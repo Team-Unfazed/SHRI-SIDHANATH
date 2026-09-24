@@ -1,0 +1,115 @@
+.pcard {
+  display: grid;
+  gap: 16px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.pcard__media {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--deep-light);
+}
+
+.pcard__media > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pcard:hover .pcard__media > img,
+.pcard:focus-visible .pcard__media > img {
+  transform: scale(1.04);
+}
+
+/* No photograph: the developer's name, set on a flat ground */
+.pcard__plate {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 18px;
+  height: 100%;
+  padding: 24px;
+  text-align: center;
+  background: var(--deep-light);
+  color: var(--black);
+}
+.pcard__plate img {
+  width: 52px;
+  height: 28px;
+  object-fit: contain;
+  opacity: 0.35;
+}
+.pcard__plate .h4 {
+  max-width: 12ch;
+  text-wrap: balance;
+}
+
+.pcard__tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 7px 11px;
+  border-radius: var(--pill);
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--black);
+}
+
+.pcard__enquire {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  padding: 9px 14px;
+  border-radius: var(--pill);
+  background: var(--primary);
+  color: var(--black);
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 0.4s ease,
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pcard:hover .pcard__enquire,
+.pcard:focus-visible .pcard__enquire {
+  opacity: 1;
+  transform: none;
+}
+
+.pcard__body {
+  display: grid;
+  gap: 8px;
+}
+
+.pcard__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.pcard__name {
+  min-width: 0;
+}
+
+.pcard__price {
+  flex: none;
+  color: var(--black);
+}
+
+.pcard__meta {
+  color: var(--black-60);
+}
+
+.on-dark .pcard__price { color: var(--white); }
+.on-dark .pcard__meta { color: var(--white-60); }
+
+@media (hover: none) {
+  .pcard__enquire {
+    opacity: 1;
+    transform: none;
+  }
+}

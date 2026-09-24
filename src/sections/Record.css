@@ -1,0 +1,202 @@
+.rec {
+  position: relative;
+  isolation: isolate;
+  /* A compact band: it states six checkable facts and gets out of the way. */
+  padding-block: calc(var(--section-gap) * 0.7);
+  background: var(--black);
+  color: var(--white);
+  overflow: clip;
+}
+
+/* One soft pool of light behind the tiles, so the glass has something to
+   catch. No pattern, no lines. */
+.rec::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background:
+    radial-gradient(45% 60% at 72% 55%, rgba(255, 255, 255, 0.07), transparent 70%),
+    radial-gradient(30% 40% at 10% 90%, rgba(228, 237, 100, 0.05), transparent 70%);
+  pointer-events: none;
+}
+
+.rec__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+  gap: clamp(40px, 5vw, 90px);
+  align-items: center;
+}
+
+/* ---- left: the statement ---------------------------------------------- */
+.rec__intro {
+  display: grid;
+  gap: 22px;
+  align-content: center;
+}
+
+.rec__title {
+  text-wrap: balance;
+  max-width: 12ch;
+}
+
+.rec__lede {
+  max-width: 36ch;
+  font-size: var(--t-small);
+  letter-spacing: var(--ls-small);
+  line-height: 1.55;
+  color: var(--white-60);
+}
+
+.rec__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 22px;
+  margin-top: 8px;
+}
+
+.rec__rera { color: var(--white-40); }
+
+/* ---- right: the tiles -------------------------------------------------- */
+.rec__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.rec__cell {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 18px;
+  min-width: 0;
+  min-height: 196px;
+  padding: 22px 22px 20px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(160deg, #1a1a1a, #0d0d0d);
+  border: 1px solid var(--white-10);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 20px 40px -24px rgba(0, 0, 0, 0.9);
+  transform-style: preserve-3d;
+  transition: border-color 0.5s ease, box-shadow 0.6s ease;
+}
+
+/* The rating leads, so it carries the one touch of the accent. */
+.rec__cell--rating {
+  background:
+    radial-gradient(120% 90% at 0% 0%, rgba(228, 237, 100, 0.1), transparent 55%),
+    linear-gradient(160deg, #1c1c1c, #0d0d0d);
+}
+
+/* Tilted, the tile lifts: a light follows the pointer and the edge brightens.
+   `--gx`/`--gy` come from the tilt in lib/motion. */
+.rec__cell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(360px circle at var(--gx, 50%) var(--gy, 0%), rgba(255, 255, 255, 0.08), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+.rec__cell.is-tilting {
+  border-color: var(--white-20);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 40px 70px -28px rgba(0, 0, 0, 0.95);
+}
+.rec__cell.is-tilting::before { opacity: 1; }
+
+/* Contents at their own depths, so the tilt separates them. */
+.rec__top {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  transform: translateZ(20px);
+}
+
+.rec__caption {
+  font-size: var(--t-small);
+  letter-spacing: var(--ls-small);
+  color: var(--white-70);
+}
+
+.rec__index { color: var(--white-20); }
+
+.rec__value {
+  position: relative;
+  /* Hung from the caption rather than stood on the footer, so a footer that
+     wraps to two lines never lifts its figure out of line with its row. */
+  align-self: start;
+  margin-top: 10px;
+  font-size: clamp(46px, 4.2vw, 64px);
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  line-height: 0.95;
+  transform: translateZ(46px);
+}
+
+/* A tonal fall-off down the figure, the way light sits on a raised numeral. */
+.rec__value .counter__run {
+  background: linear-gradient(180deg, #fff 35%, rgba(255, 255, 255, 0.6));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* Tight tracking clips the last glyph's overhang without this. */
+  padding-right: 0.08em;
+}
+
+/* One line in every tile — the rating's stars sit beside its review count —
+   so all six figures share a baseline. */
+.rec__bottom {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid var(--white-10);
+  transform: translateZ(20px);
+}
+
+.rec__foot {
+  color: var(--white-40);
+  overflow-wrap: anywhere;
+}
+
+/* Five stars, filled to the rating as it counts. */
+.rec__stars {
+  position: relative;
+  display: inline-block;
+  flex: none;
+  font-size: 11px;
+  letter-spacing: 3px;
+  line-height: 1;
+  color: var(--white-10);
+}
+.rec__stars-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--fill, 96%);
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--primary);
+}
+
+/* ---- responsive ------------------------------------------------------- */
+@media (max-width: 1100px) {
+  .rec__inner { grid-template-columns: 1fr; gap: 44px; }
+  .rec__title { max-width: 18ch; }
+}
+
+@media (max-width: 720px) {
+  .rec__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .rec__cell { min-height: 168px; padding: 18px 16px 16px; gap: 14px; }
+  .rec__value { font-size: 42px; }
+  .rec__caption { font-size: 14px; }
+}

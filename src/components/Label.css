@@ -1,0 +1,19 @@
+.slabel {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--black);
+}
+
+.slabel--center { justify-content: center; }
+.slabel--right { justify-content: flex-end; }
+
+.slabel__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 1px;
+  background: currentColor;
+  opacity: 0.55;
+}
+
+.on-dark .slabel { color: var(--white); }

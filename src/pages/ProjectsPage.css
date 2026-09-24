@@ -1,0 +1,217 @@
+/* ---- top bar -------------------------------------------------------------- */
+
+.pp__bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px var(--gutter);
+  color: var(--white);
+}
+
+.pp__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  font-size: var(--t-body, 16px);
+  color: inherit;
+  text-decoration: none;
+}
+
+/* The mark is drawn black; invert it for the dark bar, keeping the red stair
+   as close to red as a filter allows */
+.pp__brand img {
+  width: 36px;
+  height: 20px;
+  object-fit: contain;
+  filter: invert(1) hue-rotate(180deg);
+}
+
+.pp__nav {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.pp__nav > a:first-child {
+  color: var(--white-70);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.pp__nav > a:first-child:hover {
+  color: var(--white);
+}
+
+/* ---- dark stage with the ring --------------------------------------------- */
+
+.pp__stage {
+  position: relative;
+  overflow: hidden;
+  padding: 150px 0 110px;
+  background:
+    radial-gradient(ellipse 70% 55% at 35% 62%, rgba(255, 255, 255, 0.06), transparent 70%),
+    var(--black);
+  color: var(--white);
+}
+
+.pp__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  padding-bottom: 30px;
+}
+
+.pp__title {
+  margin-top: 22px;
+}
+
+.pp__lede {
+  max-width: 36ch;
+  color: var(--white-60);
+  font-size: var(--t-small);
+  letter-spacing: var(--ls-small);
+  line-height: 1.5;
+}
+
+/* ---- the full list -------------------------------------------------------- */
+
+.pp__all {
+  background: var(--whitesmoke);
+}
+
+.pp__all-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.pp__all-title {
+  margin-top: 22px;
+}
+
+.pp__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pp__filter {
+  padding: 10px 16px;
+  border: 1px solid var(--black-8);
+  border-radius: var(--pill);
+  background: transparent;
+  color: var(--black-60);
+  cursor: pointer;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+.pp__filter:hover {
+  border-color: var(--black-40);
+  color: var(--black);
+}
+.pp__filter[aria-pressed='true'] {
+  background: var(--black);
+  border-color: var(--black);
+  color: var(--white);
+}
+
+.pp__count {
+  margin: 36px 0 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--black-8);
+  color: var(--black-60);
+}
+
+.pp__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 44px 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---- closing call --------------------------------------------------------- */
+
+.pp__cta {
+  padding-block: 120px;
+  background: var(--black);
+  color: var(--white);
+}
+
+.pp__cta-inner {
+  display: grid;
+  justify-items: center;
+  gap: 22px;
+  text-align: center;
+}
+
+.pp__cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.pp__foot {
+  padding: 26px 0;
+  background: var(--black);
+  border-top: var(--hairline-light);
+  color: var(--white-40);
+}
+
+.pp__foot-inner {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 30px;
+}
+
+.pp__foot a {
+  color: var(--white-70);
+}
+
+@media (max-width: 1100px) {
+  .pp__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 860px) {
+  .pp__stage {
+    padding: 110px 0 70px;
+  }
+  .pp__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .pp__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 14px;
+  }
+  .pp__cta {
+    padding-block: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pp__brand span {
+    display: none;
+  }
+  .pp__grid {
+    grid-template-columns: 1fr;
+  }
+}

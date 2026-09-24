@@ -1,0 +1,217 @@
+.prc {
+  padding-block: var(--section-gap) 0;
+  /* A lifted or half-folded bar grows in perspective; clip it to the page
+     rather than letting it add a sideways scroll. */
+  overflow-x: clip;
+}
+
+.prc__head {
+  display: grid;
+  justify-items: center;
+  gap: 30px;
+  padding-bottom: 86px;
+  text-align: center;
+}
+
+.prc__ladder {
+  display: grid;
+  border-top: 1px solid var(--black-8);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  /* One camera for the whole ladder, looking slightly down on it, so each
+     bar's fold reads as swinging toward the viewer. */
+  perspective: 1600px;
+  perspective-origin: 50% 0%;
+}
+
+/* The step is the hinge: it folds from its top edge. */
+.prc__step {
+  position: relative;
+  transform-origin: 50% 0%;
+  transform-style: preserve-3d;
+}
+
+/* Four values, darkening. The accent lands on step two rather than the last
+   step on purpose: it marks where the work starts, not where it ends. */
+.prc__step:nth-child(1) { --bar: var(--deep-light); --fg: var(--black); --mute: var(--black-40); }
+.prc__step:nth-child(2) { --bar: var(--primary);    --fg: var(--black); --mute: var(--black-40); }
+.prc__step:nth-child(3) { --bar: var(--gray);       --fg: var(--white); --mute: var(--white-40); }
+.prc__step:nth-child(4) { --bar: var(--black);      --fg: var(--white); --mute: var(--white-40); }
+
+.prc__bar {
+  position: relative;
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr) 220px;
+  align-items: center;
+  gap: 30px;
+  width: 100%;
+  padding: 34px var(--gutter);
+  background: var(--bar);
+  color: var(--fg);
+  text-align: left;
+  transform-style: preserve-3d;
+  cursor: default;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.6s ease;
+}
+
+/* Hovered, the bar leans its top edge toward the viewer and lifts clear of the
+   ladder, throwing a shadow onto the next step. */
+@media (hover: hover) {
+  .prc__step:hover { z-index: 2; }
+  .prc__bar:hover {
+    transform: perspective(1400px) rotateX(-4deg) translateY(-3px);
+    box-shadow: 0 34px 60px -26px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* The pointer light. Soft-light blended, so it brightens the grey, the accent
+   and the black bars alike without washing out type. */
+.prc__bar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.35), transparent 60%);
+  mix-blend-mode: soft-light;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+.prc__bar:hover::before { opacity: 1; }
+
+/* The next band rides up over this one by `--panel-overlap`, and this band
+   has no bottom padding, so the overlap would land on the last bar's text.
+   The last bar is extended by exactly that much instead: the next panel's
+   rounded edge settles onto black, below the type. */
+.prc__step:last-child .prc__bar {
+  padding-bottom: calc(34px + var(--panel-overlap));
+}
+/* Its numeral centres on the visible part of the bar, not the extension. */
+.prc__step:last-child .prc__ghost {
+  translate: -4px calc(-50% - var(--panel-overlap) / 2);
+}
+
+/* Shading. While a bar is still folded back it sits in shadow (`--fold`,
+   scrubbed on the step); once the ladder is hovered, the bars not under the
+   pointer step back into a lighter shade of the same. */
+.prc__bar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #000;
+  opacity: calc(var(--fold, 0) * 0.55);
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+.prc__ladder:hover .prc__step:not(:hover) .prc__bar::after {
+  opacity: max(calc(var(--fold, 0) * 0.55), 0.14);
+}
+
+/* A large outlined numeral behind the step label — the depth layer that
+   separates from the bar when it tilts. */
+.prc__ghost {
+  position: absolute;
+  left: var(--gutter);
+  top: 50%;
+  translate: -4px -50%;
+  font-family: var(--font-display);
+  font-size: 104px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--fg);
+  opacity: 0.14;
+  transform: translateZ(14px);
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+.prc__bar:hover .prc__ghost { opacity: 0.3; }
+
+.prc__n {
+  position: relative;
+  color: var(--mute);
+  transform: translateZ(30px);
+}
+
+.prc__mid {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 0;
+  text-align: center;
+  transform: translateZ(40px);
+}
+
+.prc__title { font-weight: 500; }
+
+/* Collapsed to nothing until the row is hovered or focused, so the ladder reads
+   as four words at rest and only opens where the pointer is. */
+.prc__body {
+  max-width: 62ch;
+  font-size: var(--t-small);
+  letter-spacing: var(--ls-small);
+  line-height: 1.5;
+  color: var(--mute);
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transform: translateY(6px);
+  transition: opacity 0.4s ease, max-height 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), margin-top 0.5s ease;
+}
+.prc__bar:hover .prc__body,
+.prc__bar:focus-visible .prc__body {
+  opacity: 1;
+  max-height: 8em;
+  margin-top: 14px;
+  transform: none;
+}
+
+.prc__dots {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+  transform: translateZ(30px);
+}
+.prc__dots i {
+  width: 7px;
+  height: 7px;
+  border-radius: 1px;
+  background: currentColor;
+  opacity: 0.25;
+  transition: opacity 0.4s ease calc(var(--d) * 0.12s), transform 0.5s cubic-bezier(0.34, 1.4, 0.64, 1) calc(var(--d) * 0.12s);
+}
+/* The stage's dots light one after another once its bar has landed. Without
+   script (or with motion off) they are simply lit. */
+.prc__dots i[data-on] { opacity: 1; }
+.js:not(.nomotion) .prc__step:not(.is-in) .prc__dots i[data-on] {
+  opacity: 0.25;
+  transform: scale(0.6);
+}
+/* The hovered bar's current stage pulses its last dot. */
+.prc__bar:hover .prc__dots i[data-on]:not(:has(+ i[data-on])) {
+  animation: prc-pulse 1.4s ease-in-out infinite;
+}
+@keyframes prc-pulse {
+  50% { transform: scale(1.35); }
+}
+
+@media (max-width: 860px) {
+  .prc__head { padding-bottom: 46px; }
+  .prc__bar {
+    grid-template-columns: 1fr auto;
+    gap: 10px 20px;
+    padding-block: 26px;
+  }
+  .prc__step:last-child .prc__bar { padding-bottom: calc(26px + var(--panel-overlap)); }
+  .prc__step:last-child .prc__ghost { translate: 0 0; }
+  .prc__mid {
+    grid-column: span 2;
+    justify-items: start;
+    text-align: left;
+  }
+  .prc__body { opacity: 1; max-height: none; margin-top: 12px; transform: none; }
+  .prc__ghost { font-size: 64px; top: 18px; left: auto; right: var(--gutter); translate: 0 0; }
+}

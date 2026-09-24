@@ -1,0 +1,161 @@
+/**
+ * The LivIn design system, read off the source build rather than eyeballed:
+ * every value below was pulled from the computed custom properties on
+ * livin-studio.webflow.io. Names are kept close to the originals so the two can
+ * be diffed, with the Webflow `_group---` prefixes flattened.
+ *
+ * Two things carry the whole look and are worth protecting:
+ *
+ *   1. The type is tracked *in*, hard. Every step has a negative letter-spacing
+ *      that scales with the size (-6% at display, -4% at h1, -2% at body). Set
+ *      any of this type at normal tracking and it immediately reads generic.
+ *   2. The two display words — the hero banner and the closing wordmark — are
+ *      sized in vw, not px, so they stay edge-to-edge at every width. That is
+ *      the whole trick; do not convert them to a px scale with breakpoints.
+ */
+
+:root {
+  /* ---- colour ------------------------------------------------------- */
+  --black: #000;
+  --black-90: #000000e6;
+  --black-70: #000000b3;
+  --black-60: #0009;
+  --black-40: #0006;
+  --black-30: #0000004d;
+  --black-8: #00000014;
+  --gray: #434343;
+  --paragraph: #757575;
+
+  --white: #fff;
+  --white-70: #ffffffb3;
+  --white-60: #fff9;
+  --white-40: #fff6;
+  --white-20: #fff3;
+  --white-10: #ffffff1a;
+  --white-6: #ffffff0f;
+
+  --whitesmoke: #f5f5f5;
+  --deep-light: #ebebeb;
+  --transparent: #fff0;
+
+  /* The single accent. Used for one primary action per screen and for the
+     second step of the process ladder — nowhere else. */
+  --primary: #e4ed64;
+
+  /* ---- type families ------------------------------------------------ */
+  --font-primary: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  /* Stands in for Creato Display on the two vw-sized display words. */
+  --font-display: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+
+  /* ---- type scale --------------------------------------------------- */
+  /* Source values were 16.88vw and 27.6vw, set in Creato Display. Archivo runs
+     wider, so both are scaled down to the largest size that still clears the
+     gutter at every width — measured, not guessed. Re-measure if the family or
+     either word changes. */
+  --t-banner: 16.1vw;    /* hero word */
+  --t-cta: 20.4vw;       /* closing wordmark */
+  --t-display: 200px;
+  --t-featured: 100px;
+  --t-h1: 70px;
+  --t-h2: 56px;
+  --t-h3: 42px;
+  --t-h4: 28px;
+  --t-h5: 24px;
+  --t-h6: 22px;
+  --t-sub: 20px;
+  --t-paragraph: 18px;
+  --t-small: 16px;
+  --t-label: 14px;
+  --t-small-label: 12px;
+
+  /* ---- tracking ------------------------------------------------------ */
+  --ls-banner: -6%;
+  --ls-cta: -1.39vw;
+  --ls-display: -10px;
+  --ls-featured: -6px;
+  --ls-h1: -4.2px;
+  --ls-h2: -3px;
+  --ls-h3: -1.68px;
+  --ls-h4: -1.12px;
+  --ls-h5: -0.72px;
+  --ls-h6: -0.66px;
+  --ls-sub: -0.4px;
+  --ls-paragraph: -0.36px;
+  --ls-small: -0.32px;
+  --ls-label: -0.28px;
+  --ls-small-label: -0.24px;
+  --ls-normal: 0px;
+
+  /* ---- leading ------------------------------------------------------- */
+  --lh-banner: 94%;
+  --lh-display-two: 80%;
+  --lh-h2: 110%;
+  --lh-h3: 110%;
+  --lh-h4: 120%;
+  --lh-h5: 120%;
+  --lh-sub: 130%;
+  --lh-paragraph: 150%;
+  --lh-tight: 100%;
+
+  /* ---- rhythm -------------------------------------------------------- */
+  --section-gap: 140px;
+  --gutter: 30px;
+  --radius: 4px;
+  --radius-lg: 8px;
+
+  /* The overlapping stack. `overlap` is how far each band rides up over the one
+     before it; `radius` is the curve on its leading edge. */
+  --panel-overlap: 54px;
+  --panel-radius: 34px;
+  --pill: 999px;
+  --hairline: 1px solid var(--black-8);
+  --hairline-light: 1px solid var(--white-10);
+
+  /* The four vertical guides that run through the dark sections. */
+  --columns: 4;
+}
+
+/* The scale steps down twice. The vw-sized display words need no help — they
+   are already relative — so only the px steps are restated. */
+@media (max-width: 1100px) {
+  :root {
+    --t-display: 140px;
+    --t-featured: 72px;
+    --t-h1: 54px;
+    --t-h2: 44px;
+    --t-h3: 34px;
+    --t-h4: 24px;
+    --t-h5: 21px;
+    --t-h6: 20px;
+    --t-sub: 18px;
+    --t-paragraph: 17px;
+    --section-gap: 100px;
+    --gutter: 24px;
+    --panel-overlap: 40px;
+    --panel-radius: 26px;
+  }
+}
+
+@media (max-width: 720px) {
+  :root {
+    --t-display: 88px;
+    --t-featured: 48px;
+    --t-h1: 38px;
+    --t-h2: 32px;
+    --t-h3: 26px;
+    --t-h4: 21px;
+    --t-h5: 19px;
+    --t-h6: 18px;
+    --t-sub: 17px;
+    --t-paragraph: 16px;
+    --t-small: 15px;
+    --ls-h1: -1.6px;
+    --ls-h2: -1.4px;
+    --ls-h3: -1px;
+    --section-gap: 72px;
+    --gutter: 18px;
+    --panel-overlap: 26px;
+    --panel-radius: 18px;
+  }
+}

@@ -1,0 +1,24 @@
+/* Held invisible from first paint until the split has run, which cannot happen
+   until the web fonts have loaded. Without this the browser paints the finished
+   heading, the split lands, and the letters jump back down to start — a visible
+   double-take on every heading on the page.
+
+   A crawler never gets the `.js` class, so it never gets the hidden state. */
+.js .split {
+  opacity: 0;
+}
+
+html.nomotion .split {
+  opacity: 1 !important;
+}
+
+/* SplitText writes these. The mask wrapper it adds around each line is what the
+   letters rise out of; the padding keeps descenders clear of the clip. */
+.split .split__line {
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+
+.split .split__char {
+  will-change: transform;
+}

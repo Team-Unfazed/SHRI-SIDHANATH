@@ -1,0 +1,123 @@
+.about__head {
+  display: grid;
+  justify-items: center;
+  gap: 34px;
+  text-align: center;
+}
+
+/* Two-tone paragraph: the claim in black, the qualification in grey. One
+   sentence of each, no more — the effect dies the moment the grey half is
+   longer than the black one. */
+.about__statement {
+  max-width: min(100%, 900px);
+  margin-inline: auto;
+  text-wrap: balance;
+}
+.about__statement em {
+  font-style: normal;
+  color: var(--black-40);
+}
+
+.about__pillars {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  justify-content: center;
+  gap: 30px;
+  width: min(660px, 100%);
+  margin: 72px auto 0;
+  text-align: center;
+}
+
+.about__pillar {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  color: var(--black);
+}
+.about__pillar p {
+  font-size: var(--t-small);
+  letter-spacing: var(--ls-small);
+  line-height: 1.3;
+}
+
+.about__plates {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 92px;
+}
+
+.about__plate {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 16 / 13;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--deep-light);
+}
+/* No hover zoom here. These two images drift with the scroll (see About.jsx),
+   and GSAP writes an inline transform that an inline-losing hover rule cannot
+   override — the two effects cannot share the property. */
+.about__plate img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+}
+
+.about__mark {
+  position: absolute;
+  top: 26px;
+  left: 26px;
+}
+.about__mark img {
+  width: 52px;
+  height: 28px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.about__plate figcaption {
+  position: absolute;
+  inset: auto 26px 26px;
+}
+
+.about__plate--dark::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0) 62%);
+}
+.about__plate--dark figcaption {
+  z-index: 1;
+  color: var(--white);
+}
+.about__plate--dark p {
+  max-width: 38ch;
+  font-size: var(--t-small);
+  letter-spacing: var(--ls-small);
+  line-height: 1.5;
+}
+
+@media (max-width: 860px) {
+  .about__pillars {
+    gap: 22px;
+    margin-top: 54px;
+  }
+  .about__plates {
+    grid-template-columns: 1fr;
+    margin-top: 58px;
+  }
+}
+
+@media (max-width: 520px) {
+  .about__pillars { grid-template-columns: 1fr; text-align: left; }
+  .about__pillar {
+    grid-template-columns: 26px 1fr;
+    justify-items: start;
+    align-items: center;
+    gap: 16px;
+    padding-block: 14px;
+    border-bottom: var(--hairline);
+  }
+}

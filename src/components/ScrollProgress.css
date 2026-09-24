@@ -1,0 +1,16 @@
+.progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 95;
+  height: 2px;
+  background: var(--primary);
+  transform: scaleX(0);
+  transform-origin: left center;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* `?nomotion` (QA) */
+html.nomotion .progress {
+  display: none;
+}

@@ -1,0 +1,100 @@
+.pill {
+  --pill-bg: var(--primary);
+  --pill-fg: var(--black);
+  --pill-dot: var(--black);
+  --pill-hover: var(--black);
+  --pill-hover-fg: var(--white);
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  height: 52px;
+  padding-inline: 26px;
+  border-radius: var(--pill);
+  background: var(--pill-bg);
+  color: var(--pill-fg);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: var(--t-label);
+  letter-spacing: var(--ls-label);
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  isolation: isolate;
+  transition: color 0.4s ease;
+}
+
+/* The fill. Scales from the dot end, so the motion reads as the dot growing
+   into the button rather than a wipe crossing it. */
+.pill::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--pill-hover);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pill:hover { color: var(--pill-hover-fg); }
+.pill:hover::before { transform: scaleX(1); }
+.pill:hover .pill__dot { background: var(--pill-hover-fg); }
+
+.pill__label { position: relative; }
+
+.pill__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 1px;
+  background: var(--pill-dot);
+  transition: background 0.4s ease;
+}
+
+.pill--sm { height: 42px; padding-inline: 20px; gap: 14px; font-size: var(--t-small-label); }
+.pill--lg { height: 60px; padding-inline: 32px; }
+
+.pill--black {
+  --pill-bg: var(--black);
+  --pill-fg: var(--white);
+  --pill-dot: var(--white);
+  --pill-hover: var(--primary);
+  --pill-hover-fg: var(--black);
+}
+
+.pill--white {
+  --pill-bg: var(--white);
+  --pill-fg: var(--black);
+  --pill-dot: var(--black);
+  --pill-hover: var(--primary);
+  --pill-hover-fg: var(--black);
+}
+
+.pill--ghost {
+  --pill-bg: var(--transparent);
+  --pill-fg: var(--black);
+  --pill-dot: var(--black);
+  --pill-hover: var(--black);
+  --pill-hover-fg: var(--white);
+  border: 1px solid var(--black-8);
+}
+
+.on-dark .pill--ghost {
+  --pill-fg: var(--white);
+  --pill-dot: var(--white);
+  --pill-hover: var(--white);
+  --pill-hover-fg: var(--black);
+  border-color: var(--white-20);
+}
+
+/* Full-width on phones, where a 52px pill floating in a 358px column reads as
+   an afterthought rather than the primary action. */
+@media (max-width: 560px) {
+  .pill--block-sm {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+}

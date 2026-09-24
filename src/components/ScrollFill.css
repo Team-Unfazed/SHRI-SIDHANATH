@@ -1,0 +1,23 @@
+/* Both ends are legible on their own ground, so the paragraph is readable at
+   every point of the scrub rather than only once it has finished filling. */
+.sfill {
+  --sfill-from: var(--black-30);
+  --sfill-to: var(--black);
+  text-wrap: pretty;
+}
+
+.sfill__w {
+  color: var(--sfill-from);
+}
+
+.on-dark .sfill {
+  --sfill-from: var(--white-20);
+  --sfill-to: var(--white);
+}
+
+/* Without JS, or with motion turned down, the words would sit at the resting
+   colour forever. The filled end is the one the copy was written for. */
+html.nomotion .sfill__w,
+html:not(.js) .sfill__w {
+  color: var(--sfill-to);
+}

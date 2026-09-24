@@ -1,0 +1,282 @@
+/* ==========================================================================
+   Intro — the 3D entrance. The scene is in lib/introScene.js; this file sets
+   the type and the HUD that sit over it.
+   ========================================================================== */
+
+.intro {
+  --ink: #070707;
+  --paper: #f4efe6;
+  --paper-60: rgba(244, 239, 230, 0.6);
+  --paper-40: rgba(244, 239, 230, 0.4);
+  --paper-15: rgba(244, 239, 230, 0.15);
+  --iris: 0;
+
+  position: fixed;
+  inset: 0;
+  z-index: 250;
+  background: var(--ink);
+  color: var(--paper);
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* The exit iris: a soft-edged hole that opens from the centre of the dive */
+.intro.is-opening {
+  --hole: calc(var(--iris) * 95vmax - 14vmax);
+  -webkit-mask-image: radial-gradient(
+    circle at 50% 50%,
+    transparent var(--hole),
+    #000 calc(var(--hole) + 14vmax)
+  );
+  mask-image: radial-gradient(
+    circle at 50% 50%,
+    transparent var(--hole),
+    #000 calc(var(--hole) + 14vmax)
+  );
+}
+
+.intro__stage {
+  position: absolute;
+  inset: 0;
+}
+
+.intro__stage canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Holds the edges down so the HUD always reads, and gives the type a floor */
+.intro__vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 75% 65% at 50% 48%, transparent 40%, rgba(7, 7, 7, 0.7) 100%),
+    linear-gradient(to top, rgba(7, 7, 7, 0.85) 0%, transparent 22%),
+    linear-gradient(to bottom, rgba(7, 7, 7, 0.6) 0%, transparent 16%);
+}
+
+/* ---- HUD ---------------------------------------------------------------- */
+
+.intro__hud {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 26px var(--gutter);
+  color: var(--paper-60);
+  pointer-events: none;
+}
+
+.intro__hud > * {
+  opacity: 0;
+}
+
+.intro__hud--top {
+  top: 0;
+}
+
+.intro__hud--bottom {
+  bottom: 0;
+  align-items: flex-end;
+  padding-bottom: max(26px, env(safe-area-inset-bottom));
+}
+
+.intro__markets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.intro__markets li {
+  position: relative;
+}
+
+.intro__markets li + li::before {
+  content: '';
+  position: absolute;
+  left: -13px;
+  top: 50%;
+  width: 4px;
+  height: 1px;
+  background: var(--paper-40);
+}
+
+.intro__load {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: none;
+}
+
+.intro__bar {
+  position: relative;
+  width: clamp(80px, 14vw, 200px);
+  height: 1px;
+  background: var(--paper-15);
+  overflow: hidden;
+}
+
+.intro__fill {
+  position: absolute;
+  inset: 0;
+  background: var(--paper);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+.intro__count {
+  min-width: 3ch;
+  color: var(--paper);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Wordmark ----------------------------------------------------------- */
+
+.intro__type {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 57%;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 var(--gutter);
+  pointer-events: none;
+}
+
+.intro__wordmark {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 0.22em;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(46px, 9.2vw, 156px);
+  line-height: 0.9;
+  letter-spacing: -0.055em;
+  color: var(--paper);
+  perspective: 900px;
+}
+
+/* Each word is its own mask, so the letters rise out of a line rather than
+   fading in over one another */
+.intro__word {
+  display: inline-flex;
+  overflow: hidden;
+  padding: 0.04em 0.06em 0.1em;
+  margin: 0 -0.06em;
+  transform-style: preserve-3d;
+}
+
+.intro__char {
+  display: inline-block;
+  opacity: 0; /* until the build takes over, so nothing flashes before it */
+  transform-origin: 50% 100%;
+  will-change: transform, opacity;
+}
+
+.intro__rule {
+  display: block;
+  width: min(420px, 60vw);
+  height: 1px;
+  margin: clamp(14px, 2.2vh, 22px) 0 clamp(12px, 1.8vh, 18px);
+  background: linear-gradient(90deg, transparent, var(--paper-60), transparent);
+  transform: scaleX(0);
+}
+
+.intro__tagline {
+  margin: 0;
+  opacity: 0;
+  color: var(--paper-60);
+  letter-spacing: 0.18em;
+}
+
+/* ---- Skip --------------------------------------------------------------- */
+
+.intro__skip {
+  position: absolute;
+  left: 50%;
+  bottom: max(22px, env(safe-area-inset-bottom));
+  z-index: 3;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  border: 1px solid var(--paper-15);
+  border-radius: 999px;
+  background: rgba(7, 7, 7, 0.4);
+  color: var(--paper-60);
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition:
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.intro__skip:hover,
+.intro__skip:focus-visible {
+  color: var(--paper);
+  border-color: var(--paper-40);
+}
+
+.intro__skip span {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.intro__skip:hover span {
+  transform: translateX(3px);
+}
+
+/* The QA escape hatch and the reduced-motion preference both skip the intro */
+html.nomotion .intro {
+  display: none !important;
+}
+
+@media (max-width: 900px) {
+  .intro__hud--top > :first-child {
+    display: none;
+  }
+  .intro__hud--top {
+    justify-content: center;
+  }
+  .intro__markets {
+    display: none;
+  }
+  .intro__hud--bottom {
+    justify-content: flex-end;
+  }
+  .intro__skip {
+    left: var(--gutter);
+    transform: none;
+  }
+  .intro__type {
+    top: 55%;
+  }
+}
+
+/* Portrait phones: stack the two words and let them fill the width */
+@media (max-width: 600px) {
+  .intro__wordmark {
+    flex-direction: column;
+    align-items: center;
+    font-size: 17.5vw;
+    line-height: 0.82;
+  }
+  .intro__type {
+    top: 53%;
+  }
+}

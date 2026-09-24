@@ -1,0 +1,410 @@
+/* The hero parks at the top of the viewport and the rest of the page scrolls
+   over it, so the first band arrives as a sheet sliding across the photograph
+   rather than the photograph being pushed off screen. The hero itself never
+   moves and the page never takes the scroll away from you.
+   This only works because the horizontal-overflow guard is on <body> and the
+   sheet below owns its own stacking context; see base.css. */
+.banner {
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  /* The bottom pad clears the floating nav rather than the claim being narrowed
+     to dodge it horizontally. The pill is 62px tall at `bottom: 26px`, so
+     nothing in the hero foot may come within 88px of the viewport bottom. */
+  padding: 0 var(--gutter) 116px;
+  overflow: hidden;
+  color: var(--white);
+  isolation: isolate;
+}
+
+/* The receding scrim on the hero. As the sheet rolls up over the parked hero,
+   GSAP scrubs --hero-dim so the hero recedes into darkness rather than staying
+   flatly bright until cut off. */
+.banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: var(--black);
+  opacity: var(--hero-dim, 0);
+  pointer-events: none;
+}
+
+html.nomotion .banner::after,
+html:not(.js) .banner::after {
+  display: none;
+}
+
+/* Start state, held from the very first frame. `index.html` marks the document
+   `.js` before paint, so the entrance never replays from a flash of the
+   finished composition — and the word and claim stay hidden until SplitText has
+   rebuilt them, which cannot happen before the fonts land. Without JavaScript
+   none of this applies and the hero renders complete. */
+.js .banner__sky,
+.js .banner__arch,
+.js .banner__atmos,
+.js .banner__word,
+.js .banner__meta,
+.js .banner__meta > *,
+.js .banner__claim,
+.js .banner__actions,
+.js .banner__card {
+  opacity: 0;
+}
+
+html.nomotion .banner__sky,
+html.nomotion .banner__arch,
+html.nomotion .banner__atmos,
+html.nomotion .banner__word,
+html.nomotion .banner__meta,
+html.nomotion .banner__meta > *,
+html.nomotion .banner__claim,
+html.nomotion .banner__actions,
+html.nomotion .banner__card {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   Stage. Sky and architecture stay two independent layers, never flattened,
+   so they can animate independently on entrance and leave at different rates
+   on scroll. Transform-origin scales the sky from centre and architecture
+   from its base, so the estate grows toward the viewer.
+   -------------------------------------------------------------------------- */
+.banner__stage {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  transform-style: preserve-3d;
+}
+
+.banner__sky,
+.banner__sky img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.banner__sky {
+  transform-origin: 50% 50%;
+  will-change: transform, opacity;
+}
+
+.banner__sky img {
+  object-fit: cover;
+  object-position: 30% 30%;
+}
+
+.banner__arch {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: block;
+  transform-origin: 50% 100%;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+.banner__arch img {
+  width: 100%;
+  height: auto;
+  max-height: 78svh;
+  object-fit: cover;
+  object-position: center bottom;
+  display: block;
+}
+
+/* Atmospheric lighting and edge contrast gradient */
+.banner__atmos {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(20, 17, 14, 0.6) 0%, rgba(20, 17, 14, 0.15) 34%, rgba(20, 17, 14, 0) 52%),
+    linear-gradient(to top, rgba(20, 17, 14, 0.76) 0%, rgba(20, 17, 14, 0.38) 16%, rgba(20, 17, 14, 0) 36%);
+  pointer-events: none;
+}
+
+.banner__word {
+  position: relative;
+  z-index: 1;
+  margin: -0.06em 0 0 -0.012em;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--t-banner);
+  letter-spacing: var(--ls-banner);
+  line-height: var(--lh-banner);
+  white-space: nowrap;
+}
+
+/* SplitText writes the line mask at runtime. The padding keeps the descender of
+   the y clear of its clip; the matching negative margin gives the space back so
+   the composition does not shift when the split lands. */
+.banner__word-line,
+.banner__claim-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+  transform-style: preserve-3d;
+}
+
+.banner__char,
+.banner__claim-char {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* The three-part meta row: intent on the left, registration in the middle,
+   address on the right. It is pushed to sit just above the closing claim. */
+.banner__meta {
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: start;
+  gap: 24px;
+  padding-bottom: 44px;
+  text-shadow: 0 1px 12px rgba(10, 8, 6, 0.35);
+}
+
+.banner__intro {
+  display: flex;
+  gap: 12px;
+  max-width: 34ch;
+  font-size: var(--t-small);
+  letter-spacing: var(--ls-small);
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.95);
+}
+.banner__intro em {
+  font-style: normal;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.banner__arrow {
+  flex: none;
+  font-size: 15px;
+  line-height: 1.2;
+  opacity: 0.9;
+}
+
+.banner__years {
+  justify-self: center;
+  color: var(--white);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+.banner__where {
+  justify-self: end;
+  text-align: right;
+  color: var(--white);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.banner__foot {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+/* The floating nav is centred, so the claim has to stop short of it. At the h1
+   step the second line ran under the pill and lost a word; one step down it
+   clears, and it stops competing with the 230px banner word above it. */
+.banner__claim {
+  /* A plain measure. An earlier version capped this in `vw` to dodge the
+     centred nav pill and broke the claim into five lines at 1280 — the pill is
+     cleared by the section's bottom padding now, so the claim only has to be a
+     good line length. */
+  max-width: 19ch;
+  font-size: var(--t-h2);
+  letter-spacing: var(--ls-h2);
+}
+
+/* Same again for the claim: one mask per authored line, built by SplitText. */
+.banner__claim .banner__claim-line {
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+
+/* The claim and its two actions read as one block: the statement, then what
+   to do about it. One primary action (the accent) and one quiet one. */
+.banner__lead {
+  display: grid;
+  gap: 30px;
+}
+
+.banner__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ---- the listing card ------------------------------------------------ */
+
+.banner__card {
+  display: flex;
+  gap: 18px;
+  width: min(460px, 46vw);
+  padding: 12px;
+  border-radius: var(--radius);
+  background: var(--white);
+  color: var(--black);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 44px -16px rgba(0, 0, 0, 0.4);
+}
+
+/* Each project change cross-fades: the image and text are keyed on the slide,
+   so React remounts them and this runs once per change */
+.banner__card-img,
+.banner__card-body {
+  animation: bannerCardIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.banner__card-body {
+  animation-delay: 0.06s;
+}
+
+@keyframes bannerCardIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* A hairline along the card's foot that fills until the next project */
+.banner__card-timer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--primary);
+  transform-origin: left center;
+  animation: bannerCardTimer 5.2s linear both;
+}
+
+@keyframes bannerCardTimer {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+html.nomotion .banner__card-timer {
+  display: none;
+}
+
+.banner__card-img {
+  flex: none;
+  width: 180px;
+  height: 152px;
+  object-fit: cover;
+  border-radius: 2px;
+  background: var(--deep-light);
+}
+
+.banner__card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 6px 8px 8px 0;
+  min-width: 0;
+}
+
+.banner__card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--black-60);
+}
+
+.banner__tabs { display: flex; gap: 4px; }
+.banner__tabs button {
+  padding: 4px 6px;
+  border-radius: 2px;
+  color: var(--black-40);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.banner__tabs button[data-on] {
+  background: var(--primary);
+  color: var(--black);
+}
+
+.banner__card-name { margin-top: auto; }
+.banner__card-where { color: var(--black-60); }
+
+@media (max-width: 1100px) {
+  .banner__card { width: min(420px, 52vw); }
+  .banner__card-img { width: 140px; height: 130px; }
+}
+
+@media (max-width: 860px) {
+  .banner {
+    position: sticky;
+    top: 0;
+    min-height: 100svh;
+    padding-top: max(1.25rem, env(safe-area-inset-top));
+    padding-bottom: max(124px, calc(90px + env(safe-area-inset-bottom)));
+  }
+  .banner__sky img {
+    object-position: 55% 35%;
+  }
+  .banner__arch img {
+    width: 118%;
+    max-width: none;
+    margin-left: -9%;
+    max-height: 62svh;
+  }
+  .banner__atmos {
+    background:
+      linear-gradient(to bottom, rgba(20, 17, 14, 0.65) 0%, rgba(20, 17, 14, 0.15) 38%, rgba(20, 17, 14, 0) 56%),
+      linear-gradient(to top, rgba(20, 17, 14, 0.84) 0%, rgba(20, 17, 14, 0.45) 18%, rgba(20, 17, 14, 0) 40%);
+  }
+  .banner__word {
+    margin-top: clamp(0.75rem, 3vh, 2rem);
+    white-space: normal;
+    font-size: clamp(2.5rem, 15vw, 4.25rem);
+    line-height: 0.94;
+  }
+  .banner__meta {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding-block: clamp(12px, 2vh, 20px);
+  }
+  .banner__years,
+  .banner__where {
+    justify-self: start;
+    text-align: left;
+  }
+  .banner__foot {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+  .banner__claim {
+    font-size: clamp(1.35rem, 5vw, 1.8rem);
+    line-height: 1.15;
+    max-width: none;
+  }
+  .banner__card { width: 100%; }
+  .banner__lead { gap: 18px; }
+  .banner__actions { gap: 8px; }
+  .banner__actions > * { flex: 1 1 auto; justify-content: space-between; height: 46px; }
+}
+
+@media (max-width: 480px) {
+  .banner__card { flex-direction: row; }
+  .banner__card-img { width: 100px; height: 95px; }
+  .banner__card-body { padding: 4px 6px; gap: 4px; }
+}

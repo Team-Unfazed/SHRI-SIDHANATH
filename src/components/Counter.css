@@ -1,0 +1,15 @@
+/* Tabular figures, so the number does not jitter sideways as it counts. */
+.counter {
+  font-variant-numeric: tabular-nums;
+}
+
+/* The settled value, for assistive tech only; the animated copy is hidden. */
+.counter__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

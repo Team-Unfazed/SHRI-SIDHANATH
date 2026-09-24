@@ -1,0 +1,71 @@
+/* The homepage shortlist: a heading row with the way through to the full
+   catalogue, then one row of four cards. Compact on purpose — the projects
+   page carries the rest. */
+
+.lst__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  padding-bottom: 56px;
+}
+
+.lst__title {
+  margin-top: 22px;
+}
+
+.lst__aside {
+  display: grid;
+  justify-items: end;
+  gap: 16px;
+}
+
+.lst__count {
+  color: var(--black-60);
+}
+
+.lst__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (max-width: 1100px) {
+  .lst__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 40px;
+  }
+}
+
+@media (max-width: 720px) {
+  .lst__head {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+    padding-bottom: 36px;
+  }
+  .lst__aside {
+    justify-items: stretch;
+  }
+
+  /* On phones the row becomes a swipeable strip rather than a long column */
+  .lst__grid {
+    display: flex;
+    gap: 14px;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  .lst__grid::-webkit-scrollbar {
+    display: none;
+  }
+  .lst__item {
+    flex: 0 0 74%;
+    scroll-snap-align: start;
+  }
+}

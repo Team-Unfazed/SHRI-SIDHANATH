@@ -1,0 +1,192 @@
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.fnav {
+  position: fixed;
+  z-index: 90;
+  left: 50%;
+  bottom: 26px;
+  transform: translateX(-50%);
+
+  /* A fixed box with `left: 50%` and no `right` shrink-to-fits into the space
+     between that edge and the viewport's — half the screen. On a 360px phone
+     that is 180px, and the pill was being compressed into it. `max-content`
+     opts out of the constraint; the max-width keeps it inside the gutter. */
+  width: max-content;
+  max-width: calc(100vw - 24px);
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 62px;
+  padding: 0 8px 0 18px;
+  border-radius: var(--pill);
+  background: var(--black);
+  color: var(--white);
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.55);
+}
+
+.fnav__count {
+  position: relative;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  color: var(--white);
+}
+
+.fnav__badge {
+  position: absolute;
+  top: -1px;
+  right: -2px;
+  min-width: 15px;
+  height: 15px;
+  padding: 0 3px;
+  border-radius: var(--pill);
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  line-height: 15px;
+  text-align: center;
+}
+
+.fnav__brand {
+  /* Never shrink. As a flex item it was losing ~11px of the wordmark under the
+     burger at 360-390px, which clipped the copyright mark off the lockup. */
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding-inline: 12px;
+  font-size: var(--t-sub);
+  font-weight: 500;
+  letter-spacing: var(--ls-sub);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.fnav__brand img {
+  width: 36px;
+  height: 20px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.fnav__brand em {
+  font-style: normal;
+  color: var(--primary);
+}
+
+.fnav__brand sup {
+  font-size: 0.5em;
+  vertical-align: super;
+}
+
+.fnav__burger {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: var(--white);
+  color: var(--black);
+  transition: background 0.3s ease;
+}
+.fnav__burger:hover { background: var(--primary); }
+
+.fnav__bars {
+  display: grid;
+  gap: 5px;
+  width: 18px;
+}
+.fnav__bars i {
+  display: block;
+  height: 2px;
+  background: currentColor;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fnav__bars[data-open] i:first-child { transform: translateY(3.5px) rotate(45deg); }
+.fnav__bars[data-open] i:last-child { transform: translateY(-3.5px) rotate(-45deg); }
+
+/* ---- the overlay ----------------------------------------------------- */
+
+.fmenu {
+  position: fixed;
+  inset: 0;
+  z-index: 85;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 40px;
+  padding: 90px var(--gutter) 120px;
+  background: var(--black);
+  color: var(--white);
+  animation: fmenu-in 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fmenu-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+.fmenu__list {
+  display: grid;
+  gap: 2px;
+}
+
+.fmenu__list a {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  padding-block: 10px;
+  font-size: var(--t-h2);
+  font-weight: 500;
+  letter-spacing: var(--ls-h2);
+  line-height: 1.05;
+  transition: color 0.3s ease, padding-left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fmenu__list a:hover {
+  color: var(--primary);
+  padding-left: 14px;
+}
+.fmenu__list span {
+  color: var(--white-40);
+}
+
+.fmenu__foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  padding-top: 26px;
+  border-top: var(--hairline-light);
+  color: var(--white-60);
+}
+.fmenu__foot a:hover { color: var(--primary); }
+
+/* The pill has to fit a 360px viewport with the gutter still showing. Below
+   560px the given name is dropped and the lockup goes with it — "Sidhanath©"
+   beside the burger is still unambiguous, a clipped wordmark is not. */
+@media (max-width: 560px) {
+  .fnav {
+    gap: 2px;
+    height: 56px;
+    padding: 0 6px 0 10px;
+  }
+  .fnav__brand { font-size: 17px; padding-inline: 6px; }
+  .fnav__first { display: none; }
+  .fnav__brand img { width: 26px; height: 15px; }
+  .fnav__count { width: 28px; }
+  .fnav__burger { width: 42px; height: 42px; }
+}

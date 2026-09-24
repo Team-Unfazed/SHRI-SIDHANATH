@@ -1,0 +1,128 @@
+.svc__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  padding-block: 54px 62px;
+}
+
+.svc__title { margin-top: 26px; }
+
+/* The rows stack. Each is sticky at a slightly lower offset than the one
+   before, so scrolling shuffles them into a deck with every `//number` rail
+   still showing above the card that covered it. */
+.svc__list {
+  border-radius: var(--radius-lg);
+  overflow: clip;
+}
+
+.svc__item {
+  position: sticky;
+  top: calc(20px + var(--i) * 46px);
+  display: grid;
+  grid-template-columns: 210px 420px minmax(0, 1fr) 40px;
+  gap: 40px;
+  padding: 34px 34px 34px 20px;
+  background: var(--white);
+  border-top: var(--hairline);
+}
+.svc__item:first-child { border-top: 0; }
+
+.svc__rail {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 14px;
+  color: var(--black-40);
+}
+
+.svc__rail-word {
+  display: grid;
+  gap: 6px;
+  color: var(--black);
+}
+.svc__rail-word .mono-sm { color: var(--black-40); }
+
+.svc__img {
+  width: 100%;
+  aspect-ratio: 7 / 6;
+  object-fit: cover;
+  border-radius: 2px;
+  background: var(--deep-light);
+}
+
+.svc__body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 4px;
+}
+.svc__body .lede { max-width: 46ch; }
+
+.svc__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 24px;
+}
+.svc__tags li {
+  padding: 13px 18px;
+  border-radius: 3px;
+  background: var(--whitesmoke);
+  color: var(--black);
+}
+
+.svc__go {
+  display: grid;
+  place-items: start end;
+  color: var(--black-40);
+  transition: color 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.svc__item:hover .svc__go {
+  color: var(--black);
+  transform: translate(3px, -3px);
+}
+
+@media (max-width: 1240px) {
+  .svc__item {
+    grid-template-columns: 150px 320px minmax(0, 1fr) 30px;
+    gap: 28px;
+  }
+}
+
+@media (max-width: 980px) {
+  .svc__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+    padding-block: 44px 46px;
+  }
+  .svc__item {
+    position: static;
+    grid-template-columns: 1fr 34px;
+    grid-template-areas:
+      'rail  go'
+      'img   img'
+      'body  body';
+    gap: 22px;
+    padding: 26px 20px 30px;
+  }
+  .svc__rail {
+    grid-area: rail;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 16px;
+    padding-left: 0;
+  }
+  .svc__rail-word { grid-auto-flow: column; align-items: baseline; gap: 10px; }
+  .svc__img { grid-area: img; aspect-ratio: 16 / 10; }
+  .svc__body { grid-area: body; }
+  .svc__go { grid-area: go; }
+}
+
+@media (max-width: 520px) {
+  .svc__rail-word .h4 { font-size: var(--t-h5); }
+  .svc__tags { padding-top: 10px; }
+  .svc__tags li { padding: 11px 14px; }
+}

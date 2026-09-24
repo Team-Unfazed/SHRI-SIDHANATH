@@ -1,0 +1,87 @@
+.clo {
+  padding-top: var(--section-gap);
+  overflow: hidden;
+}
+
+.clo__inner {
+  display: grid;
+  justify-items: center;
+}
+
+.clo__word {
+  width: 100%;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--t-cta);
+  letter-spacing: var(--ls-cta);
+  line-height: var(--lh-display-two);
+  text-align: center;
+  white-space: nowrap;
+
+  /* Fallback first: any browser that cannot clip to text paints this. */
+  color: #44658a;
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+  .clo__word {
+    background-image: url('/images/scenes/estate-wide-1600.webp');
+    background-size: 100% auto;
+    background-position: center 30%;
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+.clo__word sup {
+  font-size: 0.34em;
+  vertical-align: super;
+}
+
+.clo__tail {
+  display: grid;
+  justify-items: center;
+  gap: 30px;
+  margin-top: 34px;
+  text-align: center;
+}
+
+.clo__lede {
+  --sfill-from: var(--black-8);
+  --sfill-to: var(--paragraph);
+  max-width: 44ch;
+  font-size: var(--t-sub);
+  letter-spacing: var(--ls-sub);
+  line-height: 1.45;
+  color: var(--paragraph);
+}
+
+/* Four plates in a row, each dropped a little further than the last, so the
+   strip runs into the footer at an angle instead of sitting on a shelf. */
+.clo__strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 100px;
+  padding-inline: var(--gutter);
+}
+.clo__strip li {
+  margin-top: calc(var(--i) * 26px);
+}
+.clo__strip img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 2px;
+  background: var(--deep-light);
+}
+
+@media (max-width: 860px) {
+  .clo__strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 64px;
+  }
+  .clo__strip li { margin-top: calc((var(--i) % 2) * 20px); }
+}
