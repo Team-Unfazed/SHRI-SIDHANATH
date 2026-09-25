@@ -5,11 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#f5f5f5" />
 
-    <title>Shri Sidhanath | Buy. Sell. Rent — New Panvel</title>
+    <!-- Title and description lead with the phrase people search for
+         ("real estate agent / consultant in Panvel") and name the localities,
+         the registration and the rating — all of which are visible on the page. -->
+    <title>Real Estate Agent &amp; Consultant in Panvel | Shri Sidhanath</title>
     <meta
       name="description"
-      content="Real estate consultancy in New Panvel, Navi Mumbai. Advisory, mandates, resale, rental and property management across Mumbai, Thane, Raigad and Pune."
+      content="MahaRERA-registered real estate consultants in New Panvel. Buy, sell or rent homes in Panvel, Kharghar, Kamothe, Taloja &amp; Ulwe. Rated 4.8 on Google (145 reviews)."
     />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="geo.region" content="IN-MH" />
+    <meta name="geo.placename" content="New Panvel, Navi Mumbai" />
     <link rel="canonical" href="https://www.shrisidhanath.in/" />
 
     <link rel="icon" type="image/png" href="/images/branding/favicon-64.png" />
@@ -24,11 +30,11 @@
     />
     <meta
       property="og:title"
-      content="Shri Sidhanath Constructions &amp; Estate Consultant | Real Estate Consultant in New Panvel"
+      content="Real Estate Agent &amp; Consultant in Panvel | Shri Sidhanath"
     />
     <meta
       property="og:description"
-      content="Property advisory across Mumbai, Navi Mumbai, Thane, Raigad and Pune. Registered with MahaRERA, based in New Panvel."
+      content="MahaRERA-registered real estate consultants in New Panvel for buying, selling and renting homes across Panvel, Kharghar, Kamothe, Taloja and Ulwe."
     />
     <meta property="og:url" content="https://www.shrisidhanath.in/" />
     <meta
@@ -64,14 +70,26 @@
       fetchpriority="high"
     />
 
+    <!-- Keeps the crawlable fallback in #root from flashing before the app
+         mounts. Without JavaScript the `.js` class is never set, so it shows. -->
+    <style>
+      html.js #root > [data-fallback] { display: none; }
+    </style>
+
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "RealEstateAgent",
+        "@id": "https://www.shrisidhanath.in/#agency",
         "name": "Shri Sidhanath Constructions & Estate Consultant",
+        "alternateName": "Shri Sidhanath Real Estate Consultant, Panvel",
         "legalName": "Shri Sidhanath Constructions and Real Estate",
-        "description": "Real estate consultancy providing project management and advisory, exclusive mandates, resale and rental expertise, and property management.",
+        "description": "MahaRERA-registered real estate agents and property consultants in New Panvel, Navi Mumbai: buying, selling, resale, rental and property management across Panvel, Kharghar, Kamothe, Kalamboli, Taloja and Ulwe.",
         "url": "https://www.shrisidhanath.in/",
+        "image": "https://www.shrisidhanath.in/images/scenes/estate-wide-1600.webp",
+        "logo": "https://www.shrisidhanath.in/images/branding/logo-mark-512.png",
+        "hasMap": "https://www.google.com/maps/search/?api=1&query=Shri+Sidhanath+Constructions+%26+Estate+Consultant%2C+Sector+7%2C+Panvel",
+        "knowsAbout": ["Residential real estate", "Resale property", "Rental property", "Property management", "New projects in Panvel"],
         "telephone": "+91-98207-59348",
         "email": "ravisargar@shrisidhanath.com",
         "founder": { "@type": "Person", "name": "Ravi Sargar" },
@@ -84,6 +102,13 @@
           "addressCountry": "IN"
         },
         "areaServed": [
+          { "@type": "City", "name": "Panvel" },
+          { "@type": "Place", "name": "New Panvel" },
+          { "@type": "Place", "name": "Kharghar" },
+          { "@type": "Place", "name": "Kamothe" },
+          { "@type": "Place", "name": "Kalamboli" },
+          { "@type": "Place", "name": "Taloja" },
+          { "@type": "Place", "name": "Ulwe" },
           { "@type": "City", "name": "Mumbai" },
           { "@type": "City", "name": "Navi Mumbai" },
           { "@type": "City", "name": "Thane" },
@@ -134,7 +159,26 @@
         document.documentElement.classList.add('nomotion');
       }
     </script>
-    <div id="root"></div>
+    <!-- Crawlable fallback. React replaces this on mount, so a visitor never
+         sees it; a crawler that does not run JavaScript reads the same heading,
+         services, localities and contact details the hero shows. Keep it in
+         step with src/sections/Hero.jsx. -->
+    <div id="root">
+      <main data-fallback>
+        <h1>Real estate consultants in Panvel, Navi Mumbai</h1>
+        <p>
+          Shri Sidhanath Constructions &amp; Estate Consultant: MahaRERA-registered property
+          agents for buying, selling, renting and managing homes across New Panvel, Kharghar,
+          Kamothe, Kalamboli, Taloja and Ulwe. Rated 4.8 on Google from 145 reviews.
+        </p>
+        <address>
+          Office 1, Siddhivinayak Krupa CHS Ltd, Plot 18, Sector 7, New Panvel West, Navi Mumbai
+          410206. Phone <a href="tel:+919820759348">+91 98207 59348</a>. Open 9:00 to 22:00,
+          daily. MahaRERA A52000004595.
+        </address>
+        <p><a href="/projects.html">Projects in Panvel and Navi Mumbai</a></p>
+      </main>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

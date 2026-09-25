@@ -1,20 +1,17 @@
-/* The hero parks at the top of the viewport and the rest of the page scrolls
-   over it, so the first band arrives as a sheet sliding across the photograph
-   rather than the photograph being pushed off screen. The hero itself never
-   moves and the page never takes the scroll away from you.
-   This only works because the horizontal-overflow guard is on <body> and the
-   sheet below owns its own stacking context; see base.css. */
+/* The hero scrolls away with the page. It used to park (sticky) while the
+   page slid up over it, which left the masthead, heading and card showing
+   underneath the next band — it read as the sections overlapping. Now only
+   the sheet's rounded top edge rides over the hero's empty bottom padding. */
 .banner {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 0;
   display: flex;
   flex-direction: column;
-  min-height: 100svh;
+  min-height: calc(100svh + var(--panel-radius));
   /* The bottom pad clears the floating nav rather than the claim being narrowed
      to dodge it horizontally. The pill is 62px tall at `bottom: 26px`, so
      nothing in the hero foot may come within 88px of the viewport bottom. */
-  padding: 0 var(--gutter) 116px;
+  padding: 0 var(--gutter) calc(116px + var(--panel-radius));
   overflow: hidden;
   color: var(--white);
   isolation: isolate;
@@ -47,10 +44,10 @@ html:not(.js) .banner::after {
 .js .banner__arch,
 .js .banner__atmos,
 .js .banner__word,
-.js .banner__meta,
-.js .banner__meta > *,
-.js .banner__claim,
-.js .banner__actions,
+.js .banner__eyebrow,
+.js .banner__title,
+.js .banner__lede,
+.js .banner__actions > *,
 .js .banner__card {
   opacity: 0;
 }
@@ -59,10 +56,10 @@ html.nomotion .banner__sky,
 html.nomotion .banner__arch,
 html.nomotion .banner__atmos,
 html.nomotion .banner__word,
-html.nomotion .banner__meta,
-html.nomotion .banner__meta > *,
-html.nomotion .banner__claim,
-html.nomotion .banner__actions,
+html.nomotion .banner__eyebrow,
+html.nomotion .banner__title,
+html.nomotion .banner__lede,
+html.nomotion .banner__actions > *,
 html.nomotion .banner__card {
   opacity: 1 !important;
   transform: none !important;
@@ -128,27 +125,40 @@ html.nomotion .banner__card {
   inset: 0;
   background:
     linear-gradient(to bottom, rgba(20, 17, 14, 0.6) 0%, rgba(20, 17, 14, 0.15) 34%, rgba(20, 17, 14, 0) 52%),
-    linear-gradient(to top, rgba(20, 17, 14, 0.76) 0%, rgba(20, 17, 14, 0.38) 16%, rgba(20, 17, 14, 0) 36%);
+    linear-gradient(to top, rgba(20, 17, 14, 0.76) 0%, rgba(20, 17, 14, 0.38) 16%, rgba(20, 17, 14, 0) 36%),
+    /* A pool of shade under the heading and lede, so the copy holds up over
+       the brightest part of the photograph. */
+    radial-gradient(60% 55% at 12% 82%, rgba(20, 17, 14, 0.55), rgba(20, 17, 14, 0) 70%);
   pointer-events: none;
 }
 
+/* The font size here is only the first guess; Hero.jsx measures the words and
+   scales them to run exactly from gutter to gutter at every width. */
 .banner__word {
   position: relative;
   z-index: 1;
-  margin: -0.06em 0 0 -0.012em;
+  margin: clamp(14px, 3vh, 36px) 0 0 -0.012em;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: var(--t-banner);
+  font-size: 15vw;
   letter-spacing: var(--ls-banner);
   line-height: var(--lh-banner);
   white-space: nowrap;
+  transform-style: preserve-3d;
+  will-change: transform;
+  /* Depth: a short, tight extrusion under the letters and a long soft shadow
+     on the sky, so the word sits in front of the photograph, not printed on it. */
+  text-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.10),
+    0 2px 0 rgba(0, 0, 0, 0.08),
+    0 3px 0 rgba(0, 0, 0, 0.06),
+    0 10px 18px rgba(0, 0, 0, 0.22);
 }
 
 /* SplitText writes the line mask at runtime. The padding keeps the descender of
    the y clear of its clip; the matching negative margin gives the space back so
    the composition does not shift when the split lands. */
-.banner__word-line,
-.banner__claim-line {
+.banner__word-line {
   display: block;
   overflow: hidden;
   padding-bottom: 0.1em;
@@ -156,210 +166,187 @@ html.nomotion .banner__card {
   transform-style: preserve-3d;
 }
 
-.banner__char,
-.banner__claim-char {
+.banner__char {
   display: inline-block;
   will-change: transform;
 }
 
-/* The three-part meta row: intent on the left, registration in the middle,
-   address on the right. It is pushed to sit just above the closing claim. */
-.banner__meta {
-  position: relative;
-  z-index: 1;
-  margin-top: auto;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  align-items: start;
-  gap: 24px;
-  padding-bottom: 44px;
-  text-shadow: 0 1px 12px rgba(10, 8, 6, 0.35);
-}
 
-.banner__intro {
-  display: flex;
-  gap: 12px;
-  max-width: 34ch;
-  font-size: var(--t-small);
-  letter-spacing: var(--ls-small);
-  line-height: 1.45;
-  color: rgba(255, 255, 255, 0.95);
+/* ---- the light -----------------------------------------------------------
+   A wide, soft diagonal band that drifts across the sky once every ~16s and
+   rests off-screen between passes. Screen-blended, and faint enough that it
+   reads as the light changing rather than as an effect. */
+.banner__light {
+  position: absolute;
+  inset: -20% -60%;
+  background: linear-gradient(
+    105deg,
+    transparent 38%,
+    rgba(255, 236, 200, 0.10) 47%,
+    rgba(255, 244, 222, 0.16) 50%,
+    rgba(255, 236, 200, 0.10) 53%,
+    transparent 62%
+  );
+  mix-blend-mode: screen;
+  transform: translateX(-60%);
+  animation: bannerLight 16s cubic-bezier(0.45, 0, 0.25, 1) 3s infinite;
+  pointer-events: none;
 }
-.banner__intro em {
-  font-style: normal;
-  color: rgba(255, 255, 255, 0.78);
+@keyframes bannerLight {
+  0% { transform: translateX(-60%); }
+  55%, 100% { transform: translateX(60%); }
 }
+html.nomotion .banner__light { display: none; }
 
-.banner__arrow {
-  flex: none;
-  font-size: 15px;
-  line-height: 1.2;
-  opacity: 0.9;
-}
-
-.banner__years {
-  justify-self: center;
-  color: var(--white);
-  font-weight: 500;
-  letter-spacing: 0.08em;
-}
-
-.banner__where {
-  justify-self: end;
-  text-align: right;
-  color: var(--white);
-  font-weight: 500;
-  letter-spacing: 0.04em;
-}
-
+/* ---- the foot: statement on the left, proof on the right --------------- */
 .banner__foot {
   position: relative;
   z-index: 1;
+  margin-top: auto;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 40px;
+  gap: 48px;
+  text-shadow: 0 1px 14px rgba(10, 8, 6, 0.35);
 }
 
-/* The floating nav is centred, so the claim has to stop short of it. At the h1
-   step the second line ran under the pill and lost a word; one step down it
-   clears, and it stops competing with the 230px banner word above it. */
-.banner__claim {
-  /* A plain measure. An earlier version capped this in `vw` to dodge the
-     centred nav pill and broke the claim into five lines at 1280 — the pill is
-     cleared by the section's bottom padding now, so the claim only has to be a
-     good line length. */
-  max-width: 19ch;
-  font-size: var(--t-h2);
-  letter-spacing: var(--ls-h2);
-}
-
-/* Same again for the claim: one mask per authored line, built by SplitText. */
-.banner__claim .banner__claim-line {
-  padding-bottom: 0.12em;
-  margin-bottom: -0.12em;
-}
-
-/* The claim and its two actions read as one block: the statement, then what
-   to do about it. One primary action (the accent) and one quiet one. */
 .banner__lead {
   display: grid;
-  gap: 30px;
+  gap: 18px;
+  max-width: 640px;
+}
+
+.banner__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255, 255, 255, 0.88);
+}
+.banner__stars {
+  color: var(--primary);
+  letter-spacing: 2px;
+  font-size: 11px;
+}
+
+/* The page's <h1>. Sized as a statement, not a masthead — the masthead above
+   is the display type; this is the sentence that says who and where. */
+.banner__title {
+  font-size: clamp(34px, 3.9vw, 58px);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+.banner__place { color: var(--primary); }
+
+/* SplitText's per-line mask for the heading. */
+.banner__title-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+.banner__title-word { display: inline-block; will-change: transform; }
+
+.banner__lede {
+  max-width: 52ch;
+  font-size: var(--t-small);
+  letter-spacing: var(--ls-small);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.86);
 }
 
 .banner__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+  margin-top: 6px;
 }
 
-/* ---- the listing card ------------------------------------------------ */
-
+/* ---- the card: name, address, phone, hours ---------------------------
+   Glass over the photograph. The card tilts toward the pointer (data-tilt)
+   and its rows sit at their own depths so the tilt separates them. */
 .banner__card {
-  display: flex;
-  gap: 18px;
-  width: min(460px, 46vw);
-  padding: 12px;
-  border-radius: var(--radius);
-  background: var(--white);
-  color: var(--black);
   position: relative;
-  overflow: hidden;
-  box-shadow: 0 20px 44px -16px rgba(0, 0, 0, 0.4);
-}
-
-/* Each project change cross-fades: the image and text are keyed on the slide,
-   so React remounts them and this runs once per change */
-.banner__card-img,
-.banner__card-body {
-  animation: bannerCardIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-.banner__card-body {
-  animation-delay: 0.06s;
-}
-
-@keyframes bannerCardIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: none; }
-}
-
-/* A hairline along the card's foot that fills until the next project */
-.banner__card-timer {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 2px;
-  background: var(--primary);
-  transform-origin: left center;
-  animation: bannerCardTimer 5.2s linear both;
-}
-
-@keyframes bannerCardTimer {
-  from { transform: scaleX(0); }
-  to   { transform: scaleX(1); }
-}
-
-html.nomotion .banner__card-timer {
-  display: none;
-}
-
-.banner__card-img {
   flex: none;
-  width: 180px;
-  height: 152px;
-  object-fit: cover;
-  border-radius: 2px;
-  background: var(--deep-light);
+  width: min(400px, 36vw);
+  padding: 22px 22px 18px;
+  border-radius: var(--radius-lg);
+  font-style: normal;
+  color: var(--white);
+  text-shadow: none;
+  /* Tinted toward the dusk rather than toward white, so the rows stay
+     legible where the card sits over the bright facade. */
+  background: linear-gradient(155deg, rgba(38, 32, 26, 0.62), rgba(18, 15, 12, 0.48));
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    0 30px 60px -24px rgba(0, 0, 0, 0.6);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  backdrop-filter: blur(16px) saturate(1.2);
+  transform-style: preserve-3d;
 }
 
-.banner__card-body {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 6px 8px 8px 0;
-  min-width: 0;
-}
-
-.banner__card-top {
+.banner__card-head {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 14px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  transform: translateZ(30px);
+}
+.banner__card-head img {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  padding: 6px;
+  border-radius: 10px;
+  background: var(--white);
+}
+.banner__card-name {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+.banner__card-sub {
+  margin-top: 4px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.banner__facts {
+  display: grid;
+  gap: 11px;
+  margin: 16px 0 0;
+  transform: translateZ(20px);
+}
+.banner__facts > div {
+  display: grid;
+  grid-template-columns: 84px minmax(0, 1fr);
   gap: 12px;
-  color: var(--black-60);
+  align-items: baseline;
 }
-
-.banner__tabs { display: flex; gap: 4px; }
-.banner__tabs button {
-  padding: 4px 6px;
-  border-radius: 2px;
-  color: var(--black-40);
-  transition: background 0.3s ease, color 0.3s ease;
+.banner__facts dt { color: rgba(255, 255, 255, 0.62); }
+.banner__facts dd {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.92);
 }
-.banner__tabs button[data-on] {
-  background: var(--primary);
-  color: var(--black);
-}
-
-.banner__card-name { margin-top: auto; }
-.banner__card-where { color: var(--black-60); }
 
 @media (max-width: 1100px) {
-  .banner__card { width: min(420px, 52vw); }
-  .banner__card-img { width: 140px; height: 130px; }
+  .banner__card { width: min(360px, 40vw); }
+  .banner__facts > div { grid-template-columns: 72px minmax(0, 1fr); }
 }
 
 @media (max-width: 860px) {
   .banner {
-    position: sticky;
-    top: 0;
-    min-height: 100svh;
+    min-height: calc(100svh + var(--panel-radius));
     padding-top: max(1.25rem, env(safe-area-inset-top));
-    padding-bottom: max(124px, calc(90px + env(safe-area-inset-bottom)));
+    padding-bottom: calc(max(116px, calc(90px + env(safe-area-inset-bottom))) + var(--panel-radius));
   }
-  .banner__sky img {
-    object-position: 55% 35%;
-  }
+  .banner__sky img { object-position: 55% 35%; }
   .banner__arch img {
     width: 118%;
     max-width: none;
@@ -369,42 +356,28 @@ html.nomotion .banner__card-timer {
   .banner__atmos {
     background:
       linear-gradient(to bottom, rgba(20, 17, 14, 0.65) 0%, rgba(20, 17, 14, 0.15) 38%, rgba(20, 17, 14, 0) 56%),
-      linear-gradient(to top, rgba(20, 17, 14, 0.84) 0%, rgba(20, 17, 14, 0.45) 18%, rgba(20, 17, 14, 0) 40%);
+      linear-gradient(to top, rgba(20, 17, 14, 0.9) 0%, rgba(20, 17, 14, 0.55) 30%, rgba(20, 17, 14, 0) 55%);
   }
   .banner__word {
     margin-top: clamp(0.75rem, 3vh, 2rem);
-    white-space: normal;
-    font-size: clamp(2.5rem, 15vw, 4.25rem);
+    font-size: 14vw;
     line-height: 0.94;
   }
-  .banner__meta {
-    grid-template-columns: 1fr;
-    gap: 8px;
-    padding-block: clamp(12px, 2vh, 20px);
-  }
-  .banner__years,
-  .banner__where {
-    justify-self: start;
-    text-align: left;
-  }
-  .banner__foot {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 16px;
-  }
-  .banner__claim {
-    font-size: clamp(1.35rem, 5vw, 1.8rem);
-    line-height: 1.15;
-    max-width: none;
-  }
-  .banner__card { width: 100%; }
-  .banner__lead { gap: 18px; }
+  .banner__foot { flex-direction: column; align-items: stretch; gap: 16px; }
+  .banner__lead { gap: 12px; }
+  .banner__title { font-size: clamp(26px, 7.4vw, 34px); }
+  .banner__lede { font-size: 14px; }
   .banner__actions { gap: 8px; }
   .banner__actions > * { flex: 1 1 auto; justify-content: space-between; height: 46px; }
+  /* On a phone the proof card would push the actions off the first screen.
+     The rating is already in the eyebrow; the full card is repeated in the
+     footer, so here it stays in the markup but out of the layout. */
+  .banner__card { display: none; }
 }
 
-@media (max-width: 480px) {
-  .banner__card { flex-direction: row; }
-  .banner__card-img { width: 100px; height: 95px; }
-  .banner__card-body { padding: 4px 6px; gap: 4px; }
+/* Phones: one word per line, each run to the full width (sized in Hero.jsx),
+   so the masthead fills the tall screen instead of leaving it to the sky. */
+@media (max-width: 600px) {
+  .banner__word { line-height: 0.86; }
+  .banner__w { display: block; }
 }

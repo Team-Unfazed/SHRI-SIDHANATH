@@ -185,6 +185,9 @@ html.nomotion .reveal {
 .sheet {
   position: relative;
   z-index: 1;
+  /* Tuck the rounded corners over the hero's bottom padding so the photograph,
+     not the page ground, shows behind them. */
+  margin-top: calc(var(--panel-radius) * -1);
   background: var(--whitesmoke);
   border-top-left-radius: var(--panel-radius);
   border-top-right-radius: var(--panel-radius);
