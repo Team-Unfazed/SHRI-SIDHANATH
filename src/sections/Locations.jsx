@@ -32,21 +32,25 @@ export default function Locations() {
         <ul className="loc__grid">
           {locations.map((l, i) => (
             <Reveal as="li" className="loc__item" key={l.id} delay={(i % 2) * 0.07} depth={22} data-tilt="5">
-              <img
-                className="loc__img"
-                src={l.imageSmall || l.image}
-                alt={l.imageAlt}
-                width="300"
-                height="300"
-                loading="lazy"
-              />
+              {/* The market images are wide banners with the project name set
+                  into them, so they are shown whole at their own shape rather
+                  than cropped to a square through the lettering. */}
+              <div className="loc__media">
+                <img
+                  className="loc__img"
+                  src={l.image}
+                  srcSet={l.imageSmall ? `${l.imageSmall} 800w, ${l.image} 1200w` : undefined}
+                  sizes="(max-width: 980px) 100vw, 33vw"
+                  alt={l.imageAlt}
+                  width="1200"
+                  height="662"
+                  loading="lazy"
+                />
+                <span className="loc__tag mono-sm">{l.role}</span>
+              </div>
               <div className="loc__body">
-                <p className="loc__meta mono-sm">
-                  <span>{l.role}</span>
-                  <span aria-hidden="true">&mdash;</span>
-                  <span>{l.name}</span>
-                </p>
-                <h3 className="h5">{l.note}</h3>
+                <p className="loc__name h4">{l.name}</p>
+                <h3>{l.note}</h3>
                 <Pill as="a" href="#contact" tone="ghost" size="sm" className="loc__cta">
                   Enquire
                 </Pill>

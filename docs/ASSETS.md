@@ -50,16 +50,32 @@ WebP from the `<source>`, so in practice it is never downloaded.
 `scenes/estate-*.webp` are crops of the *composited* scene (sky + architecture
 flattened), used as ordinary photography in About, Locations and the final CTA.
 
-Not all of them are wired into the page. `estate-wide`, `estate-villa`,
-`estate-grove` and `sky-band` are unused today and kept as a small library for
-the Properties, Projects and About pages that come next. The redundant JPEG
-twins of the WebP files were deleted; regenerate them from the source PNGs if a
-non-WebP fallback is ever needed.
+Only `estate-wide-1600` (the closing wordmark fill) is still wired in. The other
+scene crops were unused and have been deleted (2026-09-25); they are in git
+history if the Properties or Projects pages need them.
 
 They are **brand imagery, not project photography.** The villas in them are a
 render supplied for the hero; they are not a Shri Sidhanath project. They are
 deliberately never captioned as one, and they never appear in Featured Projects
 or Selected Work.
+
+---
+
+### Service and FAQ photography (`public/images/services/`)
+Stock photographs from Unsplash, free for commercial use under the
+[Unsplash License](https://unsplash.com/license) (no attribution required, not
+to be resold as-is). Safe to launch with.
+
+| File | Unsplash photo |
+|---|---|
+| `advisory-blueprints-*` | https://unsplash.com/photos/3QzMBrvCeyQ |
+| `mandates-residential-tower-*` | https://unsplash.com/photos/04FfOI_aYy4 |
+| `resale-apartment-living-*` | https://unsplash.com/photos/ZuHIek5xn_I |
+| `management-home-in-hand-*` | https://unsplash.com/photos/I31tYRbVP4w |
+| `faq-apartment-interior-*` | https://unsplash.com/photos/eDKrWCFn8is |
+
+Each is exported at 900 and 1400px WebP. Replace them with the client's own
+photography when it exists.
 
 ---
 

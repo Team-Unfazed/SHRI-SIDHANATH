@@ -29,11 +29,16 @@ await page.locator('.fnav__burger').click();
 await page.waitForTimeout(400);
 ok('menu opens on burger', await page.locator('#fnav-menu').isVisible());
 ok('menu is aria-expanded', await page.locator('.fnav__burger').getAttribute('aria-expanded') === 'true');
-ok('body scroll locked', await page.evaluate(() => document.body.style.overflow === 'hidden'));
+ok('menu is a popover, not a page', await page.evaluate(() => document.querySelector('#fnav-menu').getBoundingClientRect().width < innerWidth * 0.9));
+await page.mouse.click(40, 200);
+await page.waitForTimeout(400);
+ok('outside click closes menu', !(await page.locator('#fnav-menu').isVisible()));
+await page.locator('.fnav__burger').click();
+await page.waitForTimeout(400);
 await page.keyboard.press('Escape');
 await page.waitForTimeout(400);
 ok('escape closes menu', !(await page.locator('#fnav-menu').isVisible()));
-ok('body scroll restored', await page.evaluate(() => document.body.style.overflow === ''));
+ok('page never scroll-locked', await page.evaluate(() => document.body.style.overflow === ''));
 
 // menu link scrolls
 await page.locator('.fnav__burger').click();

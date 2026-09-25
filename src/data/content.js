@@ -5,8 +5,8 @@
 export const services = [
   {
     id: 'project-management',
-    image: '/images/scenes/estate-approach-800.webp',
-    imageAlt: 'A landscaped approach road running between low residential buildings at dusk.',
+    image: '/images/services/advisory-blueprints-900.webp',
+    imageAlt: 'Two people reviewing architectural drawings at a desk.',
     number: '01',
     title: 'Project Management & Advisory',
     summary:
@@ -19,8 +19,8 @@ export const services = [
   },
   {
     id: 'exclusive-mandates',
-    image: '/images/scenes/estate-villa-600.webp',
-    imageAlt: 'A contemporary villa elevation with deep window reveals.',
+    image: '/images/services/mandates-residential-tower-900.webp',
+    imageAlt: 'A contemporary residential high-rise with terracotta and white balconies.',
     number: '02',
     title: 'Exclusive Mandates',
     summary:
@@ -33,8 +33,8 @@ export const services = [
   },
   {
     id: 'resale-rental',
-    image: '/images/office/office-interior-desk-900.webp',
-    imageAlt: 'The Shri Sidhanath office desk in New Panvel.',
+    image: '/images/services/resale-apartment-living-900.webp',
+    imageAlt: 'A bright, furnished apartment living room.',
     number: '03',
     title: 'Resale & Rental Expertise',
     summary:
@@ -47,8 +47,8 @@ export const services = [
   },
   {
     id: 'property-management',
-    image: '/images/office/office-interior-signage-900.webp',
-    imageAlt: 'The Shri Sidhanath office interior with brand signage and award shelving.',
+    image: '/images/services/management-home-in-hand-900.webp',
+    imageAlt: 'A small model house held in an open palm.',
     number: '04',
     title: 'Property Management',
     summary:

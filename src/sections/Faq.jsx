@@ -28,10 +28,10 @@ export default function Faq() {
           <Reveal className="faq__aside">
             <figure className="faq__plate">
               <img
-                src="/images/office/office-interior-desk-1400.webp"
-                srcSet="/images/office/office-interior-desk-900.webp 900w, /images/office/office-interior-desk-1400.webp 1400w"
+                src="/images/services/faq-apartment-interior-1400.webp"
+                srcSet="/images/services/faq-apartment-interior-900.webp 900w, /images/services/faq-apartment-interior-1400.webp 1400w"
                 sizes="(max-width: 980px) 100vw, 34vw"
-                alt="The Shri Sidhanath office desk in New Panvel."
+                alt="A bright, modern apartment interior with a balcony."
                 width="1400"
                 height="1000"
                 loading="lazy"

@@ -56,7 +56,16 @@ export default function Services() {
                 </span>
               </div>
 
-              <img className="svc__img" src={s.image} alt={s.imageAlt} width="420" height="360" />
+              <img
+                className="svc__img"
+                src={s.image}
+                srcSet={`${s.image} 900w, ${s.image.replace('-900.', '-1400.')} 1400w`}
+                sizes="(max-width: 900px) 100vw, 420px"
+                alt={s.imageAlt}
+                width="420"
+                height="360"
+                loading="lazy"
+              />
 
               <div className="svc__body">
                 <h3 className="h4">{s.title}</h3>

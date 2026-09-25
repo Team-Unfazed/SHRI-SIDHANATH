@@ -8,55 +8,75 @@
 .loc__title { margin-top: 26px; }
 
 /* Ruled, not gapped: the cards share hairlines so the grid reads as one sheet
-   divided up rather than eight objects floating on a ground. */
+   divided up rather than six objects floating on a ground. */
 .loc__grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   border-top: var(--hairline);
   border-left: var(--hairline);
   background: var(--white);
 }
 
 .loc__item {
-  display: grid;
-  grid-template-columns: 260px minmax(0, 1fr);
-  gap: 26px;
-  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 22px;
   border-right: var(--hairline);
   border-bottom: var(--hairline);
 }
 
-.loc__img {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border-radius: 2px;
+.loc__media {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
   background: var(--deep-light);
+}
+
+.loc__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1200 / 662;
+  object-fit: cover;
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.loc__item:hover .loc__img { transform: scale(1.04); }
+
+.loc__tag {
+  position: absolute;
+  /* Bottom corner: the banners set their project name top-left. */
+  left: 12px;
+  bottom: 12px;
+  padding: 7px 11px;
+  border-radius: var(--pill);
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--black);
 }
 
 .loc__body {
   display: flex;
+  flex: 1;
   flex-direction: column;
-  gap: 14px;
-  padding-block: 6px 4px;
+  gap: 10px;
 }
 
-.loc__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  color: var(--black-60);
-}
+.loc__name { font-weight: 500; letter-spacing: var(--ls-h4); }
 
 .loc__body h3 {
-  font-weight: 500;
+  margin-bottom: 8px;
+  font-size: var(--t-small);
+  letter-spacing: var(--ls-small);
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--paragraph);
   text-wrap: pretty;
 }
 
 .loc__cta { margin-top: auto; align-self: flex-start; }
 
-@media (max-width: 1240px) {
-  .loc__item { grid-template-columns: 200px minmax(0, 1fr); gap: 20px; }
+@media (max-width: 1100px) {
+  .loc__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 980px) {
@@ -66,13 +86,9 @@
     gap: 26px;
     padding-bottom: 40px;
   }
-  .loc__grid { grid-template-columns: 1fr; }
 }
 
-@media (max-width: 560px) {
-  .loc__item {
-    grid-template-columns: 1fr;
-    padding: 18px;
-  }
-  .loc__img { aspect-ratio: 16 / 10; }
+@media (max-width: 640px) {
+  .loc__grid { grid-template-columns: 1fr; }
+  .loc__item { padding: 18px; }
 }

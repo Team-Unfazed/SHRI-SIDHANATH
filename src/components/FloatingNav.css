@@ -120,337 +120,192 @@
 .fnav__bars[data-open] i:first-child { transform: translateY(3.5px) rotate(45deg); }
 .fnav__bars[data-open] i:last-child { transform: translateY(-3.5px) rotate(-45deg); }
 
-/* ---- the overlay ----------------------------------------------------- */
+/* ---- the menu: a popover that unfolds out of the pill ---------------- */
 
-/* Everything 3D in here reads two variables, --px and --py (-0.5 … 0.5), which
-   the pointer writes on the overlay. Touch never sets them, so on phones the
-   scene simply rests at its default angle. */
+/* Anchored just above the pill, centred on it. It hinges from its bottom edge,
+   so it reads as opening out of the nav rather than appearing from nowhere. */
 .fmenu {
-  --px: 0;
-  --py: 0;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 
   position: fixed;
-  inset: 0;
-  z-index: 85;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 36px;
-  padding: 80px var(--gutter) 116px;
-  overflow: hidden auto;
-  background: #070707;
+  z-index: 89;
+  left: 50%;
+  bottom: calc(26px + 62px + 12px);
+  width: min(400px, calc(100vw - 24px));
+  max-height: calc(100svh - 130px);
+  overflow: auto;
+  padding: 18px 18px 16px;
+  border-radius: 22px;
+  background: rgba(12, 12, 12, 0.94);
+  -webkit-backdrop-filter: blur(20px) saturate(1.3);
+  backdrop-filter: blur(20px) saturate(1.3);
+  border: 1px solid var(--white-10);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 40px 80px -30px rgba(0, 0, 0, 0.7),
+    0 12px 30px -12px rgba(0, 0, 0, 0.45);
   color: var(--white);
+  transform-origin: 50% 100%;
+  transform: translateX(-50%);
 }
 .fmenu[hidden] { display: none; }
 
-.fmenu[data-state='open'] { animation: fmenu-in 0.7s var(--ease) both; }
+.fmenu[data-state='open'] { animation: fmenu-in 0.5s var(--ease) both; }
 .fmenu[data-state='closing'] {
-  animation: fmenu-out 0.3s cubic-bezier(0.7, 0, 0.84, 0) both;
+  animation: fmenu-out 0.22s cubic-bezier(0.7, 0, 0.84, 0) both;
   pointer-events: none;
 }
 
-/* Opens as a circle growing out of the burger at the bottom of the screen. */
 @keyframes fmenu-in {
-  from { clip-path: circle(0% at 50% calc(100% - 57px)); }
-  to { clip-path: circle(150% at 50% calc(100% - 57px)); }
+  from {
+    opacity: 0;
+    transform: translateX(-50%) perspective(900px) rotateX(-14deg) translateY(18px) scale(0.96);
+  }
+  to { opacity: 1; transform: translateX(-50%); }
 }
 @keyframes fmenu-out {
-  from { opacity: 1; transform: none; }
-  to { opacity: 0; transform: scale(0.97) translateY(12px); }
+  to {
+    opacity: 0;
+    transform: translateX(-50%) perspective(900px) rotateX(-8deg) translateY(10px) scale(0.97);
+  }
 }
 
-/* ---- backdrop: a glow that follows the pointer over a receding floor grid */
-
-.fmenu__bg {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  perspective: 600px;
-  overflow: hidden;
-}
-
-.fmenu__glow {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(38% 42% at calc(66% + var(--px) * 30%) calc(42% + var(--py) * 30%), rgba(228, 237, 100, 0.15), transparent 70%),
-    radial-gradient(50% 60% at 10% 100%, rgba(255, 255, 255, 0.05), transparent 70%);
-}
-
-.fmenu__floor {
-  position: absolute;
-  left: -50%;
-  right: -50%;
-  bottom: -10%;
-  height: 70%;
-  background-image:
-    linear-gradient(var(--white-10) 1px, transparent 1px),
-    linear-gradient(90deg, var(--white-10) 1px, transparent 1px);
-  background-size: 64px 64px;
-  transform-origin: 50% 100%;
-  transform: rotateX(72deg);
-  mask-image: linear-gradient(to top, #000 0%, transparent 85%);
-  -webkit-mask-image: linear-gradient(to top, #000 0%, transparent 85%);
-  animation: fmenu-floor 6s linear infinite;
-}
-@keyframes fmenu-floor {
-  to { background-position: 0 64px; }
-}
-
-/* ---- layout ----------------------------------------------------------- */
-
-.fmenu__inner {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  align-items: center;
-  gap: clamp(32px, 6vw, 110px);
-  width: 100%;
-  max-width: 1320px;
-  margin-inline: auto;
-  perspective: 1400px;
-}
-
-.fmenu__col {
-  transform-style: preserve-3d;
-  transform: rotateY(calc(var(--px) * 6deg)) rotateX(calc(var(--py) * -4deg));
-  transition: transform 0.5s var(--ease);
-}
-
-.fmenu__eyebrow {
+.fmenu__head {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 22px;
+  justify-content: space-between;
+  padding: 2px 6px 12px;
   color: var(--white-40);
 }
+.fmenu__head > span:first-child { display: inline-flex; align-items: center; gap: 8px; }
 .fmenu__dot {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: var(--primary);
-  box-shadow: 0 0 12px var(--primary);
+  box-shadow: 0 0 10px var(--primary);
 }
 
-/* ---- links: each label is a two-faced cube that rolls over on hover ---- */
+/* ---- links ------------------------------------------------------------ */
 
 .fmenu__list {
   display: grid;
-  perspective: 900px;
+  gap: 2px;
 }
 
-.fmenu__list li {
-  border-bottom: var(--hairline-light);
-  transform-origin: 50% 100%;
-}
 .fmenu[data-state='open'] .fmenu__list li {
-  animation: fmenu-flip 0.9s var(--ease) both;
-  animation-delay: calc(0.12s + var(--i) * 0.055s);
+  animation: fmenu-item 0.5s var(--ease) both;
+  animation-delay: calc(0.06s + var(--i) * 0.03s);
 }
-@keyframes fmenu-flip {
-  from { opacity: 0; transform: translateY(40px) rotateX(-85deg); }
-  to { opacity: 1; transform: none; }
+@keyframes fmenu-item {
+  from { opacity: 0; transform: translateY(8px); }
 }
 
 .fmenu__list a {
-  --h: 1.08em;
   display: flex;
   align-items: center;
-  gap: 22px;
-  padding-block: 12px;
-  font-size: clamp(34px, 4.6vw, 68px);
+  gap: 14px;
+  padding: 11px 12px;
+  border-radius: 12px;
+  font-size: 22px;
   font-weight: 500;
-  letter-spacing: -0.045em;
-  line-height: 1;
-  transform-style: preserve-3d;
-  transition: transform 0.5s var(--ease);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--white-70);
+  transition: background 0.25s ease, color 0.25s ease;
 }
 
 .fmenu__num {
   flex: none;
-  width: 2.4em;
+  width: 22px;
   color: var(--white-40);
-  transition: color 0.3s ease;
+  transition: color 0.25s ease;
 }
 
-.fmenu__cube {
-  position: relative;
-  display: inline-grid;
-  height: var(--h);
-  transform-style: preserve-3d;
-  transform: translateZ(calc(var(--h) / -2));
-  transition: transform 0.6s var(--ease);
-}
-.fmenu__face {
-  grid-area: 1 / 1;
-  display: block;
-  height: var(--h);
-  line-height: var(--h);
-  white-space: nowrap;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-.fmenu__face--front { transform: translateZ(calc(var(--h) / 2)); }
-.fmenu__face--under {
-  color: var(--primary);
-  transform: rotateX(-90deg) translateZ(calc(var(--h) / 2));
+.fmenu__label {
+  transition: transform 0.4s var(--ease);
 }
 
 .fmenu__arrow {
   flex: none;
-  width: 0.5em;
-  height: 0.5em;
+  width: 16px;
+  height: 16px;
   margin-left: auto;
   color: var(--primary);
   opacity: 0;
-  transform: translate(-14px, 14px);
-  transition: opacity 0.35s ease, transform 0.5s var(--ease);
+  transform: translate(-6px, 6px);
+  transition: opacity 0.25s ease, transform 0.4s var(--ease);
 }
 
-.fmenu__list a:hover .fmenu__cube,
-.fmenu__list a:focus-visible .fmenu__cube {
-  transform: translateZ(calc(var(--h) / -2)) rotateX(90deg);
+.fmenu__list a:hover,
+.fmenu__list a:focus-visible {
+  background: var(--white-6);
+  color: var(--white);
+  outline: none;
 }
-.fmenu__list a[data-active] { transform: translateZ(24px); }
-.fmenu__list a[data-active] .fmenu__num { color: var(--primary); }
-.fmenu__list a[data-active] .fmenu__arrow { opacity: 1; transform: none; }
-.fmenu__list a:focus-visible { outline: none; }
+.fmenu__list a:hover .fmenu__label,
+.fmenu__list a:focus-visible .fmenu__label { transform: translateX(4px); }
+.fmenu__list a:hover .fmenu__arrow,
+.fmenu__list a:focus-visible .fmenu__arrow { opacity: 1; transform: none; }
 
-/* ---- stage: a floating photo card that tilts against the pointer ------- */
+/* Where the reader is now. */
+.fmenu__list a[aria-current] { color: var(--white); }
+.fmenu__list a[aria-current] .fmenu__num { color: var(--primary); }
 
-.fmenu__stage {
-  perspective: 1100px;
-  animation: fmenu-rise 1s var(--ease) 0.2s both;
-}
-@keyframes fmenu-rise {
-  from { opacity: 0; transform: translateY(60px) rotateX(20deg); }
-  to { opacity: 1; transform: none; }
-}
-
-.fmenu__card {
-  position: relative;
-  height: min(62vh, 600px);
-  aspect-ratio: 4 / 5;
-  max-width: 100%;
-  margin-inline: auto;
-  transform-style: preserve-3d;
-  transform: rotateY(calc(-14deg + var(--px) * 22deg)) rotateX(calc(6deg + var(--py) * -18deg));
-  transition: transform 0.6s var(--ease);
-}
-
-.fmenu__frame {
-  position: absolute;
-  inset: -18px;
-  border: 1px solid var(--white-20);
-  border-radius: 22px;
-  transform: translateZ(-70px);
-  transform-style: preserve-3d;
-}
-.fmenu__frame::after {
-  content: '';
-  position: absolute;
-  inset: 40px -40px -40px 40px;
-  border-radius: 22px;
-  background: linear-gradient(135deg, rgba(228, 237, 100, 0.2), transparent 60%);
-  transform: translateZ(-60px);
-}
-
-.fmenu__shot {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 16px;
-  box-shadow: 0 50px 90px -30px rgba(0, 0, 0, 0.9), 0 0 0 1px var(--white-10);
-  opacity: 0;
-  transform: translateZ(-80px) rotateY(12deg) scale(0.94);
-  transition: opacity 0.5s ease, transform 0.8s var(--ease);
-}
-.fmenu__shot[data-active] {
-  opacity: 1;
-  transform: translateZ(0);
-}
-
-.fmenu__chip {
-  position: absolute;
-  left: -28px;
-  bottom: 36px;
-  display: grid;
-  gap: 6px;
-  padding: 16px 20px;
-  border-radius: 14px;
-  background: rgba(20, 20, 20, 0.72);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid var(--white-10);
-  box-shadow: 0 24px 50px -20px rgba(0, 0, 0, 0.8);
-  transform: translateZ(90px);
-}
-.fmenu__chip span { color: var(--primary); }
-.fmenu__chip strong {
-  font-size: var(--t-h6);
-  font-weight: 500;
-  letter-spacing: var(--ls-h6);
-}
-
-/* ---- footer ----------------------------------------------------------- */
+/* ---- actions ---------------------------------------------------------- */
 
 .fmenu__foot {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px;
-  width: 100%;
-  max-width: 1320px;
-  margin-inline: auto;
-  animation: fmenu-fade 0.6s ease 0.5s both;
-}
-@keyframes fmenu-fade {
-  from { opacity: 0; transform: translateY(10px); }
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: var(--hairline-light);
 }
 
-.fmenu__pill {
+.fmenu__btn {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 13px 18px;
+  justify-content: center;
+  gap: 8px;
+  height: 46px;
   border-radius: var(--pill);
   border: 1px solid var(--white-20);
-  background: var(--white-6);
-  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s var(--ease);
+  font-size: 15px;
+  font-weight: 500;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.3s var(--ease);
 }
-.fmenu__pill span { color: var(--white-40); transition: color 0.3s ease; }
-.fmenu__pill:hover {
+.fmenu__btn:hover { background: var(--white-10); transform: translateY(-1px); }
+
+.fmenu__btn--primary {
   background: var(--primary);
   border-color: var(--primary);
   color: var(--black);
-  transform: translateY(-2px);
 }
-.fmenu__pill:hover span { color: var(--black-60); }
-.fmenu__rera { margin-left: auto; color: var(--white-40); }
+.fmenu__btn--primary:hover { background: #eef37f; }
 
-/* Phones and small tablets: the card has nowhere to go, so the list takes the
-   screen and keeps its roll-over and flip-in. */
-@media (max-width: 900px) {
-  .fmenu { justify-content: flex-start; padding-top: 56px; gap: 28px; }
-  .fmenu__inner { grid-template-columns: 1fr; }
-  .fmenu__stage { display: none; }
-  .fmenu__col { transform: none; }
-  .fmenu__list a { gap: 14px; padding-block: 9px; font-size: clamp(30px, 8.6vw, 54px); }
-  .fmenu__rera { margin-left: 0; width: 100%; }
+.fmenu__rera {
+  margin-top: 12px;
+  text-align: center;
+  color: var(--white-40);
+}
+
+/* The pill lifts a touch while its menu is open, so the two read as one. */
+.fnav { transition: box-shadow 0.3s ease; }
+.fnav[data-open] { box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--white-10); }
+
+@media (max-width: 560px) {
+  .fmenu { bottom: calc(26px + 56px + 10px); padding: 14px 12px 12px; }
+  .fmenu__hint { display: none; }
+  .fmenu__list a { padding: 10px; font-size: 20px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .fmenu,
-  .fmenu *,
-  .fmenu *::after {
+  .fmenu * {
     animation: none !important;
     transition-duration: 0.01ms !important;
   }
-  .fmenu__col,
-  .fmenu__card { transform: none; }
 }
 
 /* The pill has to fit a 360px viewport with the gutter still showing. Below
