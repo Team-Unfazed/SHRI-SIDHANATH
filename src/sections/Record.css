@@ -200,3 +200,9 @@
   .rec__value { font-size: 42px; }
   .rec__caption { font-size: 14px; }
 }
+
+@media (max-width: 380px) {
+  .rec__cell { padding: 16px 12px 14px; min-height: 154px; }
+  .rec__value { font-size: 36px; }
+  .rec__caption { font-size: 13px; }
+}

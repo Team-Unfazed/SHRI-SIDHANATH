@@ -11,6 +11,9 @@
 //                   them, not with Shri Sidhanath. They are comps, good enough to show the
 //                   client the design. Replace with official developer media-kit assets
 //                   before the site goes live. See docs/ASSETS.md.
+//   licence: 'client-supplied'
+//                   campaign artwork the client supplied (the Locations banners, cropped
+//                   to the card). Theirs to publish as the developer's channel partner.
 //   licence: 'first-party'
 //                   the client's own photograph. Safe to publish.
 
@@ -131,7 +134,9 @@ export const projects = [
     config: '2 BHK',
     detail: '2 BHK Optima from 1.10 Cr and 2 BHK Premium from 1.49 Cr.',
     priceFrom: '1.10 Cr*',
-    image: null,
+    image: '/images/portfolio/residential/lunaris-raheja-towers.webp',
+    imageAlt: 'Lunaris, Raheja District, Navi Mumbai: residential towers above a wooded ridge at sunset.',
+    licence: 'client-supplied',
     source: 'instagram',
     verified: true,
     featured: false,
@@ -147,7 +152,9 @@ export const projects = [
     detail:
       'A gated Khopoli address, marketed at 55.99 Lakh and 1.17 Crore, all inclusive. Name corrected from the client-supplied campaign artwork, which reads AERO STATE T3.',
     priceFrom: '55.99 Lakh*',
-    image: null,
+    image: '/images/portfolio/residential/aero-state-t3-gate.webp',
+    imageAlt: 'Aero State T3, Khopoli: the stone entrance sign and landscaped approach.',
+    licence: 'client-supplied',
     source: 'instagram',
     verified: true,
     featured: false,
@@ -163,7 +170,9 @@ export const projects = [
     detail:
       'Branded land, with documented transparency, buy-back assurance and legal assistance before booking.',
     priceFrom: null,
-    image: null,
+    image: '/images/portfolio/land/hoabl-hillside-residence.webp',
+    imageAlt: 'The House of Abhinandan Lodha: a hillside residence and infinity pool at dusk.',
+    licence: 'client-supplied',
     source: 'instagram',
     verified: true,
     featured: false,
@@ -178,7 +187,9 @@ export const projects = [
     config: '1, 2 & 3 BHK',
     detail: 'South-central Mumbai residences at Wadala.',
     priceFrom: null,
-    image: null,
+    image: '/images/portfolio/residential/passcode-great-guarantee-tower.webp',
+    imageAlt: 'Passcode Great Guarantee: a high-rise residential tower above a landscaped podium.',
+    licence: 'client-supplied',
     source: 'instagram',
     verified: true,
     featured: false,
@@ -208,7 +219,9 @@ export const projects = [
     config: null,
     detail: 'Among the tallest towers rising in Navi Mumbai.',
     priceFrom: null,
-    image: null,
+    image: '/images/portfolio/residential/adhiraj-capital-towers.webp',
+    imageAlt: 'Adhiraj Capital City, Kharghar: twin high-rise towers above a landscaped garden.',
+    licence: 'placeholder',
     source: 'instagram',
     verified: true,
     featured: false,

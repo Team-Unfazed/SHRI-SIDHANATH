@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#f5f5f5" />
 
-    <!-- Title and description lead with the phrase people search for
-         ("real estate agent / consultant in Panvel") and name the localities,
-         the registration and the rating — all of which are visible on the page. -->
-    <title>Real Estate Agent &amp; Consultant in Panvel | Shri Sidhanath</title>
+    <!-- Title and description lead with the phrases people search for
+         ("best / top real estate agent, agency, consultant, property dealer in
+         Panvel") and back the claim with facts that are visible on the page:
+         the 4.8 Google rating, the MahaRERA number, the office and localities.
+         "Top-rated" is used rather than "best" because the rating supports it. -->
+    <title>Top-Rated Real Estate Agent &amp; Consultant in Panvel | Shri Sidhanath</title>
     <meta
       name="description"
-      content="MahaRERA-registered real estate consultants in New Panvel. Buy, sell or rent homes in Panvel, Kharghar, Kamothe, Taloja &amp; Ulwe. Rated 4.8 on Google (145 reviews)."
+      content="Shri Sidhanath: MahaRERA-registered real estate agency and property consultant in New Panvel, rated 4.8★ on Google (145 reviews). Buy, sell or rent flats in Panvel, Kharghar, Kamothe, Taloja &amp; Ulwe. Call +91 98207 59348."
     />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="geo.region" content="IN-MH" />
@@ -30,7 +32,7 @@
     />
     <meta
       property="og:title"
-      content="Real Estate Agent &amp; Consultant in Panvel | Shri Sidhanath"
+      content="Top-Rated Real Estate Agent &amp; Consultant in Panvel | Shri Sidhanath"
     />
     <meta
       property="og:description"
@@ -39,8 +41,11 @@
     <meta property="og:url" content="https://www.shrisidhanath.in/" />
     <meta
       property="og:image"
-      content="https://www.shrisidhanath.in/images/scenes/estate-wide-1600.webp"
+      content="https://www.shrisidhanath.in/images/og/shri-sidhanath-panvel.jpg"
     />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Shri Sidhanath, real estate consultant in New Panvel" />
     <meta name="twitter:card" content="summary_large_image" />
 
     <!-- Archivo carries every heading and the body; IBM Plex Mono carries the
@@ -86,10 +91,18 @@
         "legalName": "Shri Sidhanath Constructions and Real Estate",
         "description": "MahaRERA-registered real estate agents and property consultants in New Panvel, Navi Mumbai: buying, selling, resale, rental and property management across Panvel, Kharghar, Kamothe, Kalamboli, Taloja and Ulwe.",
         "url": "https://www.shrisidhanath.in/",
-        "image": "https://www.shrisidhanath.in/images/scenes/estate-wide-1600.webp",
+        "image": "https://www.shrisidhanath.in/images/og/shri-sidhanath-panvel.jpg",
         "logo": "https://www.shrisidhanath.in/images/branding/logo-mark-512.png",
         "hasMap": "https://www.google.com/maps/search/?api=1&query=Shri+Sidhanath+Constructions+%26+Estate+Consultant%2C+Sector+7%2C+Panvel",
-        "knowsAbout": ["Residential real estate", "Resale property", "Rental property", "Property management", "New projects in Panvel"],
+        "knowsAbout": ["Residential real estate", "Resale property", "Rental property", "Property management", "New projects in Panvel", "Commercial property", "Land and plots"],
+        "slogan": "Your Trusted Partner in Premium Real Estate Solutions",
+        "makesOffer": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Property buying assistance in Panvel" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Property selling and exclusive mandates" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Resale and rental property services" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Property management" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Project management and advisory" } }
+        ],
         "telephone": "+91-98207-59348",
         "email": "ravisargar@shrisidhanath.com",
         "founder": { "@type": "Person", "name": "Ravi Sargar" },
@@ -147,6 +160,20 @@
         ]
       }
     </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://www.shrisidhanath.in/#website",
+        "name": "Shri Sidhanath",
+        "alternateName": "Shri Sidhanath Real Estate, Panvel",
+        "url": "https://www.shrisidhanath.in/",
+        "inLanguage": "en-IN",
+        "publisher": { "@id": "https://www.shrisidhanath.in/#agency" }
+      }
+    </script>
+    <!-- FAQPage schema, generated from src/data/content.js at build time. -->
+    <!--seo:faq-schema-->
   </head>
   <body>
     <script>
@@ -176,7 +203,8 @@
           410206. Phone <a href="tel:+919820759348">+91 98207 59348</a>. Open 9:00 to 22:00,
           daily. MahaRERA A52000004595.
         </address>
-        <p><a href="/projects.html">Projects in Panvel and Navi Mumbai</a></p>
+        <!-- Services, areas, projects and FAQs, generated from src/data at build time. -->
+        <!--seo:home-->
       </main>
     </div>
     <script type="module" src="/src/main.jsx"></script>

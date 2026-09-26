@@ -1,9 +1,10 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'node:path';
 import react from '@vitejs/plugin-react';
+import seoFallback from './scripts/seo-fallback.js';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), seoFallback()],
   server: {
     port: 5173,
     host: true,

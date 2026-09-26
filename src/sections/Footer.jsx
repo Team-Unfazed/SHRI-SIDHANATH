@@ -10,6 +10,7 @@ const MAIN = [
   { label: 'Services', href: '#services' },
   { label: 'Projects', href: '#listings' },
   { label: 'Locations', href: '#locations' },
+  { label: 'All projects', href: '/projects.html' },
 ];
 
 const PRACTICE = [
@@ -158,6 +159,16 @@ export default function Footer({ ref }) {
             </ul>
           </div>
         </div>
+
+        {/* One plain paragraph that says who, what and where in the words
+            people search with. Every claim in it is on the page already. */}
+        <p className="ftz__about">
+          {site.fullName} is a {site.reraAuthority}-registered real estate agency and property
+          consultant in New Panvel, Navi Mumbai, rated {site.google.rating} on Google from{' '}
+          {site.google.reviews} reviews. We help families and investors buy, sell and rent flats,
+          shops, offices and land in Panvel, New Panvel, Kharghar, Kamothe, Kalamboli, Taloja and
+          Ulwe, and take selective mandates in Mumbai, Thane, Raigad and Pune.
+        </p>
 
         <p className="ftz__base mono-sm">
           © {new Date().getFullYear()} {site.fullName} · Open {site.google.hoursLabel}

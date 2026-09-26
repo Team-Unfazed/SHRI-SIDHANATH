@@ -256,6 +256,11 @@ html.nomotion .banner__light { display: none; }
   color: rgba(255, 255, 255, 0.86);
 }
 
+.banner__lede--desktop { display: inline; }
+.banner__lede--mobile { display: none; }
+.banner__btn--desktop { display: inline; }
+.banner__btn--mobile { display: none; }
+
 .banner__actions {
   display: flex;
   flex-wrap: wrap;
@@ -341,10 +346,15 @@ html.nomotion .banner__light { display: none; }
 }
 
 @media (max-width: 860px) {
+  .banner__lede--desktop { display: none; }
+  .banner__lede--mobile { display: inline; }
+  .banner__btn--desktop { display: none; }
+  .banner__btn--mobile { display: inline; }
+
   .banner {
     min-height: calc(100svh + var(--panel-radius));
     padding-top: max(1.25rem, env(safe-area-inset-top));
-    padding-bottom: calc(max(116px, calc(90px + env(safe-area-inset-bottom))) + var(--panel-radius));
+    padding-bottom: calc(max(104px, calc(88px + env(safe-area-inset-bottom))) + var(--panel-radius));
   }
   .banner__sky img { object-position: 55% 35%; }
   .banner__arch img {
@@ -359,25 +369,54 @@ html.nomotion .banner__light { display: none; }
       linear-gradient(to top, rgba(20, 17, 14, 0.9) 0%, rgba(20, 17, 14, 0.55) 30%, rgba(20, 17, 14, 0) 55%);
   }
   .banner__word {
-    margin-top: clamp(0.75rem, 3vh, 2rem);
-    font-size: 14vw;
-    line-height: 0.94;
+    margin-top: clamp(0.75rem, 2.5vh, 1.5rem);
+    white-space: nowrap;
+    line-height: var(--lh-banner);
   }
-  .banner__foot { flex-direction: column; align-items: stretch; gap: 16px; }
-  .banner__lead { gap: 12px; }
-  .banner__title { font-size: clamp(26px, 7.4vw, 34px); }
-  .banner__lede { font-size: 14px; }
-  .banner__actions { gap: 8px; }
-  .banner__actions > * { flex: 1 1 auto; justify-content: space-between; height: 46px; }
+  .banner__w {
+    display: inline;
+  }
+  .banner__foot {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+  .banner__lead { gap: 10px; }
+  .banner__title {
+    font-size: clamp(22px, 6.2vw, 30px);
+    line-height: 1.1;
+  }
+  .banner__lede {
+    font-size: 14px;
+    line-height: 1.45;
+  }
+  .banner__actions {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    width: 100%;
+    margin-top: 4px;
+  }
+  .banner__actions > * {
+    flex: 1 1 0;
+    min-width: 0;
+    justify-content: center;
+    padding-inline: 14px;
+    height: 44px;
+    font-size: 12px;
+  }
   /* On a phone the proof card would push the actions off the first screen.
      The rating is already in the eyebrow; the full card is repeated in the
      footer, so here it stays in the markup but out of the layout. */
   .banner__card { display: none; }
 }
 
-/* Phones: one word per line, each run to the full width (sized in Hero.jsx),
-   so the masthead fills the tall screen instead of leaving it to the sky. */
 @media (max-width: 600px) {
-  .banner__word { line-height: 0.86; }
-  .banner__w { display: block; }
+  .banner__word {
+    white-space: nowrap;
+    line-height: var(--lh-banner);
+  }
+  .banner__w {
+    display: inline;
+  }
 }

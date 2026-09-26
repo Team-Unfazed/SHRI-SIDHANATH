@@ -49,35 +49,12 @@ export default function Hero() {
       const box = word.parentElement;
       const cs = getComputedStyle(box);
       const avail = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
-      /* On phones the three words stack, so the widest word sets the size;
-         elsewhere the whole line does. */
-      const stacked = window.matchMedia('(max-width: 600px)').matches;
-      const parts = stacked ? [...word.querySelectorAll('.banner__w')] : [word];
-      const width = Math.max(
-        ...parts.map((n) => {
-          const range = document.createRange();
-          range.selectNodeContents(n);
-          return range.getBoundingClientRect().width;
-        })
-      );
+      const range = document.createRange();
+      range.selectNodeContents(word);
+      const width = range.getBoundingClientRect().width;
       if (!width || !avail) return;
       const size = parseFloat(getComputedStyle(word).fontSize);
       let next = size * (avail / width) * 0.99;
-
-      /* Stacked, the word could also outgrow the height: keep all three lines
-         in the sky above the heading, with a clear gap before it. */
-      if (stacked) {
-        const foot = box.querySelector('.banner__foot');
-        const room =
-          window.innerHeight -
-          parseFloat(cs.paddingTop) -
-          (parseFloat(cs.paddingBottom) - parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--panel-radius') || 0)) -
-          (foot?.offsetHeight ?? 0) -
-          parseFloat(getComputedStyle(word).marginTop) -
-          28;
-        const lineHeight = parseFloat(getComputedStyle(word).lineHeight) / size;
-        next = Math.min(next, room / (3 * lineHeight));
-      }
       word.style.fontSize = `${Math.floor(next * 100) / 100}px`;
     };
 
@@ -314,14 +291,23 @@ export default function Hero() {
           </h1>
 
           <p className="banner__lede">
-            MahaRERA-registered property agents for buying, selling, renting and managing
-            homes across {AREAS.slice(0, -1).join(', ')} and {AREAS[AREAS.length - 1]}.
+            <span className="banner__lede--desktop">
+              MahaRERA-registered property agents for buying, selling, renting and managing
+              homes across {AREAS.slice(0, -1).join(', ')} and {AREAS[AREAS.length - 1]}.
+            </span>
+            <span className="banner__lede--mobile">
+              MahaRERA-registered property consultants for Panvel and Navi Mumbai.
+            </span>
           </p>
 
           <div className="banner__actions">
-            <Pill href="#contact">Book a consultation</Pill>
+            <Pill href="#contact">
+              <span className="banner__btn--desktop">Book a consultation</span>
+              <span className="banner__btn--mobile">Book Consultation</span>
+            </Pill>
             <Pill href={`tel:${site.phoneIntl}`} tone="ghost">
-              Call {site.phoneDisplay}
+              <span className="banner__btn--desktop">Call {site.phoneDisplay}</span>
+              <span className="banner__btn--mobile">Call Now</span>
             </Pill>
           </div>
         </div>

@@ -84,8 +84,9 @@ ul {
 
 .skip-link {
   position: absolute;
-  left: -9999px;
   top: 0;
+  left: 12px;
+  transform: translateY(-120%);
   z-index: 200;
   background: var(--black);
   color: var(--white);
@@ -93,10 +94,10 @@ ul {
   font-family: var(--font-mono);
   font-size: var(--t-small-label);
   text-transform: uppercase;
+  transition: transform 0.2s ease;
 }
 .skip-link:focus {
-  left: 12px;
-  top: 12px;
+  transform: translateY(12px);
 }
 
 /* ---- layout objects -------------------------------------------------- */

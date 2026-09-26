@@ -212,6 +212,10 @@ export const whyPoints = [
 
 export const faqs = [
   {
+    q: 'Why choose Shri Sidhanath as your real estate agent in Panvel?',
+    a: 'We are a MahaRERA-registered consultancy (A52000004595) with our own office in New Panvel, open 9:00 to 22:00 every day, and rated 4.8 on Google from 145 reviews. One desk handles buying, selling, resale, rentals and property management across Panvel, Kharghar, Kamothe, Kalamboli, Taloja and Ulwe.',
+  },
+  {
     q: 'How does Shri Sidhanath help buyers?',
     a: 'We begin with your requirement, budget and timeline, then shortlist only what genuinely fits. We arrange site visits, read the technical and legal position of each option with you, negotiate, and stay involved through documentation and handover.',
   },
