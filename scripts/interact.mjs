@@ -8,6 +8,7 @@
  * Exits non-zero on the first failure so it is usable in a pre-deploy check.
  */
 import { chromium } from 'playwright';
+import { projects } from '../src/data/projects.js';
 
 const args = process.argv.slice(2);
 const flagIndex = args.indexOf('--url');
@@ -73,7 +74,7 @@ ok('every section anchor resolves', await page.evaluate(() => {
   const hrefs = [...document.querySelectorAll('a[href^="#"]')].map(a => a.getAttribute('href'));
   return hrefs.every(h => h === '#' || document.querySelector(h));
 }));
-ok('nav count matches project list', (await page.locator('.fnav__badge').textContent()) === '12');
+ok('nav count matches project list', (await page.locator('.fnav__badge').textContent()) === String(projects.length));
 ok('no external http links are unsafe', await page.evaluate(() =>
   [...document.querySelectorAll('a[target="_blank"]')].every(a => (a.rel || '').includes('noreferrer'))));
 ok('all images have alt attributes', await page.evaluate(() =>

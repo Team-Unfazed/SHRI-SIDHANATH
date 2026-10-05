@@ -60,7 +60,8 @@ function projectsFallback() {
     .map(
       (p) =>
         `<li><h2>${esc(p.name)}</h2><p>${esc([p.location || p.area, p.category, p.config].filter(Boolean).join(' · '))}</p>` +
-        `${p.priceFrom ? `<p>From ${esc(p.priceFrom)}</p>` : ''}<p>${esc(p.detail)}</p></li>`
+        `${p.priceFrom ? `<p>From ${esc(p.priceFrom)}</p>` : ''}${p.detail ? `<p>${esc(p.detail)}</p>` : ''}` +
+        `${p.reraNumber ? `<p>Promoter: ${esc(p.developer)}. MahaRERA: ${esc(p.reraNumber)}</p><a href="${esc(p.sourceUrl)}">View on MahaRERA</a>` : ''}</li>`
     )
     .join('');
   return `
@@ -82,9 +83,10 @@ function projectsSchema() {
       '@type': 'ListItem',
       position: i + 1,
       item: {
-        '@type': 'Residence',
+        '@type': p.source === 'MahaRERA' && !p.projectType ? 'Place' : 'Residence',
         name: p.name,
-        description: p.detail,
+        ...(p.detail ? { description: p.detail } : {}),
+        ...(p.reraNumber ? { identifier: p.reraNumber, sameAs: p.sourceUrl } : {}),
         address: { '@type': 'PostalAddress', addressLocality: p.area, addressRegion: 'Maharashtra', addressCountry: 'IN' },
         ...(p.image ? { image: ORIGIN + p.image } : {}),
       },

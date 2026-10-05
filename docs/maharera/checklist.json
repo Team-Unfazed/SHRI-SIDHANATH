@@ -1,0 +1,252 @@
+[
+  {
+    "inputRow": 1,
+    "reraNumber": "PR1271012600320",
+    "duplicate": false,
+    "found": true,
+    "extracted": true,
+    "reason": "Search fields verified; full details CAPTCHA-protected.",
+    "added": true,
+    "verified": true
+  },
+  {
+    "inputRow": 2,
+    "reraNumber": "P52000078843",
+    "duplicate": false,
+    "found": true,
+    "extracted": true,
+    "reason": "Search fields verified; full details CAPTCHA-protected.",
+    "added": true,
+    "verified": true
+  },
+  {
+    "inputRow": 3,
+    "reraNumber": "P52000054611",
+    "duplicate": false,
+    "found": true,
+    "extracted": true,
+    "reason": "Search fields verified; full details CAPTCHA-protected.",
+    "added": true,
+    "verified": true
+  },
+  {
+    "inputRow": 4,
+    "reraNumber": "P52000055992",
+    "duplicate": false,
+    "found": true,
+    "extracted": true,
+    "reason": "Search fields verified; full details CAPTCHA-protected.",
+    "added": true,
+    "verified": true
+  },
+  {
+    "inputRow": 5,
+    "reraNumber": "PR1270002502927",
+    "duplicate": false,
+    "found": true,
+    "extracted": true,
+    "reason": "Search fields verified; full details CAPTCHA-protected.",
+    "added": true,
+    "verified": true
+  },
+  {
+    "inputRow": 6,
+    "reraNumber": "PR1270002502892",
+    "duplicate": false,
+    "found": true,
+    "extracted": true,
+    "reason": "Search fields verified; full details CAPTCHA-protected.",
+    "added": true,
+    "verified": true
+  },
+  {
+    "inputRow": 7,
+    "reraNumber": "PR1270002502891",
+    "duplicate": false,
+    "found": true,
+    "extracted": true,
+    "reason": "Search fields verified; full details CAPTCHA-protected.",
+    "added": true,
+    "verified": true
+  },
+  {
+    "inputRow": 8,
+    "reraNumber": "PR1270002502890",
+    "duplicate": false,
+    "found": true,
+    "extracted": true,
+    "reason": "Search fields verified; full details CAPTCHA-protected.",
+    "added": true,
+    "verified": true
+  },
+  {
+    "inputRow": 9,
+    "reraNumber": "PR1270002502889",
+    "duplicate": false,
+    "found": true,
+    "extracted": true,
+    "reason": "Search fields verified; full details CAPTCHA-protected.",
+    "added": true,
+    "verified": true
+  },
+  {
+    "inputRow": 10,
+    "reraNumber": "P52000055578",
+    "duplicate": false,
+    "found": true,
+    "extracted": true,
+    "reason": "Search fields verified; full details CAPTCHA-protected.",
+    "added": true,
+    "verified": true
+  },
+  {
+    "inputRow": 11,
+    "reraNumber": "P52000050193",
+    "duplicate": false,
+    "found": true,
+    "extracted": true,
+    "reason": "Search fields verified; full details CAPTCHA-protected.",
+    "added": true,
+    "verified": true
+  },
+  {
+    "inputRow": 12,
+    "reraNumber": "P52000050194",
+    "duplicate": false,
+    "found": true,
+    "extracted": true,
+    "reason": "Search fields verified; full details CAPTCHA-protected.",
+    "added": true,
+    "verified": true
+  },
+  {
+    "inputRow": 13,
+    "reraNumber": "P52000055662",
+    "duplicate": false,
+    "found": true,
+    "extracted": true,
+    "reason": "Search fields verified; full details CAPTCHA-protected.",
+    "added": true,
+    "verified": true
+  },
+  {
+    "inputRow": 14,
+    "reraNumber": "P52000055661",
+    "duplicate": false,
+    "found": true,
+    "extracted": true,
+    "reason": "Search fields verified; full details CAPTCHA-protected.",
+    "added": true,
+    "verified": true
+  },
+  {
+    "inputRow": 15,
+    "reraNumber": "PR1270002501603",
+    "duplicate": false,
+    "found": true,
+    "extracted": true,
+    "reason": "Search fields verified; full details CAPTCHA-protected.",
+    "added": true,
+    "verified": true
+  },
+  {
+    "inputRow": 16,
+    "reraNumber": "PR1270002501610",
+    "duplicate": false,
+    "found": true,
+    "extracted": true,
+    "reason": "Search fields verified; full details CAPTCHA-protected.",
+    "added": true,
+    "verified": true
+  },
+  {
+    "inputRow": 17,
+    "reraNumber": "PR1270002501589",
+    "duplicate": false,
+    "found": true,
+    "extracted": true,
+    "reason": "Search fields verified; full details CAPTCHA-protected.",
+    "added": true,
+    "verified": true
+  },
+  {
+    "inputRow": 18,
+    "reraNumber": "P52000055578",
+    "duplicate": true,
+    "found": true,
+    "extracted": true,
+    "reason": "Search fields verified; full details CAPTCHA-protected.",
+    "added": true,
+    "verified": true
+  },
+  {
+    "inputRow": 19,
+    "reraNumber": "P52000050193",
+    "duplicate": true,
+    "found": true,
+    "extracted": true,
+    "reason": "Search fields verified; full details CAPTCHA-protected.",
+    "added": true,
+    "verified": true
+  },
+  {
+    "inputRow": 20,
+    "reraNumber": "P52000050194",
+    "duplicate": true,
+    "found": true,
+    "extracted": true,
+    "reason": "Search fields verified; full details CAPTCHA-protected.",
+    "added": true,
+    "verified": true
+  },
+  {
+    "inputRow": 21,
+    "reraNumber": "P52000055662",
+    "duplicate": true,
+    "found": true,
+    "extracted": true,
+    "reason": "Search fields verified; full details CAPTCHA-protected.",
+    "added": true,
+    "verified": true
+  },
+  {
+    "inputRow": 22,
+    "reraNumber": "P52000055661",
+    "duplicate": true,
+    "found": true,
+    "extracted": true,
+    "reason": "Search fields verified; full details CAPTCHA-protected.",
+    "added": true,
+    "verified": true
+  },
+  {
+    "inputRow": 23,
+    "reraNumber": "PR1270002501603",
+    "duplicate": true,
+    "found": true,
+    "extracted": true,
+    "reason": "Search fields verified; full details CAPTCHA-protected.",
+    "added": true,
+    "verified": true
+  },
+  {
+    "inputRow": 24,
+    "reraNumber": "PR1270002501610",
+    "duplicate": true,
+    "found": true,
+    "extracted": true,
+    "reason": "Search fields verified; full details CAPTCHA-protected.",
+    "added": true,
+    "verified": true
+  },
+  {
+    "inputRow": 25,
+    "reraNumber": "PR1270002501589",
+    "duplicate": true,
+    "found": true,
+    "extracted": true,
+    "reason": "Search fields verified; full details CAPTCHA-protected.",
+    "added": true,
+    "verified": true
+  }
+]

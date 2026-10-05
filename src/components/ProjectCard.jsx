@@ -1,4 +1,5 @@
 import './ProjectCard.css';
+import ProjectRegistration from './ProjectRegistration';
 
 /**
  * One project, as a card: photograph (or a typographic plate where there is no
@@ -12,6 +13,7 @@ export default function ProjectCard({ project: p, href = '/#contact' }) {
   const meta = [p.area, p.config].filter(Boolean).join(' · ');
 
   return (
+    <article className="pcard-entry">
     <a className="pcard" href={href} data-tilt="6" aria-label={`Enquire about ${p.name}`}>
       <span className="pcard__media">
         {p.image ? (
@@ -22,7 +24,8 @@ export default function ProjectCard({ project: p, href = '/#contact' }) {
             <span className="h4">{p.developer || p.area}</span>
           </span>
         )}
-        <span className="pcard__tag mono-sm">{p.category}</span>
+        {p.category && <span className="pcard__tag mono-sm">{p.category}</span>}
+        {p.imageCredit && <span className="pcard__credit mono-sm">Illustration: {p.imageCredit}</span>}
         <span className="pcard__enquire mono-sm" aria-hidden="true">
           Enquire &rarr;
         </span>
@@ -34,7 +37,15 @@ export default function ProjectCard({ project: p, href = '/#contact' }) {
           {p.priceFrom && <span className="pcard__price mono-sm">From {p.priceFrom}</span>}
         </span>
         <span className="pcard__meta mono-sm">{meta}</span>
+        {p.reraNumber && <>
+          {p.developer && <span className="pcard__meta mono-sm">{p.developer}</span>}
+          <span className="pcard__meta mono-sm">RERA: {p.reraNumber}</span>
+          {p.status && <span className="pcard__meta mono-sm">{p.status}</span>}
+          {p.completionDate && <span className="pcard__meta mono-sm">Proposed completion: {p.completionDate}</span>}
+        </>}
       </span>
     </a>
+    <ProjectRegistration project={p} />
+    </article>
   );
 }

@@ -1,0 +1,410 @@
+/* ── Proof: "On the record" + "Developers" ─────────────────────────────────
+   One full-screen page after About. Developer artwork fills the frame; the
+   record sits on the dark side of a graded wash, the artwork's subject stays
+   clear on the right, and a plate pops up naming the developer on screen.
+   Motion is rotation in depth: tiles flap up, the plate and its lettering tip
+   up on each slide, the photograph drifts in perspective.
+─────────────────────────────────────────────────────────────────────────── */
+
+.proof {
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --pad-x: max(var(--gutter), 6vw);
+
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  min-height: 660px;
+  /* bottom: clear of the floating nav (26px + 62px) */
+  padding: clamp(56px, 9vh, 92px) 0 104px;
+  overflow: hidden;
+  background: #07090c;
+  color: var(--white);
+}
+
+/* ── the photograph ────────────────────────────────────────────────────── */
+
+.proof__stage {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  perspective: 1400px;
+}
+
+.proof__shell {
+  position: absolute;
+  inset: -6%;
+  transform-style: preserve-3d;
+  will-change: transform;
+  animation: proofDrift 26s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+}
+
+@keyframes proofDrift {
+  0%   { transform: rotateX(0deg) rotateY(0deg); }
+  50%  { transform: rotateX(1deg) rotateY(-1.6deg) translate3d(-0.6%, -0.4%, 0); }
+  100% { transform: rotateX(-0.8deg) rotateY(1.4deg) translate3d(0.6%, 0.3%, 0); }
+}
+
+/* Anchored right: the artwork carries its own campaign lettering on the left
+   third, which the wash covers; the buildings are on the right. */
+.proof__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 100% 50%;
+  opacity: 0;
+  transform: scale(1.16);
+  transition: opacity 1.4s ease, transform 1.8s var(--ease);
+}
+
+.proof__photo[data-active] {
+  opacity: 1;
+  transform: scale(1.02);
+}
+
+/* a slow push-in for as long as the slide holds */
+.proof[data-playing] .proof__photo[data-active] {
+  transform: scale(1.1);
+  transition: opacity 1.4s ease, transform calc(var(--hold) + 1.6s) linear;
+}
+
+.proof__wash {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, #07090c 0%, #07090c 40%, rgba(7, 9, 12, 0.72) 53%, rgba(7, 9, 12, 0.14) 69%, rgba(7, 9, 12, 0) 80%),
+    linear-gradient(0deg, rgba(7, 9, 12, 0.94) 0%, rgba(7, 9, 12, 0.7) 20%, rgba(7, 9, 12, 0) 44%),
+    linear-gradient(180deg, rgba(7, 9, 12, 0.5) 0%, rgba(7, 9, 12, 0) 20%);
+}
+
+/* ── layout ────────────────────────────────────────────────────────────── */
+
+.proof__main {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 640px) minmax(0, 1fr);
+  gap: 40px;
+  padding-inline: var(--pad-x);
+}
+
+.proof__record {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.proof__title {
+  margin: 18px 0 0;
+  max-width: 17ch;
+  font-size: clamp(28px, 3.3vw, 48px);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+}
+
+.proof__lede {
+  margin: clamp(10px, 1.8vh, 18px) 0 0;
+  max-width: 46ch;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--white-60);
+}
+
+/* ── the six tiles ─────────────────────────────────────────────────────── */
+
+.proof__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: clamp(16px, 3vh, 30px);
+  perspective: 1100px;
+}
+
+/* Each tile starts edge-on, hinged at its foot, and turns up to face the
+   reader — invisible at the start without fading. Held until the page is in
+   view. The tilt lives on the child so the two transforms never fight. */
+.proof__flap {
+  transform-origin: 50% 100%;
+  transform-style: preserve-3d;
+  animation: proofFlap 0.9s var(--ease) both;
+  animation-delay: calc(0.15s + var(--i) * 0.08s);
+  animation-play-state: paused;
+}
+
+.proof[data-inview] .proof__flap { animation-play-state: running; }
+
+@keyframes proofFlap {
+  from { transform: rotateX(-90deg) translateZ(-30px); }
+  60%  { transform: rotateX(8deg); }
+  to   { transform: none; }
+}
+
+.proof__tile {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: clamp(92px, 13vh, 122px);
+  padding: 13px 15px 13px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #1b1c1e 0%, #0c0c0d 100%);
+  border: 1px solid var(--white-10);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 1px 0 #2b2c2f,
+    0 2px 0 #222325,
+    0 3px 0 #18191a,
+    0 4px 0 #0e0e0f,
+    0 18px 26px -14px rgba(0, 0, 0, 0.7);
+  transition: border-color 0.3s ease;
+}
+
+.proof__tile:hover { border-color: rgba(228, 237, 100, 0.55); }
+
+.proof__tile-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.proof__caption,
+.proof__index,
+.proof__foot,
+.proof__rera,
+.proof__count,
+.proof__credit {
+  margin: 0;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.proof__caption { font-size: 9.5px; letter-spacing: 0.13em; color: var(--white-60); }
+.proof__index { font-size: 9.5px; letter-spacing: 0.1em; color: var(--primary); }
+
+.proof__value {
+  margin: auto 0 0;
+  padding-top: 8px;
+  font-size: clamp(28px, 2.9vw, 42px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+.proof__foot {
+  margin-top: 7px;
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  color: var(--white-40);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.proof__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: clamp(14px, 2.6vh, 26px);
+}
+
+.proof__rera { font-size: 10px; letter-spacing: 0.12em; color: var(--white-40); }
+
+/* ── the developer on screen ───────────────────────────────────────────── */
+
+.proof__now {
+  align-self: end;
+  justify-self: end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+  max-width: min(100%, 520px);
+  perspective: 1000px;
+  /* an anchor target: land with the whole page in view */
+  scroll-margin-top: 100vh;
+}
+
+/* The plate pops up out of the floor: hinged at its foot, it swings past
+   upright and settles back. Edge-on at the start, so it needs no fade. */
+.proof__plate {
+  position: relative;
+  min-width: min(100%, 340px);
+  padding: 18px 22px 20px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #1b1c1e 0%, #0b0b0c 100%);
+  border: 1px solid var(--white-10);
+  box-shadow:
+    inset 0 2px 0 var(--primary),
+    0 1px 0 #2b2c2f,
+    0 2px 0 #222325,
+    0 3px 0 #18191a,
+    0 4px 0 #0e0e0f,
+    0 26px 40px -18px rgba(0, 0, 0, 0.8);
+  transform-origin: 50% 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+  animation: proofPop 1s cubic-bezier(0.22, 1.2, 0.36, 1) both;
+}
+
+@keyframes proofPop {
+  0%   { transform: rotateX(-92deg) translateY(26px) scale(0.86); }
+  55%  { transform: rotateX(12deg) translateY(-6px) scale(1.03); }
+  78%  { transform: rotateX(-4deg) scale(1); }
+  100% { transform: none; }
+}
+
+.proof__count {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 28px;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--white-60);
+}
+.proof__count span { color: var(--primary); }
+
+/* The name arrives a letter at a time, each one tipping up into place. */
+.proof__name {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.26em;
+  margin: 12px 0 0;
+  font-size: clamp(26px, 2.9vw, 44px);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  perspective: 600px;
+}
+
+.proof__word { display: inline-flex; white-space: nowrap; }
+
+.proof__char {
+  display: inline-block;
+  transform-origin: 50% 100%;
+  backface-visibility: hidden;
+  animation: proofChar 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation-delay: calc(0.32s + var(--c) * 0.028s);
+}
+
+@keyframes proofChar {
+  from { transform: translateY(0.5em) rotateX(-92deg) scale(0.7); }
+  to   { transform: none; }
+}
+
+.proof__by {
+  margin: 10px 0 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.78);
+  transform-origin: 0 100%;
+  backface-visibility: hidden;
+  animation: proofChar 0.7s var(--ease) 0.75s both;
+}
+
+.proof__dots { display: flex; gap: 8px; }
+
+.proof__dot {
+  position: relative;
+  width: 46px;
+  height: 22px;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.proof__dot::before,
+.proof__dot i {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 10px;
+  height: 2px;
+  border-radius: 2px;
+}
+
+.proof__dot::before { background: rgba(255, 255, 255, 0.35); }
+.proof__dot i { background: var(--white); transform: scaleX(0); transform-origin: 0 50%; }
+.proof__dot:hover::before { background: rgba(255, 255, 255, 0.6); }
+.proof__dot:focus-visible { outline: 1px solid var(--primary); outline-offset: 2px; }
+
+/* the current one fills over the length of the hold */
+.proof__dot[aria-current] i { transform: scaleX(1); }
+.proof[data-playing] .proof__dot[aria-current] i { animation: proofFill var(--hold) linear both; }
+
+@keyframes proofFill {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+.proof__credit {
+  max-width: 46ch;
+  font-size: 9px;
+  line-height: 1.5;
+  letter-spacing: 0.1em;
+  text-align: right;
+  color: rgba(255, 255, 255, 0.72);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* ── short desktop screens ─────────────────────────────────────────────── */
+
+@media (max-height: 760px) and (min-width: 901px) {
+  .proof__lede { display: none; }
+}
+
+/* ── tablet and phone: the page grows to fit, it is no longer one screen ── */
+
+@media (max-width: 900px) {
+  .proof {
+    height: auto;
+    min-height: 100svh;
+    padding: 72px 0 150px;
+  }
+
+  .proof__wash {
+    background:
+      linear-gradient(180deg, rgba(7, 9, 12, 0.9) 0%, rgba(7, 9, 12, 0.84) 60%, rgba(7, 9, 12, 0.94) 100%);
+  }
+
+  .proof__photo { object-position: 78% 50%; }
+
+  .proof__main { grid-template-columns: minmax(0, 1fr); gap: 34px; }
+  .proof__now { justify-self: start; align-items: flex-start; }
+  .proof__credit { text-align: left; }
+}
+
+@media (max-width: 560px) {
+  .proof__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .proof__tile { min-height: 96px; }
+}
+
+/* ── reduced motion ────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .proof__shell { animation: none; inset: 0; }
+  .proof__flap,
+  .proof__plate,
+  .proof__char,
+  .proof__by { animation: none; }
+  .proof__photo { transition: opacity 0.2s linear; transform: none !important; }
+}
+
+html.nomotion .proof__shell { animation: none; inset: 0; }
+html.nomotion .proof__flap,
+html.nomotion .proof__plate,
+html.nomotion .proof__char,
+html.nomotion .proof__by { animation: none; }
+html.nomotion .proof__photo { transition: none; transform: none !important; }

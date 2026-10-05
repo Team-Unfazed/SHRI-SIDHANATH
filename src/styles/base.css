@@ -16,6 +16,7 @@ html {
 
 /* `?nomotion` (QA): everything in its final state */
 html.nomotion { scroll-behavior: auto; }
+html[data-hero-scrolling="true"] { scroll-behavior: auto; }
 html.nomotion *,
 html.nomotion *::before,
 html.nomotion *::after {
@@ -188,11 +189,11 @@ html.nomotion .reveal {
   z-index: 1;
   /* Tuck the rounded corners over the hero's bottom padding so the photograph,
      not the page ground, shows behind them. */
-  margin-top: calc(var(--panel-radius) * -1);
+  margin-top: 0;
   background: var(--whitesmoke);
   border-top-left-radius: var(--panel-radius);
   border-top-right-radius: var(--panel-radius);
-  box-shadow: 0 -34px 60px -20px rgba(0, 0, 0, 0.42);
+  /* No upward shadow: it fell across the bottom of the About video as a dark fade. */
 }
 
 /* ---- the overlapping stack -------------------------------------------
@@ -228,6 +229,7 @@ html.nomotion .reveal {
 
 /* The dark panels keep their own ground; stated here so the rule above cannot
    quietly win on source order. */
+.sheet > .about { background: #07090c; }
 .sheet > .why { background: #0a0a0a; }
 .sheet > .rec,
 .sheet > .faq { background: var(--black); }

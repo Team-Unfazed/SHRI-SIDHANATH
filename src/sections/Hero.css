@@ -1,422 +1,154 @@
-/* The hero scrolls away with the page. It used to park (sticky) while the
-   page slid up over it, which left the masthead, heading and card showing
-   underneath the next band — it read as the sections overlapping. Now only
-   the sheet's rounded top edge rides over the hero's empty bottom padding. */
-.banner {
-  position: relative;
-  z-index: 0;
-  display: flex;
-  flex-direction: column;
-  min-height: calc(100svh + var(--panel-radius));
-  /* The bottom pad clears the floating nav rather than the claim being narrowed
-     to dodge it horizontally. The pill is 62px tall at `bottom: 26px`, so
-     nothing in the hero foot may come within 88px of the viewport bottom. */
-  padding: 0 var(--gutter) calc(116px + var(--panel-radius));
-  overflow: hidden;
-  color: var(--white);
-  isolation: isolate;
-}
-
-/* The receding scrim on the hero. As the sheet rolls up over the parked hero,
-   GSAP scrubs --hero-dim so the hero recedes into darkness rather than staying
-   flatly bright until cut off. */
-.banner::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  background: var(--black);
-  opacity: var(--hero-dim, 0);
+﻿.banner { position: relative; isolation: isolate; min-height: 740px; height: 100svh; display: flex; align-items: center; padding: 130px max(var(--gutter), 6vw) 160px; overflow: hidden; color: var(--white); background: #101619; }
+.banner__stage, .banner__video, .banner__atmos { position: absolute; inset: 0; width: 100%; height: 100%; }
+.banner__stage { z-index: -1; pointer-events: none; }
+.banner__video { object-fit: cover; }
+.banner__atmos {
+  /* One graded wash instead of boxes behind the type: darker under the header
+     and under the headline, clear through the middle where the footage is the
+     point. The footage is a bright daytime aerial, so the wash is what carries
+     white type on every frame. */
+  background:
+    linear-gradient(180deg, rgba(8, 11, 14, .62) 0%, rgba(8, 11, 14, .28) 12%, rgba(8, 11, 14, 0) 26%),
+    linear-gradient(0deg, rgba(8, 11, 14, .82) 0%, rgba(8, 11, 14, .62) 22%, rgba(8, 11, 14, .24) 44%, rgba(8, 11, 14, 0) 62%);
   pointer-events: none;
 }
 
-html.nomotion .banner::after,
-html:not(.js) .banner::after {
-  display: none;
-}
-
-/* Start state, held from the very first frame. `index.html` marks the document
-   `.js` before paint, so the entrance never replays from a flash of the
-   finished composition — and the word and claim stay hidden until SplitText has
-   rebuilt them, which cannot happen before the fonts land. Without JavaScript
-   none of this applies and the hero renders complete. */
-.js .banner__sky,
-.js .banner__arch,
-.js .banner__atmos,
-.js .banner__word,
-.js .banner__eyebrow,
-.js .banner__title,
-.js .banner__lede,
-.js .banner__actions > *,
-.js .banner__card {
-  opacity: 0;
-}
-
-html.nomotion .banner__sky,
-html.nomotion .banner__arch,
-html.nomotion .banner__atmos,
-html.nomotion .banner__word,
-html.nomotion .banner__eyebrow,
-html.nomotion .banner__title,
-html.nomotion .banner__lede,
-html.nomotion .banner__actions > *,
-html.nomotion .banner__card {
-  opacity: 1 !important;
-  transform: none !important;
-}
-
-
-/* --------------------------------------------------------------------------
-   Stage. Sky and architecture stay two independent layers, never flattened,
-   so they can animate independently on entrance and leave at different rates
-   on scroll. Transform-origin scales the sky from centre and architecture
-   from its base, so the estate grows toward the viewer.
-   -------------------------------------------------------------------------- */
-.banner__stage {
+.banner__bar {
   position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  transform-style: preserve-3d;
-}
-
-.banner__sky,
-.banner__sky img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.banner__sky {
-  transform-origin: 50% 50%;
-  will-change: transform, opacity;
-}
-
-.banner__sky img {
-  object-fit: cover;
-  object-position: 30% 30%;
-}
-
-.banner__arch {
-  position: absolute;
+  top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
-  display: block;
-  transform-origin: 50% 100%;
-  transform-style: preserve-3d;
-  will-change: transform, opacity;
-}
-
-.banner__arch img {
-  width: 100%;
-  height: auto;
-  max-height: 78svh;
-  object-fit: cover;
-  object-position: center bottom;
-  display: block;
-}
-
-/* Atmospheric lighting and edge contrast gradient */
-.banner__atmos {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(to bottom, rgba(20, 17, 14, 0.6) 0%, rgba(20, 17, 14, 0.15) 34%, rgba(20, 17, 14, 0) 52%),
-    linear-gradient(to top, rgba(20, 17, 14, 0.76) 0%, rgba(20, 17, 14, 0.38) 16%, rgba(20, 17, 14, 0) 36%),
-    /* A pool of shade under the heading and lede, so the copy holds up over
-       the brightest part of the photograph. */
-    radial-gradient(60% 55% at 12% 82%, rgba(20, 17, 14, 0.55), rgba(20, 17, 14, 0) 70%);
-  pointer-events: none;
-}
-
-/* The font size here is only the first guess; Hero.jsx measures the words and
-   scales them to run exactly from gutter to gutter at every width. */
-.banner__word {
-  position: relative;
-  z-index: 1;
-  margin: clamp(14px, 3vh, 36px) 0 0 -0.012em;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 15vw;
-  letter-spacing: var(--ls-banner);
-  line-height: var(--lh-banner);
-  white-space: nowrap;
-  transform-style: preserve-3d;
-  will-change: transform;
-  /* Depth: a short, tight extrusion under the letters and a long soft shadow
-     on the sky, so the word sits in front of the photograph, not printed on it. */
-  text-shadow:
-    0 1px 0 rgba(0, 0, 0, 0.10),
-    0 2px 0 rgba(0, 0, 0, 0.08),
-    0 3px 0 rgba(0, 0, 0, 0.06),
-    0 10px 18px rgba(0, 0, 0, 0.22);
-}
-
-/* SplitText writes the line mask at runtime. The padding keeps the descender of
-   the y clear of its clip; the matching negative margin gives the space back so
-   the composition does not shift when the split lands. */
-.banner__word-line {
-  display: block;
-  overflow: hidden;
-  padding-bottom: 0.1em;
-  margin-bottom: -0.1em;
-  transform-style: preserve-3d;
-}
-
-.banner__char {
-  display: inline-block;
-  will-change: transform;
-}
-
-
-/* ---- the light -----------------------------------------------------------
-   A wide, soft diagonal band that drifts across the sky once every ~16s and
-   rests off-screen between passes. Screen-blended, and faint enough that it
-   reads as the light changing rather than as an effect. */
-.banner__light {
-  position: absolute;
-  inset: -20% -60%;
-  background: linear-gradient(
-    105deg,
-    transparent 38%,
-    rgba(255, 236, 200, 0.10) 47%,
-    rgba(255, 244, 222, 0.16) 50%,
-    rgba(255, 236, 200, 0.10) 53%,
-    transparent 62%
-  );
-  mix-blend-mode: screen;
-  transform: translateX(-60%);
-  animation: bannerLight 16s cubic-bezier(0.45, 0, 0.25, 1) 3s infinite;
-  pointer-events: none;
-}
-@keyframes bannerLight {
-  0% { transform: translateX(-60%); }
-  55%, 100% { transform: translateX(60%); }
-}
-html.nomotion .banner__light { display: none; }
-
-/* ---- the foot: statement on the left, proof on the right --------------- */
-.banner__foot {
-  position: relative;
-  z-index: 1;
-  margin-top: auto;
+  z-index: 2;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
-  gap: 48px;
-  text-shadow: 0 1px 14px rgba(10, 8, 6, 0.35);
+  gap: 16px;
+  padding: 28px max(var(--gutter), 6vw);
 }
-
-.banner__lead {
-  display: grid;
-  gap: 18px;
-  max-width: 640px;
-}
-
-.banner__eyebrow {
+.banner__brand {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: rgba(255, 255, 255, 0.88);
-}
-.banner__stars {
-  color: var(--primary);
-  letter-spacing: 2px;
-  font-size: 11px;
-}
-
-/* The page's <h1>. Sized as a statement, not a masthead — the masthead above
-   is the display type; this is the sentence that says who and where. */
-.banner__title {
-  font-size: clamp(34px, 3.9vw, 58px);
-  font-weight: 500;
-  letter-spacing: -0.04em;
-  line-height: 1.02;
-  text-wrap: balance;
-}
-.banner__place { color: var(--primary); }
-
-/* SplitText's per-line mask for the heading. */
-.banner__title-line {
-  display: block;
-  overflow: hidden;
-  padding-bottom: 0.1em;
-  margin-bottom: -0.1em;
-}
-.banner__title-word { display: inline-block; will-change: transform; }
-
-.banner__lede {
-  max-width: 52ch;
-  font-size: var(--t-small);
-  letter-spacing: var(--ls-small);
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.86);
-}
-
-.banner__lede--desktop { display: inline; }
-.banner__lede--mobile { display: none; }
-.banner__btn--desktop { display: inline; }
-.banner__btn--mobile { display: none; }
-
-.banner__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 6px;
-}
-
-/* ---- the card: name, address, phone, hours ---------------------------
-   Glass over the photograph. The card tilts toward the pointer (data-tilt)
-   and its rows sit at their own depths so the tilt separates them. */
-.banner__card {
-  position: relative;
-  flex: none;
-  width: min(400px, 36vw);
-  padding: 22px 22px 18px;
-  border-radius: var(--radius-lg);
-  font-style: normal;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -.03em;
   color: var(--white);
-  text-shadow: none;
-  /* Tinted toward the dusk rather than toward white, so the rows stay
-     legible where the card sits over the bright facade. */
-  background: linear-gradient(155deg, rgba(38, 32, 26, 0.62), rgba(18, 15, 12, 0.48));
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.25),
-    0 30px 60px -24px rgba(0, 0, 0, 0.6);
-  -webkit-backdrop-filter: blur(16px) saturate(1.2);
-  backdrop-filter: blur(16px) saturate(1.2);
-  transform-style: preserve-3d;
+  text-decoration: none;
+  min-width: 0;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, .5);
 }
-
-.banner__card-head {
+.banner__brand img { flex-shrink: 0; object-fit: contain; filter: brightness(0) invert(1) drop-shadow(0 1px 8px rgba(0, 0, 0, .45)); }
+.banner__brand-name { letter-spacing: -.02em; white-space: nowrap; }
+.banner__bar-actions {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
-  transform: translateZ(30px);
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
 }
-.banner__card-head img {
-  flex: none;
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-  padding: 6px;
-  border-radius: 10px;
-  background: var(--white);
-}
-.banner__card-name {
-  font-size: 16px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  line-height: 1.25;
-}
-.banner__card-sub {
-  margin-top: 4px;
-  color: rgba(255, 255, 255, 0.6);
-}
+.banner__bar-pill { height: 42px; font-size: 10px; padding-inline: 18px; gap: 12px; }
+/* The outlined pill gets a full-strength edge and a trace of smoke behind the
+   label, so it holds even where the wash is thinnest. */
+.banner .banner__bar-pill.pill--ghost { border-color: rgba(255, 255, 255, .85); background: rgba(8, 11, 14, .32); }
 
-.banner__facts {
-  display: grid;
-  gap: 11px;
-  margin: 16px 0 0;
-  transform: translateZ(20px);
+.banner__center {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  bottom: clamp(108px, 16vh, 148px);
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: clamp(14px, 2.2vh, 20px);
+  width: min(92vw, 980px);
+  padding-inline: 12px;
 }
-.banner__facts > div {
-  display: grid;
-  grid-template-columns: 84px minmax(0, 1fr);
-  gap: 12px;
-  align-items: baseline;
-}
-.banner__facts dt { color: rgba(255, 255, 255, 0.62); }
-.banner__facts dd {
+.banner__title {
   margin: 0;
-  font-size: 14px;
-  line-height: 1.4;
-  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(22px, 3.2vw, 42px);
+  font-weight: 500;
+  line-height: 1.16;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  text-wrap: balance;
+  color: var(--white);
+  text-shadow: 0 2px 26px rgba(0, 0, 0, .5);
+}
+.banner__rating {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.banner__stars {
+  font-size: clamp(14px, 2vw, 18px);
+  letter-spacing: .22em;
+  color: #f3d078;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, .5);
+  line-height: 1;
+}
+.banner__rating-text {
+  font-family: var(--font-mono);
+  font-size: clamp(10px, 1.2vw, 12px);
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .92);
+  text-shadow: 0 1px 14px rgba(0, 0, 0, .55);
 }
 
-@media (max-width: 1100px) {
-  .banner__card { width: min(360px, 40vw); }
-  .banner__facts > div { grid-template-columns: 72px minmax(0, 1fr); }
-}
-
-@media (max-width: 860px) {
-  .banner__lede--desktop { display: none; }
-  .banner__lede--mobile { display: inline; }
-  .banner__btn--desktop { display: none; }
-  .banner__btn--mobile { display: inline; }
-
-  .banner {
-    min-height: calc(100svh + var(--panel-radius));
-    padding-top: max(1.25rem, env(safe-area-inset-top));
-    padding-bottom: calc(max(104px, calc(88px + env(safe-area-inset-bottom))) + var(--panel-radius));
-  }
-  .banner__sky img { object-position: 55% 35%; }
-  .banner__arch img {
-    width: 118%;
-    max-width: none;
-    margin-left: -9%;
-    max-height: 62svh;
-  }
-  .banner__atmos {
-    background:
-      linear-gradient(to bottom, rgba(20, 17, 14, 0.65) 0%, rgba(20, 17, 14, 0.15) 38%, rgba(20, 17, 14, 0) 56%),
-      linear-gradient(to top, rgba(20, 17, 14, 0.9) 0%, rgba(20, 17, 14, 0.55) 30%, rgba(20, 17, 14, 0) 55%);
-  }
-  .banner__word {
-    margin-top: clamp(0.75rem, 2.5vh, 1.5rem);
-    white-space: nowrap;
-    line-height: var(--lh-banner);
-  }
-  .banner__w {
-    display: inline;
-  }
-  .banner__foot {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 14px;
-  }
-  .banner__lead { gap: 10px; }
-  .banner__title {
-    font-size: clamp(22px, 6.2vw, 30px);
-    line-height: 1.1;
-  }
-  .banner__lede {
-    font-size: 14px;
-    line-height: 1.45;
-  }
-  .banner__actions {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-    width: 100%;
-    margin-top: 4px;
-  }
-  .banner__actions > * {
-    flex: 1 1 0;
-    min-width: 0;
-    justify-content: center;
-    padding-inline: 14px;
-    height: 44px;
-    font-size: 12px;
-  }
-  /* On a phone the proof card would push the actions off the first screen.
-     The rating is already in the eyebrow; the full card is repeated in the
-     footer, so here it stays in the markup but out of the layout. */
-  .banner__card { display: none; }
+@media (max-width: 720px) {
+  .banner__bar { align-items: flex-start; flex-wrap: wrap; padding: 22px 24px; }
+  .banner__bar-actions { width: 100%; justify-content: flex-start; }
+  .banner__bar-pill:first-child .pill__label { font-size: 9px; }
+  .banner__title { letter-spacing: .035em; font-size: clamp(18px, 5.4vw, 28px); }
+  .banner__center { bottom: clamp(96px, 14vh, 120px); }
 }
 
 @media (max-width: 600px) {
-  .banner__word {
-    white-space: nowrap;
-    line-height: var(--lh-banner);
-  }
-  .banner__w {
-    display: inline;
-  }
+  .banner { min-height: 700px; padding: 125px 24px 185px; }
 }
+@media (min-width: 601px) and (max-height: 760px) {
+  .banner { min-height: 660px; }
+  .banner__title { font-size: clamp(20px, 3.2vw, 36px); }
+  .banner__center { bottom: 100px; }
+}
+
+.banner__scroll {
+  position: absolute;
+  left: max(var(--gutter), 6vw);
+  bottom: 48px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: rgba(255, 255, 255, .8);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, .5);
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.banner__scroll-line {
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: rgba(255, 255, 255, .6);
+}
+.banner__scroll:hover { color: var(--white); }
+.banner__scroll:hover .banner__scroll-line { background: rgba(255, 255, 255, .7); }
+
+/* Up to 680px the enquiry dock sits above the nav (bottom 96px, 42px tall —
+   see EnquiryModal.css) and the nav itself spans the bottom edge. The plate
+   clears the dock; the scroll cue has nowhere left to sit and a swipe needs no
+   prompt. */
+@media (max-width: 680px) {
+  .banner__center { bottom: calc(96px + 42px + 12px); }
+  .banner__scroll { display: none; }
+}
+
+/* Set by lib/heroScroll on every full-screen page it slides between. */
+[data-swipe-scroll="true"] { touch-action: pan-x pinch-zoom; }

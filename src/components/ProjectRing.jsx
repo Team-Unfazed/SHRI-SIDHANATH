@@ -264,6 +264,7 @@ export default function ProjectRing({ items }) {
               ['Location', p.location || p.area],
               ['Configuration', p.config],
               ['Developer', p.developer],
+              ['MahaRERA number', p.reraNumber],
               ['Starting from', p.priceFrom],
             ]
               .filter(([, v]) => v)

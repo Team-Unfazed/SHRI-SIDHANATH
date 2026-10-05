@@ -59,6 +59,22 @@
   color: var(--black);
 }
 
+/* Developer artwork is labelled as such, on the picture itself */
+.pcard__credit {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  max-width: calc(100% - 28px);
+  padding: 6px 10px;
+  border-radius: var(--pill);
+  background: rgba(0, 0, 0, 0.62);
+  color: var(--white);
+  font-size: 9.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .pcard__enquire {
   position: absolute;
   right: 14px;
@@ -103,6 +119,16 @@
 .pcard__meta {
   color: var(--black-60);
 }
+
+.pcard-entry { min-width: 0; }
+.pcard__body, .pcard__plate { overflow-wrap: anywhere; }
+.pcard__registration { margin-top: 16px; border-top: 1px solid var(--black-8); padding-top: 14px; }
+.pcard__registration summary { cursor: pointer; }
+.pcard__registration dl { display: grid; gap: 14px; margin: 20px 0; }
+.pcard__registration dt, .pcard__source-note { color: var(--black-60); }
+.pcard__registration dd { margin: 4px 0 0; overflow-wrap: anywhere; }
+.pcard__source-note { font-size: var(--t-small); line-height: 1.5; margin-bottom: 14px; }
+.pcard__source { color: inherit; text-underline-offset: 4px; }
 
 .on-dark .pcard__price { color: var(--white); }
 .on-dark .pcard__meta { color: var(--white-60); }

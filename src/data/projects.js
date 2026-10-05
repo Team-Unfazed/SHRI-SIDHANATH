@@ -16,8 +16,16 @@
 //                   to the card). Theirs to publish as the developer's channel partner.
 //   licence: 'first-party'
 //                   the client's own photograph. Safe to publish.
+//   licence: 'developer-artwork'
+//                   the developer's own render, from the developer's official site,
+//                   joined on by registration number from projectMedia.js. Shown with
+//                   an "illustration" credit. Confirm media rights before launch.
 
-export const projects = [
+import mahareraProjects from './maharera-projects.json' with { type: 'json' };
+import { projectMedia } from './projectMedia.js';
+import { registerEntries, REGISTER_UPDATED } from './projectRegister.js';
+
+export const existingProjects = [
   {
     id: 'delta-prestige',
     name: 'Delta Prestige',
@@ -228,4 +236,81 @@ export const projects = [
   },
 ];
 
+// Registration numbers identify individual phases; do not merge phases merely
+// because they share a promoter or belong to an existing township listing.
+const identity = (value) => value?.trim().toLowerCase();
+export function mergeProjects(existing, incoming) {
+  const merged = existing.map((project) => ({ ...project }));
+  for (const project of incoming) {
+    const index = merged.findIndex((p) =>
+      (p.reraNumber && identity(p.reraNumber) === identity(project.reraNumber)) ||
+      p.id === project.id ||
+      (!p.reraNumber && identity(p.name) === identity(project.name) &&
+        identity(p.developer) === identity(project.developer))
+    );
+    if (index === -1) merged.push(project);
+    else merged[index] = { ...merged[index], ...project, id: merged[index].id };
+  }
+  // Pictures are joined on last, by registration number, so re-importing the
+  // register (which records `image: null`) can never strip them off again.
+  return merged.map((project) => {
+    const media = projectMedia[project.reraNumber];
+    return media
+      ? {
+          ...project,
+          image: media.src,
+          imageAlt: media.alt,
+          imageCredit: media.credit,
+          imageSourceUrl: media.sourceUrl,
+          licence: 'developer-artwork',
+        }
+      : project;
+  });
+}
+
+// The client's own project register, laid over the inventory by registration
+// number: detail for what is already here, new entries for what is not. An
+// existing project keeps its name, promoter and market; only a missing
+// promoter is filled. See projectRegister.js for what is left out and why.
+export function applyRegister(list, entries = registerEntries) {
+  const out = list.map((project) => ({ ...project }));
+  for (const { attachTo, name, developer, area, district, pincode, ...detail } of entries) {
+    const index = out.findIndex((p) =>
+      (p.reraNumber && identity(p.reraNumber) === identity(detail.reraNumber)) ||
+      (attachTo && p.id === attachTo)
+    );
+    if (index !== -1) {
+      const had = out[index];
+      out[index] = {
+        ...had,
+        ...detail,
+        developer: had.developer || developer || null,
+        district: had.district || district || null,
+        register: REGISTER_UPDATED,
+      };
+    } else {
+      out.push({
+        id: detail.reraNumber.toLowerCase(),
+        name,
+        developer,
+        area,
+        district: district ?? null,
+        pincode: pincode ?? null,
+        state: 'Maharashtra',
+        priceFrom: null,
+        image: null,
+        featured: false,
+        source: 'client-register',
+        ...detail,
+        register: REGISTER_UPDATED,
+      });
+    }
+  }
+  return out;
+}
+
+// `registeredProjects` is the inventory as evidenced by the client's posts and
+// the MahaRERA search; `projects` is that plus the client's register.
+export const registeredProjects = mergeProjects(existingProjects, mahareraProjects);
+export const projects = applyRegister(registeredProjects);
 export const featuredProjects = projects.filter((p) => p.featured);

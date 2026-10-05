@@ -1,123 +1,258 @@
-.about__head {
-  display: grid;
-  justify-items: center;
-  gap: 34px;
-  text-align: center;
-}
+/* ── About ──────────────────────────────────────────────────────────────────
+   Full-viewport video with nothing over it: no scrim, no blur, no fades.
+   One horizontal slab of facts sits directly on top of the floating nav pill.
+   All of its motion is rotation in depth — nothing here animates opacity.
+─────────────────────────────────────────────────────────────────────────── */
 
-/* Two-tone paragraph: the claim in black, the qualification in grey. One
-   sentence of each, no more — the effect dies the moment the grey half is
-   longer than the black one. */
-.about__statement {
-  max-width: min(100%, 900px);
-  margin-inline: auto;
-  text-wrap: balance;
-}
-.about__statement em {
-  font-style: normal;
-  color: var(--black-40);
-}
-
-.about__pillars {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  justify-content: center;
-  gap: 30px;
-  width: min(660px, 100%);
-  margin: 72px auto 0;
-  text-align: center;
-}
-
-.about__pillar {
-  display: grid;
-  justify-items: center;
-  gap: 18px;
-  color: var(--black);
-}
-.about__pillar p {
-  font-size: var(--t-small);
-  letter-spacing: var(--ls-small);
-  line-height: 1.3;
-}
-
-.about__plates {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 22px;
-  margin-top: 92px;
-}
-
-.about__plate {
+.about {
   position: relative;
-  margin: 0;
-  aspect-ratio: 16 / 13;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
   overflow: hidden;
-  border-radius: var(--radius);
-  background: var(--deep-light);
+  background: #0a0e12;
+  isolation: isolate;
 }
-/* No hover zoom here. These two images drift with the scroll (see About.jsx),
-   and GSAP writes an inline transform that an inline-losing hover rule cannot
-   override — the two effects cannot share the property. */
-.about__plate img {
+
+/* ── video ─────────────────────────────────────────────────────────────── */
+
+.about__stage {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  perspective: 1200px;
+}
+
+.about__video-shell {
+  position: absolute;
+  inset: -8%;
+  width: 116%;
+  height: 116%;
+  transform-style: preserve-3d;
+  will-change: transform;
+  animation: aboutVideoDepth 24s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+}
+
+.about__video {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  will-change: transform;
+  display: block;
 }
 
-.about__mark {
-  position: absolute;
-  top: 26px;
-  left: 26px;
+@keyframes aboutVideoDepth {
+  0%   { transform: rotateX(0deg)     rotateY(0deg)    scale(1); }
+  50%  { transform: rotateX(1.2deg)   rotateY(-1.4deg) scale(1.03) translate3d(-0.8%, -0.5%, 0); }
+  100% { transform: rotateX(-0.8deg)  rotateY(1deg)    scale(1.06) translate3d(0.6%,  0.4%,  0); }
 }
-.about__mark img {
-  width: 52px;
-  height: 28px;
+
+/* ── the line ──────────────────────────────────────────────────────────── */
+
+.about__line {
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  position: absolute;
+  /* nav pill: bottom 26px, height 62px — then a 10px gap */
+  bottom: calc(26px + 62px + 10px);
+  left: 0;
+  right: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  padding: 0 12px;
+  perspective: 1100px;
+  perspective-origin: 50% 100%;
+}
+
+/* The hinge. The slab starts edge-on to the viewer, lying flat on the nav, and
+   swings up to face them — so it is invisible at the start without any fade.
+   Once up it keeps a slow sway. Both wait for `data-inview` (see About.jsx). */
+.about__rise {
+  min-width: 0;
+  max-width: 100%;
+  transform-origin: 50% 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+  animation:
+    aboutRise 1.1s var(--ease) both,
+    aboutSway 10s ease-in-out 1.1s infinite;
+  animation-play-state: paused;
+}
+
+.about[data-inview] .about__rise { animation-play-state: running; }
+
+@keyframes aboutRise {
+  from { transform: rotateX(-90deg) translateZ(-40px); }
+  60%  { transform: rotateX(9deg); }
+  to   { transform: none; }
+}
+
+@keyframes aboutSway {
+  0%, 100% { transform: none; }
+  25%      { transform: rotateX(2.5deg) rotateY(-1.6deg) translateY(-2px); }
+  75%      { transform: rotateX(-1.5deg) rotateY(1.6deg) translateY(1px); }
+}
+
+/* The slab itself. Solid, so the video behind stays sharp; the stacked hard
+   shadows are its bottom edge, which is what gives it thickness when it tilts.
+   `data-tilt` (lib/motion) leans it toward the pointer. */
+.about__slab {
+  position: relative;
+  display: flex;
+  max-width: 100%;
+  height: 48px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #1b1c1e 0%, #0b0b0c 100%);
+  border: 1px solid var(--white-10);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 1px 0 #2b2c2f,
+    0 2px 0 #222325,
+    0 3px 0 #18191a,
+    0 4px 0 #0e0e0f,
+    0 14px 22px -12px rgba(0, 0, 0, 0.6);
+  color: var(--white);
+}
+
+/* A single band of light crossing the face as it lands. */
+.about__slab::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 90px;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.16), transparent);
+  transform: translateX(-140px) skewX(-18deg);
+  pointer-events: none;
+  animation: aboutSheen 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.75s both;
+  animation-play-state: paused;
+}
+
+.about[data-inview] .about__slab::after { animation-play-state: running; }
+
+@keyframes aboutSheen {
+  to { transform: translateX(110vw) skewX(-18deg); }
+}
+
+/* It never wraps: narrower than the line, it scrolls sideways instead. */
+.about__scroll {
+  display: flex;
+  align-items: stretch;
+  min-width: 0;
+  white-space: nowrap;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+.about__scroll::-webkit-scrollbar { display: none; }
+
+.about__name {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0;
+  padding: 0 18px 0 16px;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1;
+  /* the brand cell reads as a raised tab at the head of the slab */
+  background: linear-gradient(180deg, rgba(228, 237, 100, 0.14), rgba(228, 237, 100, 0.04));
+  box-shadow: inset -1px 0 0 var(--white-10), inset 0 -2px 0 var(--primary);
+}
+
+.about__name-logo {
+  flex: none;
+  display: block;
   object-fit: contain;
+  /* the mark is dark; knocked out to white as the nav does */
   filter: brightness(0) invert(1);
 }
 
-.about__plate figcaption {
-  position: absolute;
-  inset: auto 26px 26px;
+.about__facts {
+  flex: none;
+  display: flex;
+  align-items: stretch;
+  margin: 0;
 }
 
-.about__plate--dark::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0) 62%);
+/* Each fact turns up into place like a flap, one after the other. The
+   perspective is in the transform because the scroller flattens 3-D. */
+.about__fact {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  padding: 0 18px;
+  box-shadow: inset 1px 0 0 var(--white-10);
+  line-height: 1;
+  transform-origin: 50% 100%;
+  backface-visibility: hidden;
+  animation: aboutFlap 0.7s var(--ease) both;
+  animation-delay: calc(0.5s + var(--i) * 0.09s);
+  animation-play-state: paused;
+  transition: background 0.3s ease;
 }
-.about__plate--dark figcaption {
-  z-index: 1;
+
+.about[data-inview] .about__fact { animation-play-state: running; }
+
+@keyframes aboutFlap {
+  from { transform: perspective(500px) rotateX(-92deg); }
+  to   { transform: perspective(500px) rotateX(0deg); }
+}
+
+.about__fact:first-child { box-shadow: none; }
+
+.about__fact dt {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--white-40);
+  transition: color 0.3s ease;
+}
+
+.about__fact dd {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
   color: var(--white);
 }
-.about__plate--dark p {
-  max-width: 38ch;
-  font-size: var(--t-small);
-  letter-spacing: var(--ls-small);
-  line-height: 1.5;
+
+.about__fact:hover { background: var(--white-6); }
+.about__fact:hover dt { color: var(--primary); }
+
+/* ── mobile ──────────────────────────────────────────────────────────── */
+
+/* Up to 680px the enquiry dock moves to sit above the nav (bottom 96px, 42px
+   tall — see EnquiryModal.css), so the slab clears that instead. */
+@media (max-width: 680px) {
+  .about__line { bottom: calc(96px + 42px + 10px); }
 }
 
-@media (max-width: 860px) {
-  .about__pillars {
-    gap: 22px;
-    margin-top: 54px;
-  }
-  .about__plates {
-    grid-template-columns: 1fr;
-    margin-top: 58px;
-  }
+@media (max-width: 560px) {
+  .about__slab { height: 44px; border-radius: 12px; }
+  .about__name { padding: 0 13px 0 12px; }
+  .about__fact { padding: 0 13px; }
 }
 
-@media (max-width: 520px) {
-  .about__pillars { grid-template-columns: 1fr; text-align: left; }
-  .about__pillar {
-    grid-template-columns: 26px 1fr;
-    justify-items: start;
-    align-items: center;
-    gap: 16px;
-    padding-block: 14px;
-    border-bottom: var(--hairline);
-  }
+/* ── reduced motion ──────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .about__video-shell { animation: none; inset: 0; width: 100%; height: 100%; }
+  .about__rise,
+  .about__fact { animation: none; }
+  .about__slab::after { display: none; }
 }
+
+html.nomotion .about__rise,
+html.nomotion .about__fact { animation: none; }
+html.nomotion .about__slab::after { display: none; }

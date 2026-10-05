@@ -14,11 +14,12 @@ export default defineConfig({
     // The photographs are the content. Inlining any of them as base64 makes the
     // JS bundle carry image bytes the browser cannot cache separately.
     assetsInlineLimit: 0,
-    // Two pages: the homepage and the full projects catalogue
+    // Separate entries keep the showcase independent of the existing homepage.
     rollupOptions: {
       input: {
         main: resolve(import.meta.dirname, 'index.html'),
         projects: resolve(import.meta.dirname, 'projects.html'),
+        showcase: resolve(import.meta.dirname, 'showcase.html'),
       },
     },
   },

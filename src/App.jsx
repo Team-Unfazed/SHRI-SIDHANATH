@@ -1,15 +1,15 @@
 import { useEffect, useRef } from 'react';
 import FloatingNav from './components/FloatingNav';
+import EnquiryModal from './components/EnquiryModal';
 import Intro from './components/Intro';
 import ScrollProgress from './components/ScrollProgress';
 import Hero from './sections/Hero';
 import About from './sections/About';
 import Services from './sections/Services';
 import Why from './sections/Why';
-import Record from './sections/Record';
-import Listings from './sections/Listings';
+import Proof from './sections/Proof';
+import Shortlist from './sections/Shortlist';
 import Process from './sections/Process';
-import Developers from './sections/Developers';
 import Faq from './sections/Faq';
 import Locations from './sections/Locations';
 import Closer from './sections/Closer';
@@ -17,6 +17,7 @@ import Footer from './sections/Footer';
 import { ScrollTrigger, initTilt } from './lib/motion';
 import { initStack } from './lib/stack';
 import { projects } from './data/projects';
+import { initHeroScroll } from './lib/heroScroll';
 
 /**
  * The LivIn layout, rebuilt.
@@ -25,8 +26,8 @@ import { projects } from './data/projects';
  * substitutions where the original relied on material this practice does not
  * have and will not invent:
  *
- *   success stats  -> Record      only figures that can be checked
- *   testimonials   -> Developers  the marketed-projects list and the Google rating
+ *   success stats  -> Proof       only figures that can be checked, and
+ *   testimonials   ->             the marketed-projects list, on one full-screen page
  *   blog grid      -> Locations   the markets, in the same card grid
  *
  * Everything else — banner, about, services ladder, dark why-us band, listings,
@@ -68,6 +69,10 @@ export default function App() {
   /* Pointer tilt on every card marked `data-tilt` */
   useEffect(() => initTilt(document.getElementById('main')), []);
 
+  useEffect(() => initHeroScroll(
+    ...['top', 'about', 'record', 'listings'].map((id) => document.getElementById(id))
+  ), []);
+
   return (
     <>
       <a className="skip-link" href="#main">
@@ -82,17 +87,16 @@ export default function App() {
 
       <main id="main">
         <Hero />
+        <About />
+        <Proof />
+        <Shortlist />
 
-        {/* One opaque sheet, so the parked hero is covered rather than showing
+        {/* One opaque sheet, so the parked hero and about are covered rather than showing
             through every transparent band that follows it. */}
         <div className="sheet" ref={sheet}>
-          <About />
           <Services />
           <Why />
-          <Record />
-          <Listings />
           <Process />
-          <Developers />
           <Faq />
           <Locations />
           <Closer />
@@ -102,6 +106,9 @@ export default function App() {
       {/* Outside the sheet, and outside <main>. It is solid black, so it covers
           the parked hero on its own. */}
       <Footer ref={footer} />
+
+      {/* Enquiry popup emerging from taskbar */}
+      <EnquiryModal />
     </>
   );
 }

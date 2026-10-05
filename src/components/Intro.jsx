@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from '../lib/motion';
-import { finishIntro, introSkipped } from '../lib/intro';
+import { finishIntro, introSkipped, setIntroComplete } from '../lib/intro';
 import { createIntroScene } from '../lib/introScene';
 import { site } from '../data/site';
 import './Intro.css';
@@ -103,8 +103,13 @@ export default function Intro() {
 
       out = gsap.timeline({
         onComplete: () => {
+          // This component stays mounted after returning null. Stop its hidden
+          // WebGL render loop so it cannot compete with scrolling and video.
+          scene?.dispose();
+          scene = null;
           if (!document.body.dataset.navOpen) document.body.style.overflow = '';
           setGone(true);
+          setIntroComplete();
         },
       });
 

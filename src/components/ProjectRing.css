@@ -178,6 +178,7 @@
 .ring__facts dd {
   margin: 0;
   color: var(--white);
+  overflow-wrap: anywhere;
 }
 
 .ring__actions {

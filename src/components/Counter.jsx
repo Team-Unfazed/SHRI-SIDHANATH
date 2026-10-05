@@ -13,6 +13,10 @@ import './Counter.css';
  * The final value is what renders first and what screen readers get, so the
  * figure is correct with no JavaScript and is never announced mid-count.
  * `onUpdate` receives the current number, for anything that should move with it.
+ *
+ * `when` hands the start to the caller instead of the scroll position: `false`
+ * holds the figure at its starting state, `true` runs it. Left undefined, the
+ * count starts when the figure scrolls into view.
  */
 export default function Counter({
   value,
@@ -20,6 +24,8 @@ export default function Counter({
   duration = 2.2,
   delay = 0,
   start = 'top 85%',
+  ease,
+  when,
   onUpdate,
   className = '',
 }) {
@@ -35,6 +41,8 @@ export default function Counter({
       return;
     }
 
+    const manual = when !== undefined;
+    const scrollTrigger = manual ? undefined : { trigger: el, start, once: true };
     let tween;
     if (mode === 'decode') {
       const chars = [...text];
@@ -53,10 +61,11 @@ export default function Counter({
         duration: duration * 0.7,
         delay,
         ease: 'power1.in',
+        paused: manual && !when,
         onUpdate: () => {
           el.textContent = state.t >= 1 ? text : scramble(Math.floor(state.t * (digits.length + 0.6)));
         },
-        scrollTrigger: { trigger: el, start, once: true },
+        scrollTrigger,
       });
     } else {
       const m = text.match(/^(\D*)(\d+(?:\.\d+)?)(.*)$/);
@@ -79,7 +88,8 @@ export default function Counter({
         n: target,
         duration,
         delay,
-        ease: 'expo.out',
+        ease: ease || 'expo.out',
+        paused: manual && !when,
         onUpdate: () => {
           el.textContent = format(state.n);
           cb.current?.(state.n);
@@ -88,7 +98,7 @@ export default function Counter({
           el.textContent = text;
           cb.current?.(target);
         },
-        scrollTrigger: { trigger: el, start, once: true },
+        scrollTrigger,
       });
     }
 
@@ -97,7 +107,7 @@ export default function Counter({
       tween?.kill();
       el.textContent = text;
     };
-  }, [value, mode, duration, delay, start]);
+  }, [value, mode, duration, delay, start, ease, when]);
 
   return (
     <span className={`counter ${className}`.trim()}>

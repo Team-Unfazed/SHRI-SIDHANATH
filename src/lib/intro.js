@@ -25,8 +25,14 @@ export const introDone = new Promise((resolve) => {
   settle = resolve;
 });
 
-if (introSkipped && settle) {
-  settle();
+let settleComplete;
+export const introComplete = new Promise((resolve) => {
+  settleComplete = resolve;
+});
+
+if (introSkipped) {
+  if (settle) settle();
+  if (settleComplete) settleComplete();
 }
 
 /** Called by the 3D intro as its zoom-through exit begins */
@@ -34,5 +40,13 @@ export const finishIntro = () => {
   if (settle) {
     settle();
     settle = null;
+  }
+};
+
+/** Called when the 3D intro curtain is fully gone and hero is completely open */
+export const setIntroComplete = () => {
+  if (settleComplete) {
+    settleComplete();
+    settleComplete = null;
   }
 };

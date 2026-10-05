@@ -1,0 +1,264 @@
+/* ── Shortlist: the projects page ──────────────────────────────────────────
+   One full screen: slow skyline footage under a dark wash, a heading row with
+   the way through to the catalogue, and four cards. Each card is a photograph
+   with a name on it and nothing else. The cards flap up in depth when the page
+   arrives and lean toward the pointer.
+─────────────────────────────────────────────────────────────────────────── */
+
+.short {
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --pad-x: max(var(--gutter), 6vw);
+
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  min-height: 620px;
+  /* bottom: clear of the floating nav (26px + 62px) */
+  padding: clamp(52px, 8.5vh, 88px) var(--pad-x) 108px;
+  overflow: hidden;
+  background: #07090c;
+  color: var(--white);
+}
+
+/* ── footage ───────────────────────────────────────────────────────────── */
+
+.short__stage {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  perspective: 1400px;
+}
+
+.short__shell {
+  position: absolute;
+  inset: -6%;
+  transform-style: preserve-3d;
+  will-change: transform;
+  animation: shortDrift 28s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+}
+
+@keyframes shortDrift {
+  0%   { transform: rotateX(0deg) rotateY(0deg) scale(1); }
+  50%  { transform: rotateX(-0.9deg) rotateY(1.4deg) scale(1.03); }
+  100% { transform: rotateX(0.8deg) rotateY(-1.2deg) scale(1.06); }
+}
+
+.short__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* The footage is pale and overcast; the wash turns it into a night-blue
+   ground that white type and the photographs both sit on comfortably. */
+.short__wash {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(7, 9, 12, 0.86) 0%, rgba(7, 9, 12, 0.5) 34%, rgba(7, 9, 12, 0.58) 62%, rgba(7, 9, 12, 0.94) 100%),
+    rgba(10, 18, 28, 0.42);
+}
+
+/* ── layout ────────────────────────────────────────────────────────────── */
+
+.short__inner {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(22px, 4.4vh, 44px);
+}
+
+.short__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.short__title {
+  margin: 18px 0 0;
+  font-size: clamp(30px, 3.6vw, 54px);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+
+.short__aside {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex: none;
+}
+
+.short__count,
+.short__index,
+.short__go,
+.short__meta {
+  margin: 0;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.short__count { font-size: 10.5px; letter-spacing: 0.14em; color: var(--white-60); }
+
+/* ── the four cards ────────────────────────────────────────────────────── */
+
+.short__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(12px, 1.4vw, 20px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  perspective: 1300px;
+}
+
+/* Edge-on at the start, hinged at the foot, so it needs no fade. The pointer
+   tilt lives on the card inside so the two transforms never fight. */
+.short__flap {
+  transform-origin: 50% 100%;
+  transform-style: preserve-3d;
+  animation: shortFlap 1s var(--ease) both;
+  animation-delay: calc(0.2s + var(--i) * 0.1s);
+  animation-play-state: paused;
+}
+
+.short[data-inview] .short__flap { animation-play-state: running; }
+
+@keyframes shortFlap {
+  from { transform: rotateX(-90deg) translateZ(-40px); }
+  60%  { transform: rotateX(7deg); }
+  to   { transform: none; }
+}
+
+.short__card {
+  position: relative;
+  display: block;
+  height: clamp(230px, 44vh, 400px);
+  border-radius: 16px;
+  overflow: hidden;
+  background: #101214;
+  border: 1px solid var(--white-10);
+  box-shadow:
+    0 1px 0 #2b2c2f,
+    0 2px 0 #222325,
+    0 3px 0 #18191a,
+    0 4px 0 #0e0e0f,
+    0 28px 40px -20px rgba(0, 0, 0, 0.85);
+  color: var(--white);
+  text-decoration: none;
+  transition: border-color 0.3s ease;
+}
+
+.short__card:hover,
+.short__card:focus-visible { border-color: rgba(228, 237, 100, 0.6); outline: none; }
+
+.short__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.4s var(--ease);
+}
+
+.short__card:hover .short__img,
+.short__card:focus-visible .short__img { transform: scale(1.06); }
+
+/* the name's own ground, on the photograph */
+.short__card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(7, 9, 12, 0.92) 0%, rgba(7, 9, 12, 0.5) 30%, rgba(7, 9, 12, 0) 56%);
+  pointer-events: none;
+}
+
+.short__index,
+.short__go {
+  position: absolute;
+  top: 14px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: var(--pill);
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+}
+
+.short__index { left: 14px; background: rgba(7, 9, 12, 0.72); color: var(--primary); }
+
+.short__go {
+  right: 14px;
+  background: var(--primary);
+  color: var(--black);
+  transform: translateY(-46px);
+  transition: transform 0.5s var(--ease);
+}
+
+.short__card:hover .short__go,
+.short__card:focus-visible .short__go { transform: none; }
+
+.short__body {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 16px;
+  z-index: 1;
+  display: grid;
+  gap: 7px;
+}
+
+.short__name {
+  font-size: clamp(17px, 1.5vw, 22px);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.short__meta { font-size: 9.5px; letter-spacing: 0.1em; color: rgba(255, 255, 255, 0.72); }
+
+/* ── tablet and phone: the page grows to fit ───────────────────────────── */
+
+@media (max-width: 900px) {
+  .short {
+    height: auto;
+    min-height: 100svh;
+    padding: 72px var(--pad-x) 150px;
+  }
+
+  .short__head { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .short__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .short__card { height: clamp(220px, 34vh, 300px); }
+  /* no hover on touch, and four prompts at once is noise */
+  .short__go { display: none; }
+}
+
+@media (max-width: 420px) {
+  .short__aside { flex-wrap: wrap; gap: 14px; }
+  .short__card { height: 210px; }
+  .short__name { font-size: 15.5px; }
+}
+
+/* ── reduced motion ────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .short__shell { animation: none; inset: 0; }
+  .short__flap { animation: none; }
+}
+
+html.nomotion .short__shell { animation: none; inset: 0; }
+html.nomotion .short__flap { animation: none; }

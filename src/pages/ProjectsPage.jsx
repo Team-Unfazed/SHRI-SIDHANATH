@@ -13,7 +13,7 @@ const pad = (n) => String(n).padStart(2, '0');
 
 /* Filters by market. Panvel and New Panvel read as one market to a buyer. */
 const marketOf = (p) => (p.area === 'New Panvel' ? 'Panvel' : p.area);
-const MARKETS = ['All', ...new Set(projects.map(marketOf))];
+const MARKETS = ['All', ...new Set(projects.map(marketOf).filter(Boolean))];
 
 /**
  * /projects.html — the full catalogue.
@@ -23,11 +23,14 @@ const MARKETS = ['All', ...new Set(projects.map(marketOf))];
  */
 export default function ProjectsPage() {
   const [market, setMarket] = useState('All');
+  const [query, setQuery] = useState('');
   const grid = useRef(null);
 
   const shown = useMemo(
-    () => (market === 'All' ? projects : projects.filter((p) => marketOf(p) === market)),
-    [market]
+    () => projects.filter((p) => (market === 'All' || marketOf(p) === market) &&
+      [p.name, p.developer, p.location, p.area, p.district, p.pincode, p.reraNumber, p.status, p.projectType, p.category]
+        .filter(Boolean).join(' ').toLowerCase().includes(query.trim().toLowerCase())),
+    [market, query]
   );
 
   /* Each time the filter changes, the cards that are now showing rise out of
@@ -123,6 +126,11 @@ export default function ProjectsPage() {
               </div>
             </div>
 
+            <label className="pp__search mono-sm">
+              Search projects
+              <input type="search" value={query} onChange={(event) => setQuery(event.target.value)}
+                placeholder="Name, promoter, location or RERA number" />
+            </label>
             <p className="pp__count mono-sm" aria-live="polite">
               Showing {pad(shown.length)} of {pad(projects.length)}
             </p>
@@ -134,6 +142,7 @@ export default function ProjectsPage() {
                 </li>
               ))}
             </ul>
+            {shown.length === 0 && <p>No matching projects. Try another search or market.</p>}
           </div>
         </section>
 
