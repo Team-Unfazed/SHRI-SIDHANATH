@@ -283,7 +283,7 @@ an empty frame for a beat.
       replace with official media-kit assets before publishing. `npm run check:assets`
       lists them. See [`docs/ASSETS.md`](docs/ASSETS.md).
 - [ ] The canonical, Open Graph and JSON-LD URLs in `index.html` assume
-      `https://www.shrisidhanath.in/`. Update if that changes.
+      `https://www.shrisidhanath.com/`. Update if that changes.
 - [ ] Add `robots.txt` and `sitemap.xml` to `public/` for the production host.
 - [ ] The footer enquiry field composes a `mailto:` — it has no backend. If a
       real form is wanted, that is a server, not a CSS change.

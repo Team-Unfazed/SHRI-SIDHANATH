@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.shrisidhanath.in/sitemap.xml
+Sitemap: https://www.shrisidhanath.com/sitemap.xml

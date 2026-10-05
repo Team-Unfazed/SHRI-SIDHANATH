@@ -16,7 +16,7 @@ import { services, locations, faqs } from '../src/data/content.js';
 import { projects } from '../src/data/projects.js';
 import { site } from '../src/data/site.js';
 
-const ORIGIN = 'https://www.shrisidhanath.in';
+const ORIGIN = 'https://www.shrisidhanath.com';
 
 const esc = (s) =>
   String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');

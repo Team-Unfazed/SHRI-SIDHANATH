@@ -51,5 +51,5 @@ Expect movement over weeks to months, not days.
   which one with the client.
 - Passcode Great Guarantee is listed at Wadala, but its banner says Mulund.
   Confirm the location with the client.
-- The domain `shrisidhanath.in` is assumed in canonical and schema URLs.
+- The domain `www.shrisidhanath.com` is assumed in canonical and schema URLs.
   Change it everywhere if the live domain differs.
