@@ -11,6 +11,9 @@ const MAIN = [
   { label: 'Projects', href: '#listings' },
   { label: 'Locations', href: '#locations' },
   { label: 'All projects', href: '/projects.html' },
+  { label: 'Agent in Panvel', href: '/real-estate-agent-panvel.html' },
+  { label: 'Agent in Raigad', href: '/real-estate-agent-raigad.html' },
+  { label: 'Agent in Navi Mumbai', href: '/real-estate-agent-navi-mumbai.html' },
 ];
 
 const PRACTICE = [

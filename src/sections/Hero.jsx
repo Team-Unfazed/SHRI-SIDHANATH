@@ -73,6 +73,9 @@ export default function Hero() {
       </header>
 
       <div className="banner__center">
+        <p className="banner__kicker mono-sm">
+          {site.reraAuthority}&nbsp;{site.rera} · Serving Panvel since 2004
+        </p>
         <h1 className="banner__title" id="hero-title">
           The best real estate agent in Panvel, Navi Mumbai
         </h1>
@@ -85,6 +88,18 @@ export default function Hero() {
             Rated {site.google.rating} out of 5 on Google, {site.google.reviews} reviews
           </span>
         </p>
+        <div className="banner__cta-row">
+          <Pill
+            type="button"
+            onClick={() => window.dispatchEvent(new Event('enquiry:open'))}
+            className="banner__cta-pill pill--block-sm"
+          >
+            Enquire now
+          </Pill>
+          <Pill href={`tel:${site.phoneIntl}`} tone="ghost" className="banner__cta-pill pill--block-sm">
+            Call {site.phoneDisplay}
+          </Pill>
+        </div>
       </div>
 
       <a className="banner__scroll mono-sm" href="#about" aria-label="Scroll to about">

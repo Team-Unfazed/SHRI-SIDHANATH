@@ -1,4 +1,25 @@
 User-agent: *
 Allow: /
 
+# Explicit allowances for AI answer-engine crawlers (ChatGPT search, Google AI
+# Overviews / AI Mode, Perplexity). "Allow: /" above already permits these —
+# listed individually so intent is unambiguous to anyone auditing this file.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
 Sitemap: https://www.shrisidhanath.com/sitemap.xml

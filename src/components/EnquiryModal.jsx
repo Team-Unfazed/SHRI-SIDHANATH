@@ -22,6 +22,10 @@ const CONFIGURATIONS = [
 
 export default function EnquiryModal() {
   const [isOpen, setIsOpen] = useState(false);
+  // The hero carries its own "Enquire now" CTA (see Hero.jsx), so the docked
+  // launcher stays out of the way while the hero is in view rather than
+  // competing with it, and reappears once the visitor has scrolled on.
+  const [heroVisible, setHeroVisible] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [refId, setRefId] = useState('');
@@ -147,6 +151,26 @@ export default function EnquiryModal() {
     setIsOpen(true);
   };
 
+  // Lets any other part of the UI (e.g. the hero's primary CTA) open this
+  // modal without the two components needing a shared parent or context —
+  // the same window-event pattern already used for `hero-scroll-start`.
+  useEffect(() => {
+    const onOpenRequest = () => setIsOpen(true);
+    window.addEventListener('enquiry:open', onOpenRequest);
+    return () => window.removeEventListener('enquiry:open', onOpenRequest);
+  }, []);
+
+  useEffect(() => {
+    const hero = document.getElementById('top');
+    if (!hero) return undefined;
+    const observer = new IntersectionObserver(
+      ([entry]) => setHeroVisible(entry.isIntersecting),
+      { threshold: 0.35 }
+    );
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, []);
+
   // Keyboard accessibility: Escape closes modal
   useEffect(() => {
     if (!isOpen) return;
@@ -166,45 +190,6 @@ export default function EnquiryModal() {
       handleClose();
     }
   };
-
-  // 3D Card Tilt on pointer move for fine pointers
-  useEffect(() => {
-    const card = modalRef.current;
-    if (!card || !isOpen) return;
-
-    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-
-    const onPointerMove = (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-      gsap.to(card, {
-        rotationY: x * 8,
-        rotationX: -y * 8,
-        transformPerspective: 1000,
-        ease: 'power1.out',
-        duration: 0.4,
-      });
-    };
-
-    const onPointerLeave = () => {
-      gsap.to(card, {
-        rotationY: 0,
-        rotationX: 0,
-        ease: 'power2.out',
-        duration: 0.6,
-      });
-    };
-
-    card.addEventListener('pointermove', onPointerMove);
-    card.addEventListener('pointerleave', onPointerLeave);
-
-    return () => {
-      card.removeEventListener('pointermove', onPointerMove);
-      card.removeEventListener('pointerleave', onPointerLeave);
-    };
-  }, [isOpen, submitted]);
 
   // Form submission with 3D tick animation transition
   const handleSubmit = (e) => {
@@ -260,8 +245,9 @@ export default function EnquiryModal() {
 
   return (
     <>
-      {/* Docked Taskbar Launcher Button (when modal is closed) */}
-      {!isOpen && (
+      {/* Docked Taskbar Launcher Button (when modal is closed and the hero's
+          own CTA isn't already covering the same job) */}
+      {!isOpen && !heroVisible && (
         <button
           type="button"
           className="enquiry-taskbar-dock"
@@ -502,7 +488,7 @@ export default function EnquiryModal() {
 
                 <p className="enquiry-success-summary">
                   Thank you, <strong>{name}</strong>. We have logged your requirement for a{' '}
-                  <strong>{selectedConfig}</strong> ({intent}) in <strong>{selectedLocality}</strong>.
+                  <strong>{selectedConfig}</strong> ({intent}) in <strong>{site.headquarters}</strong>.
                   Ravi Sargar or our senior Panvel advisor will call you shortly on <strong>+91 {phone}</strong>.
                 </p>
 

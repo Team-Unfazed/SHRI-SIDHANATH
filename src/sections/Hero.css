@@ -65,6 +65,11 @@
   width: min(92vw, 980px);
   padding-inline: 12px;
 }
+.banner__kicker {
+  margin: 0;
+  color: rgba(255, 255, 255, .82);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, .55);
+}
 .banner__title {
   margin: 0;
   font-size: clamp(22px, 3.2vw, 42px);
@@ -100,10 +105,22 @@
   text-shadow: 0 1px 14px rgba(0, 0, 0, .55);
 }
 
+.banner__cta-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: clamp(2px, 1vh, 10px);
+  width: 100%;
+}
+.banner__cta-pill { flex: none; }
+
 @media (max-width: 720px) {
   .banner__bar { align-items: flex-start; flex-wrap: wrap; padding: 22px 24px; }
   .banner__bar-actions { width: 100%; justify-content: flex-start; }
   .banner__bar-pill:first-child .pill__label { font-size: 9px; }
+  .banner__kicker { font-size: clamp(8px, 2.2vw, 9.5px); letter-spacing: .02em; white-space: nowrap; }
   .banner__title { letter-spacing: .035em; font-size: clamp(18px, 5.4vw, 28px); }
   .banner__center { bottom: clamp(96px, 14vh, 120px); }
 }

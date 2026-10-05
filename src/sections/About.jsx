@@ -50,7 +50,6 @@ export default function About() {
             tabIndex={-1}
           >
             <source src="/videos/about-us-video.mp4" type="video/mp4" />
-            <source src="/videos/about us section video.mp4" type="video/mp4" />
           </video>
         </div>
       </div>

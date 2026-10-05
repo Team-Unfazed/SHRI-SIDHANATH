@@ -32,12 +32,14 @@ export const site = {
     country: 'IN',
   },
 
-  // Verified on the client's Google Business Profile, 2026-09-12. See
-  // docs/RESEARCH-GOOGLE-FACEBOOK.md. These are the only rating, review-count
-  // and opening-hours figures on the site, and they are not rounded or restated.
+  // Verified live on the client's Google Business Profile via OpenSEO,
+  // 2026-10-06 (re-check of the 2026-09-12 figures in
+  // docs/RESEARCH-GOOGLE-FACEBOOK.md — rating unchanged, review count moved
+  // 145 -> 150). These are the only rating, review-count and opening-hours
+  // figures on the site, and they are not rounded or restated.
   google: {
     rating: '4.8',
-    reviews: 145,
+    reviews: 150,
     opens: '09:00',
     closes: '22:00',
     hoursLabel: '9:00 to 22:00, daily',

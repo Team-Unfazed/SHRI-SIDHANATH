@@ -1,6 +1,11 @@
 import { reducedMotion } from './motion';
 
 const DURATION = 1500;
+// A touch swipe resolves on its own momentum far faster than a wheel notch —
+// holding it to the wheel's 1500ms reads as the page ignoring the gesture for
+// over a second, which is the main thing "laggy scroll" reports on phones
+// turned out to be. Keep the wheel/keyboard duration cinematic; make touch snap.
+const DURATION_TOUCH = 650;
 const WHEEL_IDLE = 300;
 
 /* The CSS `ease` curve, cubic-bezier(0.25, 0.1, 0.25, 1): a soft start, a quick
@@ -93,7 +98,7 @@ export function initHeroScroll(...sections) {
     release();
   };
 
-  const glide = (destination = about) => {
+  const glide = (destination = about, fast = false) => {
     if (animating || blocked()) return;
     clearTimeout(releaseTimer);
     captured = true;
@@ -103,7 +108,7 @@ export function initHeroScroll(...sections) {
     const from = window.scrollY;
     const began = performance.now();
     // Match the site's existing motion policy, including its ?nomotion QA switch.
-    const duration = reducedMotion() ? 0 : DURATION;
+    const duration = reducedMotion() ? 0 : fast ? DURATION_TOUCH : DURATION;
     const tick = (now) => {
       if (blocked()) { cancel(); return; }
       const to = destination.getBoundingClientRect().top + window.scrollY;
@@ -155,7 +160,7 @@ export function initHeroScroll(...sections) {
     if (to) {
       prevent(event);
       touch.handled = true;
-      glide(to);
+      glide(to, true);
     }
   };
 

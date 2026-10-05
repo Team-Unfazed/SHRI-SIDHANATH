@@ -49,7 +49,9 @@ export default function Locations() {
                 <span className="loc__tag mono-sm">{l.role}</span>
               </div>
               <div className="loc__body">
-                <p className="loc__name h4">{l.name}</p>
+                <p className="loc__name h4">
+                  {l.pagePath ? <a href={l.pagePath}>{l.name}</a> : l.name}
+                </p>
                 <h3>{l.note}</h3>
                 <Pill as="a" href="#contact" tone="ghost" size="sm" className="loc__cta">
                   Enquire
