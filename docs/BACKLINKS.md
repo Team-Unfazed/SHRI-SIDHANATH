@@ -147,6 +147,32 @@ confirm, not confirmed-live facts:
 6. Re-check Search Console's Links report monthly as the real low-cost
    backlink-discovery tool for a site this size.
 
+## 6. Drafted form answers (ready to paste, not submitted)
+
+Owner declined auto-submission (business registration forms should be submitted
+by the owner, not an agent) and asked for the values drafted instead. Source:
+this project's own verified NAP (`index.html` JSON-LD, GBP dashboard).
+
+**L&T Realty** — https://www.lntrealty.com/partner-with-us/ (Name, Email,
+Phone, City dropdown):
+- Name: `Ravi Sargar`
+- Email: `ravisargar@shrisidhanath.com`
+- Phone: `+91 98207 59348`
+- City: `Navi Mumbai`
+
+**Kanakia Group** — https://www.kanakia.com/channel-partner (Name, RERA ID of
+Channel Partner, Firm Name, Email, Mobile, project-location dropdown):
+- Name: `Ravi Sargar`
+- RERA ID of Channel Partner: `A52000004595`
+- Firm Name: `Shri Sidhanath Constructions & Estate Consultant`
+- Email: `ravisargar@shrisidhanath.com`
+- Mobile: `+91 98207 59348`
+- Project location: `Panvel`
+
+Neither form's field list was confirmed exhaustive by the research agent —
+open each page and check for additional required fields (e.g. years of
+experience, firm address) before submitting.
+
 ## Sources and confidence
 
 - Common Crawl domain graph: confidence 0.50, domain-level only, release
