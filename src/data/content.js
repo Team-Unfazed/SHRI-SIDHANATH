@@ -286,6 +286,10 @@ export const faqs = [
     q: 'What is the difference between buying a new project flat and a resale flat in Panvel?',
     a: 'A new project flat is bought directly from a developer, usually under construction or newly completed, with the price and payment schedule set by the project\'s RERA registration. A resale flat is bought from its current owner, is typically ready to move into, and needs its own checks — OC status, society NOC, outstanding dues and clear title — which is where an on-ground local agent earns their fee.',
   },
+  {
+    q: 'Is Shri Sidhanath a real estate agent, a property broker, or a consultant?',
+    a: 'All three terms describe the same MahaRERA-registered practice (A52000004595) — "real estate agent", "property broker" and "property consultant" are used interchangeably in Panvel and Navi Mumbai for someone who is paid brokerage to connect buyers, sellers, landlords and tenants. Shri Sidhanath has operated as a real estate agent and property broker in Panvel since 2004, handling sales, resale, rentals, land and property management under one desk.',
+  },
 ];
 
 // Property discovery filters

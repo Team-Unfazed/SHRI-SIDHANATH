@@ -29,7 +29,14 @@ function homeFallback() {
     .map((s) => `<li><h3>${esc(s.title)}</h3><p>${esc(s.summary)}</p></li>`)
     .join('');
   const loc = locations
-    .map((l) => `<li><h3>Real estate agent in ${esc(l.name)}</h3><p>${esc(l.note)}</p></li>`)
+    .map(
+      (l) =>
+        `<li><h3>${
+          l.pagePath
+            ? `<a href="${esc(l.pagePath)}">Real estate agent in ${esc(l.name)}</a>`
+            : `Real estate agent in ${esc(l.name)}`
+        }</h3><p>${esc(l.note)}</p></li>`
+    )
     .join('');
   const faq = faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('');
   const proj = projects
