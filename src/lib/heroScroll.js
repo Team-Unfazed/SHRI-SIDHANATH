@@ -44,7 +44,7 @@ export function initHeroScroll(...sections) {
   let suppressClickUntil = 0;
   const html = document.documentElement;
 
-  const blocked = () => !!document.querySelector('.intro, .enquiry-overlay[data-open="true"]');
+  const blocked = () => !!document.querySelector('.intro, .enquiry-overlay[data-open="true"], .pdetail-overlay');
   const editable = (target) => target instanceof Element && !!target.closest(
     'input, textarea, select, [contenteditable="true"], [role="dialog"], .fmenu:not([hidden])'
   );

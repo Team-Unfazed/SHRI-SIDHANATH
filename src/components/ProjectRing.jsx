@@ -15,7 +15,7 @@ const pad = (n) => String(n).padStart(2, '0');
  * arrow keys. The ring's angle is a single number that every input tweens; the
  * frame is derived from it, so no two inputs can disagree about where it is.
  */
-export default function ProjectRing({ items }) {
+export default function ProjectRing({ items, onOpen }) {
   const stage = useRef(null);
   const spin = useRef(null);
   const api = useRef({ next() {}, prev() {}, go() {} });
@@ -176,10 +176,8 @@ export default function ProjectRing({ items }) {
       const card = e.target.closest('.ring__card');
       if (!card) return;
       const i = cards.indexOf(card);
-      if (i !== shown) {
-        e.preventDefault();
-        goToIndex(i);
-      }
+      if (i !== shown) goToIndex(i);
+      else onOpen?.(items[i]);
     };
     el.addEventListener('click', click, true);
 
@@ -211,7 +209,7 @@ export default function ProjectRing({ items }) {
       el.removeEventListener('keydown', key);
       window.removeEventListener('resize', resize);
     };
-  }, [items]);
+  }, [items, onOpen]);
 
   const p = items[active];
 
@@ -228,12 +226,12 @@ export default function ProjectRing({ items }) {
         <div className="ring__tilt">
           <div className="ring__spin" ref={spin}>
             {items.map((it, i) => (
-              <a
+              <button
+                type="button"
                 className="ring__card"
                 key={it.id}
-                href="/#contact"
                 draggable="false"
-                aria-label={it.name}
+                aria-label={i === active ? `View details for ${it.name}` : it.name}
                 aria-hidden={i !== active}
                 tabIndex={-1}
               >
@@ -246,7 +244,7 @@ export default function ProjectRing({ items }) {
                   </span>
                 )}
                 <span className="ring__name mono-sm">{it.name}</span>
-              </a>
+              </button>
             ))}
           </div>
         </div>
@@ -277,7 +275,9 @@ export default function ProjectRing({ items }) {
           </dl>
         </div>
         <div className="ring__actions">
-          <Pill href="/#contact">Enquire about this project</Pill>
+          <Pill onClick={() => window.dispatchEvent(new Event('enquiry:open'))}>
+            Enquire about this project
+          </Pill>
           <div className="ring__arrows">
             <button type="button" className="ring__arrow" onClick={() => api.current.prev()} aria-label="Previous project">
               &larr;

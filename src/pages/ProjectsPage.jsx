@@ -4,7 +4,9 @@ import Pill from '../components/Pill';
 import SplitReveal from '../components/SplitReveal';
 import ProjectRing from '../components/ProjectRing';
 import ProjectCard from '../components/ProjectCard';
-import { projects } from '../data/projects';
+import PropertyDetail from '../components/PropertyDetail';
+import EnquiryModal from '../components/EnquiryModal';
+import { useProjects } from '../hooks/useProjects';
 import { site } from '../data/site';
 import { gsap, reducedMotion, initTilt, ScrollTrigger } from '../lib/motion';
 import './ProjectsPage.css';
@@ -13,7 +15,6 @@ const pad = (n) => String(n).padStart(2, '0');
 
 /* Filters by market. Panvel and New Panvel read as one market to a buyer. */
 const marketOf = (p) => (p.area === 'New Panvel' ? 'Panvel' : p.area);
-const MARKETS = ['All', ...new Set(projects.map(marketOf).filter(Boolean))];
 
 /**
  * /projects.html — the full catalogue.
@@ -22,15 +23,22 @@ const MARKETS = ['All', ...new Set(projects.map(marketOf).filter(Boolean))];
  * filterable grid. The homepage carries only a shortlist and links here.
  */
 export default function ProjectsPage() {
+  const { projects } = useProjects();
   const [market, setMarket] = useState('All');
   const [query, setQuery] = useState('');
+  const [selected, setSelected] = useState(null);
   const grid = useRef(null);
+
+  const MARKETS = useMemo(
+    () => ['All', ...new Set(projects.map(marketOf).filter(Boolean))],
+    [projects],
+  );
 
   const shown = useMemo(
     () => projects.filter((p) => (market === 'All' || marketOf(p) === market) &&
       [p.name, p.developer, p.location, p.area, p.district, p.pincode, p.reraNumber, p.status, p.projectType, p.category]
         .filter(Boolean).join(' ').toLowerCase().includes(query.trim().toLowerCase())),
-    [market, query]
+    [projects, market, query]
   );
 
   /* Each time the filter changes, the cards that are now showing rise out of
@@ -100,7 +108,7 @@ export default function ProjectsPage() {
               </p>
             </div>
 
-            <ProjectRing items={projects} />
+            <ProjectRing items={projects} onOpen={setSelected} />
           </div>
         </section>
 
@@ -138,7 +146,7 @@ export default function ProjectsPage() {
             <ul className="pp__grid" ref={grid}>
               {shown.map((p) => (
                 <li className="pp__item" key={p.id}>
-                  <ProjectCard project={p} />
+                  <ProjectCard project={p} onOpen={setSelected} />
                 </li>
               ))}
             </ul>
@@ -173,6 +181,9 @@ export default function ProjectsPage() {
           <a href="/">Back to home</a>
         </div>
       </footer>
+
+      {selected && <PropertyDetail project={selected} onClose={() => setSelected(null)} />}
+      <EnquiryModal />
     </>
   );
 }

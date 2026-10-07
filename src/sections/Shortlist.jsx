@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Label from '../components/Label';
 import SplitReveal from '../components/SplitReveal';
 import Pill from '../components/Pill';
-import { projects } from '../data/projects';
+import PropertyDetail from '../components/PropertyDetail';
+import { useProjects } from '../hooks/useProjects';
 import { introDone } from '../lib/intro';
 import { useBackgroundVideo } from '../lib/backgroundVideo';
 import './Shortlist.css';
@@ -18,12 +19,14 @@ import './Shortlist.css';
  * The footage behind is stock (Coverr, free licence): a generic skyline, not
  * any project on this list.
  */
-const SHORTLIST = projects.filter((p) => p.image).slice(0, 4);
-
 export default function Shortlist() {
+  const { projects } = useProjects();
+  const SHORTLIST = useMemo(() => projects.filter((p) => p.image).slice(0, 4), [projects]);
+
   const root = useRef(null);
   const videoRef = useRef(null);
   const [entered, setEntered] = useState(false);
+  const [selected, setSelected] = useState(null);
 
   useEffect(() => useBackgroundVideo(root, videoRef, introDone), []);
 
@@ -84,28 +87,31 @@ export default function Shortlist() {
         <ul className="short__grid">
           {SHORTLIST.map((p, i) => (
             <li className="short__flap" key={p.id} style={{ '--i': i }}>
-              <a
+              <button
+                type="button"
                 className="short__card"
-                href="#contact"
+                onClick={() => setSelected(p)}
                 data-tilt="7"
-                aria-label={`Enquire about ${p.name}`}
+                aria-label={`View details for ${p.name}`}
               >
                 <img className="short__img" src={p.image} alt={p.imageAlt} loading="lazy" />
                 <span className="short__index" aria-hidden="true">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <span className="short__go" aria-hidden="true">Enquire &rarr;</span>
+                <span className="short__go" aria-hidden="true">View details &rarr;</span>
                 <span className="short__body">
                   <span className="short__name">{p.name}</span>
                   <span className="short__meta">
                     {[p.area, p.priceFrom && `From ${p.priceFrom}`].filter(Boolean).join(' · ')}
                   </span>
                 </span>
-              </a>
+              </button>
             </li>
           ))}
         </ul>
       </div>
+
+      {selected && <PropertyDetail project={selected} onClose={() => setSelected(null)} />}
     </section>
   );
 }

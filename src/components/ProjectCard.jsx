@@ -6,15 +6,19 @@ import ProjectRegistration from './ProjectRegistration';
  * photograph), then name, starting price and location. Shared by the homepage
  * shortlist and the projects page, so the two never drift apart.
  *
+ * The card opens the property's own detail panel (`onOpen`) rather than
+ * jumping to the enquiry form directly — browsing and enquiring are two
+ * different things, and the enquiry form is one tap away inside the panel.
+ *
  * Only what the content layer records is shown — a missing price or
  * configuration is simply absent, never filled in.
  */
-export default function ProjectCard({ project: p, href = '/#contact' }) {
+export default function ProjectCard({ project: p, onOpen }) {
   const meta = [p.area, p.config].filter(Boolean).join(' · ');
 
   return (
     <article className="pcard-entry">
-    <a className="pcard" href={href} data-tilt="6" aria-label={`Enquire about ${p.name}`}>
+    <button type="button" className="pcard" onClick={() => onOpen(p)} data-tilt="6" aria-label={`View details for ${p.name}`}>
       <span className="pcard__media">
         {p.image ? (
           <img src={p.image} alt={p.imageAlt} width="560" height="700" loading="lazy" />
@@ -27,7 +31,7 @@ export default function ProjectCard({ project: p, href = '/#contact' }) {
         {p.category && <span className="pcard__tag mono-sm">{p.category}</span>}
         {p.imageCredit && <span className="pcard__credit mono-sm">Illustration: {p.imageCredit}</span>}
         <span className="pcard__enquire mono-sm" aria-hidden="true">
-          Enquire &rarr;
+          View details &rarr;
         </span>
       </span>
 
@@ -44,7 +48,10 @@ export default function ProjectCard({ project: p, href = '/#contact' }) {
           {p.completionDate && <span className="pcard__meta mono-sm">Proposed completion: {p.completionDate}</span>}
         </>}
       </span>
-    </a>
+    </button>
+    {/* Kept outside the button: a <details> inside an interactive button is
+        invalid, and the registry facts are already one tap away in the panel —
+        this stays for anyone skimming the grid without opening it. */}
     <ProjectRegistration project={p} />
     </article>
   );

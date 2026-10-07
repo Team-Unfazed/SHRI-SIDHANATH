@@ -1,0 +1,164 @@
+/* ── Property detail ───────────────────────────────────────────────────────
+   A plain panel, not a production number — the card already does the selling;
+   this just answers "tell me more" without leaving the page. One soft fade +
+   rise on open, nothing else animated.
+──────────────────────────────────────────────────────────────────────────── */
+
+.pdetail-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: pdetailFade 0.25s ease both;
+}
+
+.pdetail {
+  position: relative;
+  width: min(560px, 100%);
+  max-height: min(84vh, 760px);
+  overflow-y: auto;
+  background: var(--white);
+  color: var(--black);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.4);
+  animation: pdetailRise 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes pdetailFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pdetailRise {
+  from { opacity: 0; transform: translateY(18px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+
+.pdetail__close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--black);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+}
+
+.pdetail__media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--deep-light);
+}
+
+.pdetail__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pdetail__plate {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 14px;
+  height: 100%;
+  padding: 24px;
+  text-align: center;
+}
+.pdetail__plate img { width: 48px; height: 26px; object-fit: contain; opacity: 0.35; }
+
+.pdetail__tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 7px 11px;
+  border-radius: var(--pill);
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--black);
+}
+
+.pdetail__body {
+  padding: 24px;
+  display: grid;
+  gap: 12px;
+}
+
+.pdetail__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.pdetail__name { min-width: 0; }
+.pdetail__price { flex: none; color: var(--black); }
+.pdetail__meta { color: var(--black-60); }
+
+.pdetail__summary {
+  font-size: var(--t-small);
+  line-height: var(--lh-paragraph);
+  color: var(--gray);
+}
+
+.pdetail__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.pdetail__cta {
+  flex: 1 1 220px;
+  padding: 13px 18px;
+  border-radius: var(--pill);
+  background: var(--primary);
+  color: var(--black);
+  font-family: var(--font-mono);
+  font-size: var(--t-small-label);
+  font-weight: 500;
+  letter-spacing: var(--ls-small-label);
+  text-transform: uppercase;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+.pdetail__cta:hover { transform: translateY(-1px); }
+
+.pdetail__ghost {
+  flex: 1 1 100px;
+  display: grid;
+  place-items: center;
+  padding: 13px 16px;
+  border-radius: var(--pill);
+  border: 1px solid var(--black-8);
+  color: var(--black);
+  text-align: center;
+}
+.pdetail__ghost:hover { background: var(--whitesmoke); }
+
+.pdetail .pcard__registration { margin-top: 8px; }
+
+@media (max-width: 560px) {
+  .pdetail-overlay { padding: 0; align-items: flex-end; }
+  .pdetail {
+    width: 100%;
+    max-height: 90vh;
+    border-radius: var(--panel-radius) var(--panel-radius) 0 0;
+  }
+  .pdetail__body { padding: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pdetail-overlay, .pdetail { animation: none; }
+}
+html.nomotion .pdetail-overlay,
+html.nomotion .pdetail { animation: none; }

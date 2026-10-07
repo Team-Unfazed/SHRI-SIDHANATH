@@ -238,10 +238,31 @@
   .about__line { bottom: calc(96px + 42px + 10px); }
 }
 
-@media (max-width: 560px) {
-  .about__slab { height: 44px; border-radius: 12px; }
-  .about__name { padding: 0 13px 0 12px; }
-  .about__fact { padding: 0 13px; }
+/* Below 600px the single-line ticker stops being readable — a thumb has to
+   swipe sideways through a 44px-tall strip to reach the office address and
+   hours, with no hint that there's more off-screen. The slab instead grows
+   downward into a plain stacked card: one fact per row, fully on screen,
+   nothing to scroll. The flap/sheen entrance animations are unaffected —
+   they key off the same elements regardless of their flex direction. */
+@media (max-width: 600px) {
+  .about__slab { height: auto; max-height: 68vh; border-radius: 14px; }
+  .about__scroll {
+    flex-direction: column;
+    align-items: stretch;
+    white-space: normal;
+    overflow-x: visible;
+    overflow-y: auto;
+  }
+  .about__name {
+    padding: 12px 16px;
+    box-shadow: inset 0 -1px 0 var(--white-10), inset 0 -2px 0 var(--primary);
+  }
+  .about__facts { flex-direction: column; align-items: stretch; }
+  .about__fact {
+    padding: 11px 16px;
+    box-shadow: inset 0 1px 0 var(--white-10);
+  }
+  .about__fact:first-child { box-shadow: none; }
 }
 
 /* ── reduced motion ──────────────────────────────────────────────────── */
