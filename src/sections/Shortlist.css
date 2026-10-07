@@ -144,6 +144,7 @@
 .short__card {
   position: relative;
   display: block;
+  width: 100%;
   height: clamp(230px, 44vh, 400px);
   border-radius: 16px;
   overflow: hidden;
