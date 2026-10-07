@@ -252,7 +252,7 @@ export const faqs = [
   },
   {
     q: 'How can I contact Shri Sidhanath?',
-    a: 'Call or WhatsApp 9820759348, email us, or visit the office at Plot 18, Sector 7, New Panvel West. We reply to every enquiry.',
+    a: 'Call or WhatsApp 8065532578, email us, or visit the office at Plot 18, Sector 7, New Panvel West. We reply to every enquiry.',
   },
   // The entries below are written as direct, specific, snippet-ready answers —
   // the kind an AI Overview, ChatGPT or Perplexity can quote verbatim without
@@ -280,7 +280,7 @@ export const faqs = [
   },
   {
     q: 'What does a real estate agent in Panvel charge in brokerage?',
-    a: 'Brokerage is agreed up front for each transaction rather than published as a fixed rate, since it depends on the property, the deal size and whether it is a sale, resale or rental. Call +91 98207 59348 and we will quote a figure before any work starts.',
+    a: 'Brokerage is agreed up front for each transaction rather than published as a fixed rate, since it depends on the property, the deal size and whether it is a sale, resale or rental. Call +91 80655 32578 and we will quote a figure before any work starts.',
   },
   {
     q: 'What is the difference between buying a new project flat and a resale flat in Panvel?',
@@ -358,7 +358,7 @@ export const locationPages = [
     breadcrumbLabel: 'Panvel',
     title: 'Real Estate Agent in Panvel | New Panvel, Kharghar, Kamothe, Taloja & Ulwe | Shri Sidhanath',
     metaDescription:
-      "Shri Sidhanath: MahaRERA-registered real estate agent and property consultant based in New Panvel, rated 4.8★ on Google (150 reviews). Flats, land and commercial space in New Panvel, Kharghar, Kamothe, Taloja, Ulwe and Kalamboli. Call +91 98207 59348.",
+      "Shri Sidhanath: MahaRERA-registered real estate agent and property consultant based in New Panvel, rated 4.8★ on Google (150 reviews). Flats, land and commercial space in New Panvel, Kharghar, Kamothe, Taloja, Ulwe and Kalamboli. Call +91 80655 32578.",
     kicker: 'Panvel desk',
     h1: 'Real estate agent in Panvel — New Panvel, Kharghar, Kamothe, Taloja, Ulwe & Kalamboli',
     lede:
@@ -411,7 +411,7 @@ export const locationPages = [
     faqs: [
       {
         q: 'Who is a reliable real estate agent in Panvel?',
-        a: 'Shri Sidhanath Constructions & Estate Consultant is a MahaRERA-registered (A52000004595) real estate agent based in New Panvel, rated 4.8 on Google from 150 reviews, covering New Panvel, Old Panvel, Kharghar, Kamothe, Kalamboli, Taloja and Ulwe. Call or WhatsApp +91 98207 59348.',
+        a: 'Shri Sidhanath Constructions & Estate Consultant is a MahaRERA-registered (A52000004595) real estate agent based in New Panvel, rated 4.8 on Google from 150 reviews, covering New Panvel, Old Panvel, Kharghar, Kamothe, Kalamboli, Taloja and Ulwe. Call or WhatsApp +91 80655 32578.',
       },
       {
         q: 'Which parts of Panvel does Shri Sidhanath cover?',
@@ -431,7 +431,7 @@ export const locationPages = [
       },
       {
         q: 'How do I book a site visit in Panvel?',
-        a: 'Call or WhatsApp +91 98207 59348, or visit the office at Plot 18, Sector 7, New Panvel West (open 9:00 to 22:00, daily) and a visit will be arranged at a time that suits you.',
+        a: 'Call or WhatsApp +91 80655 32578, or visit the office at Plot 18, Sector 7, New Panvel West (open 9:00 to 22:00, daily) and a visit will be arranged at a time that suits you.',
       },
     ],
   },
@@ -443,7 +443,7 @@ export const locationPages = [
     breadcrumbLabel: 'Raigad',
     title: 'Real Estate Agent in Raigad District | Khopoli, Karjat, Pen & Alibaug | Shri Sidhanath',
     metaDescription:
-      "Shri Sidhanath: MahaRERA-registered real estate agent (A52000004595) for land, plots and property across Raigad district — Khopoli, Karjat, and the wider Pen–Alibaug corridor. Rated 4.8★ on Google. Call +91 98207 59348.",
+      "Shri Sidhanath: MahaRERA-registered real estate agent (A52000004595) for land, plots and property across Raigad district — Khopoli, Karjat, and the wider Pen–Alibaug corridor. Rated 4.8★ on Google. Call +91 80655 32578.",
     kicker: 'Raigad district',
     h1: 'Real estate agent in Raigad district — Khopoli, Karjat and the Pen–Alibaug corridor',
     lede:
@@ -489,7 +489,7 @@ export const locationPages = [
       },
       {
         q: 'Is Khopoli a good place to invest in a plot?',
-        a: 'Khopoli is one of the desk\'s core areas in Raigad district for plotted development, including branded projects. Whether it suits a specific budget, timeline and use case (residence, weekend home or investment) depends on the individual parcel — call +91 98207 59348 to discuss a shortlist.',
+        a: 'Khopoli is one of the desk\'s core areas in Raigad district for plotted development, including branded projects. Whether it suits a specific budget, timeline and use case (residence, weekend home or investment) depends on the individual parcel — call +91 80655 32578 to discuss a shortlist.',
       },
       {
         q: 'Does Shri Sidhanath cover Alibaug or Pen?',
@@ -497,7 +497,7 @@ export const locationPages = [
       },
       {
         q: 'How do I contact a real estate agent for Raigad district property?',
-        a: 'Call or WhatsApp +91 98207 59348. The desk is based in New Panvel (Plot 18, Sector 7, New Panvel West), open 9:00 to 22:00 daily, and is MahaRERA-registered under A52000004595.',
+        a: 'Call or WhatsApp +91 80655 32578. The desk is based in New Panvel (Plot 18, Sector 7, New Panvel West), open 9:00 to 22:00 daily, and is MahaRERA-registered under A52000004595.',
       },
     ],
   },
@@ -509,7 +509,7 @@ export const locationPages = [
     breadcrumbLabel: 'Navi Mumbai',
     title: 'Real Estate Agent in Navi Mumbai | Vashi, Nerul, Kharghar & Belapur | Shri Sidhanath',
     metaDescription:
-      "Shri Sidhanath: MahaRERA-registered real estate agent and property consultant covering Navi Mumbai — Vashi, Nerul, Kharghar, Belapur and the Panvel node. Rated 4.8★ on Google (150 reviews). Call +91 98207 59348.",
+      "Shri Sidhanath: MahaRERA-registered real estate agent and property consultant covering Navi Mumbai — Vashi, Nerul, Kharghar, Belapur and the Panvel node. Rated 4.8★ on Google (150 reviews). Call +91 80655 32578.",
     kicker: 'Navi Mumbai',
     h1: 'Real estate agent in Navi Mumbai — Vashi, Nerul, Kharghar & Belapur',
     lede:
@@ -555,7 +555,7 @@ export const locationPages = [
       },
       {
         q: 'Can Shri Sidhanath help with a flat in Vashi or Nerul?',
-        a: 'Yes, on an advisory basis — call +91 98207 59348 with the budget, configuration and timeline and the desk will work the requirement, drawing on the same documentation, valuation and registration process used across its Panvel-node transactions.',
+        a: 'Yes, on an advisory basis — call +91 80655 32578 with the budget, configuration and timeline and the desk will work the requirement, drawing on the same documentation, valuation and registration process used across its Panvel-node transactions.',
       },
       {
         q: 'Is Shri Sidhanath MahaRERA registered for work across Navi Mumbai?',
@@ -563,7 +563,7 @@ export const locationPages = [
       },
       {
         q: 'How do I contact Shri Sidhanath about a Navi Mumbai property?',
-        a: 'Call or WhatsApp +91 98207 59348, email, or visit the office at Plot 18, Sector 7, New Panvel West, open 9:00 to 22:00 daily.',
+        a: 'Call or WhatsApp +91 80655 32578, email, or visit the office at Plot 18, Sector 7, New Panvel West, open 9:00 to 22:00 daily.',
       },
     ],
   },

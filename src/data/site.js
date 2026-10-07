@@ -11,10 +11,10 @@ export const site = {
   reraAuthority: 'MahaRERA',
   headquarters: 'New Panvel, Navi Mumbai',
 
-  phone: '9820759348',
-  phoneIntl: '+919820759348',
-  phoneDisplay: '+91 98207 59348',
-  whatsapp: 'https://wa.me/919820759348',
+  phone: '8065532578',
+  phoneIntl: '+918065532578',
+  phoneDisplay: '+91 80655 32578',
+  whatsapp: 'https://wa.me/918065532578',
 
   emails: [
     'ravisargar@gmail.com',

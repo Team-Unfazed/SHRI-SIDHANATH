@@ -241,7 +241,7 @@ export default function EnquiryModal() {
   const waMessage = encodeURIComponent(
     `Hello Shri Sidhanath Advisory (Ref: ${refId || 'PANVEL-DIRECT'}),\n\nI submitted an enquiry:\n• Name: ${name}\n• Contact: +91 ${phone}\n• Looking to: ${intent}\n• Typology: ${selectedConfig}\n• Details: ${budgetNote || 'Standard consultation requested'}\n\nPlease share verified inventory.`
   );
-  const whatsappUrl = `https://wa.me/919820759348?text=${waMessage}`;
+  const whatsappUrl = `${site.whatsapp}?text=${waMessage}`;
 
   return (
     <>
