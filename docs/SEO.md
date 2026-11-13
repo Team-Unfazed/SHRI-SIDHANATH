@@ -15,7 +15,7 @@ same way it was fixed on 2026-10-06.
 - **Title and description** (`index.html`) lead with those phrases and back
   "top-rated" with the visible 4.8 Google rating. `projects.html` targets
   "new projects / flats for sale in Panvel, Kharghar, Navi Mumbai".
-- **Three location landing pages**, added 2026-10-06, one per priority area,
+- **Location landing pages** (Panvel, Raigad, Navi Mumbai added 2026-10-06; **Kharghar added 2026-11-13** — `real-estate-agent-kharghar.html`, targeting "real estate agent in Kharghar", 590/mo KD 0 in OpenSEO's Sep 2026 India data), one per priority area,
   linked from the homepage Locations cards and the footer (not the primary
   nav — reached by search, AI answers and those internal links):
   - `real-estate-agent-panvel.html` — New Panvel, Old Panvel, Kharghar,

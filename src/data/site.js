@@ -35,11 +35,11 @@ export const site = {
   // Verified live on the client's Google Business Profile via OpenSEO,
   // 2026-10-06 (re-check of the 2026-09-12 figures in
   // docs/RESEARCH-GOOGLE-FACEBOOK.md — rating unchanged, review count moved
-  // 145 -> 150). These are the only rating, review-count and opening-hours
+  // 145 -> 150 -> 149 on 2026-11-11). These are the only rating, review-count and opening-hours
   // figures on the site, and they are not rounded or restated.
   google: {
     rating: '4.8',
-    reviews: 150,
+    reviews: 149,
     opens: '09:00',
     closes: '22:00',
     hoursLabel: '9:00 to 22:00, daily',

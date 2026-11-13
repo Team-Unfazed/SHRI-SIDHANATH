@@ -314,13 +314,13 @@ export const locationPages = [
     breadcrumbLabel: 'Panvel',
     title: 'Real Estate Agent in Panvel | New Panvel, Kharghar, Kamothe, Taloja & Ulwe | Shri Sidhanath',
     metaDescription:
-      "Shri Sidhanath: MahaRERA-registered real estate agent and property consultant based in New Panvel, rated 4.8★ on Google (150 reviews). Flats, land and commercial space in New Panvel, Kharghar, Kamothe, Taloja, Ulwe and Kalamboli. Call +91 80655 32578.",
+      "Shri Sidhanath: MahaRERA-registered real estate agent and property consultant based in New Panvel, rated 4.8★ on Google (149 reviews). Flats, land and commercial space in New Panvel, Kharghar, Kamothe, Taloja, Ulwe and Kalamboli. Call +91 80655 32578.",
     kicker: 'Panvel desk',
     h1: 'Real estate agent in Panvel — New Panvel, Kharghar, Kamothe, Taloja, Ulwe & Kalamboli',
     lede:
       'The practice is based in New Panvel and the Panvel node is where its knowledge runs deepest: six micro-markets, one desk, one MahaRERA registration.',
     intro: [
-      "Shri Sidhanath Constructions & Estate Consultant is headquartered on Plot 18, Sector 7, New Panvel West — a MahaRERA-registered (A52000004595) real estate agency and property consultant rated 4.8 on Google from 150 reviews. Panvel is not one market from this desk's side of the table; it is six, and each one gets treated differently.",
+      "Shri Sidhanath Constructions & Estate Consultant is headquartered on Plot 18, Sector 7, New Panvel West — a MahaRERA-registered (A52000004595) real estate agency and property consultant rated 4.8 on Google from 149 reviews. Panvel is not one market from this desk's side of the table; it is six, and each one gets treated differently.",
       "Buying, selling, resale, renting and property management are handled across all six, alongside CIDCO resale flats, flat registration, stamp duty coordination and OC (occupancy certificate) checks on older buildings before they are recommended to anyone.",
     ],
     heroImage: '/images/locations/new-panvel-office-1200.webp',
@@ -367,7 +367,7 @@ export const locationPages = [
     faqs: [
       {
         q: 'Who is a reliable real estate agent in Panvel?',
-        a: 'Shri Sidhanath Constructions & Estate Consultant is a MahaRERA-registered (A52000004595) real estate agent based in New Panvel, rated 4.8 on Google from 150 reviews, covering New Panvel, Old Panvel, Kharghar, Kamothe, Kalamboli, Taloja and Ulwe. Call or WhatsApp +91 80655 32578.',
+        a: 'Shri Sidhanath Constructions & Estate Consultant is a MahaRERA-registered (A52000004595) real estate agent based in New Panvel, rated 4.8 on Google from 149 reviews, covering New Panvel, Old Panvel, Kharghar, Kamothe, Kalamboli, Taloja and Ulwe. Call or WhatsApp +91 80655 32578.',
       },
       {
         q: 'Which parts of Panvel does Shri Sidhanath cover?',
@@ -465,7 +465,7 @@ export const locationPages = [
     breadcrumbLabel: 'Navi Mumbai',
     title: 'Real Estate Agent in Navi Mumbai | Vashi, Nerul, Kharghar & Belapur | Shri Sidhanath',
     metaDescription:
-      "Shri Sidhanath: MahaRERA-registered real estate agent and property consultant covering Navi Mumbai — Vashi, Nerul, Kharghar, Belapur and the Panvel node. Rated 4.8★ on Google (150 reviews). Call +91 80655 32578.",
+      "Shri Sidhanath: MahaRERA-registered real estate agent and property consultant covering Navi Mumbai — Vashi, Nerul, Kharghar, Belapur and the Panvel node. Rated 4.8★ on Google (149 reviews). Call +91 80655 32578.",
     kicker: 'Navi Mumbai',
     h1: 'Real estate agent in Navi Mumbai — Vashi, Nerul, Kharghar & Belapur',
     lede:
@@ -520,6 +520,72 @@ export const locationPages = [
       {
         q: 'How do I contact Shri Sidhanath about a Navi Mumbai property?',
         a: 'Call or WhatsApp +91 80655 32578, email, or visit the office at Plot 18, Sector 7, New Panvel West, open 9:00 to 22:00 daily.',
+      },
+    ],
+  },
+  {
+    id: 'kharghar',
+    slug: 'real-estate-agent-kharghar.html',
+    path: '/real-estate-agent-kharghar.html',
+    navLabel: 'Kharghar',
+    breadcrumbLabel: 'Kharghar',
+    title: 'Real Estate Agent in Kharghar | Flats for Sale & Rent | Shri Sidhanath',
+    metaDescription:
+      "Shri Sidhanath: MahaRERA-registered real estate agent for Kharghar — resale and rental flats, new projects such as Sai World Empire, plus registration and stamp duty help. Rated 4.8★ on Google (149 reviews). Call +91 80655 32578.",
+    kicker: 'Kharghar',
+    h1: 'Real estate agent in Kharghar — flats to buy, resale and rent',
+    lede:
+      "Kharghar sits inside the Panvel node the practice knows best: the same MahaRERA-registered desk that works New Panvel and Kamothe handles Kharghar buying, resale and rental requirements.",
+    intro: [
+      "Shri Sidhanath Constructions & Estate Consultant is a MahaRERA-registered (A52000004595) real estate agency and property consultant based in New Panvel. Kharghar is part of its core coverage alongside Kamothe, Kalamboli, Taloja and Ulwe, and the desk takes buying, selling, resale and rental requirements there.",
+      "The practice markets Kharghar projects including Sai World Empire (Sector 36, opposite CIDCO Valleyshilp), Symphony and Adhiraj. For resale and rental flats the desk checks the paperwork that matters before a flat is shown as an option — occupancy certificate (OC) status for older buildings, society NOC, outstanding dues and clear title — and coordinates flat registration and stamp duty once a deal is agreed.",
+    ],
+    heroImage: '/images/locations/new-panvel-office-1200.webp',
+    heroImageSmall: '/images/locations/new-panvel-office-800.webp',
+    heroImageAlt: 'The Shri Sidhanath shopfront in New Panvel at night, MahaRERA seal above the door.',
+    serviceAreas: ['Kharghar', 'Navi Mumbai', 'Kamothe', 'New Panvel', 'Panvel'],
+    submarkets: [
+      {
+        name: 'Resale flats in Kharghar',
+        note:
+          'CIDCO-origin buildings and newer towers side by side. Each resale option is checked for OC status, society NOC, dues and title before it is recommended.',
+      },
+      {
+        name: 'Rental flats in Kharghar',
+        note:
+          'Rental requirements for tenants and landlords, agreed with the brokerage fixed up front rather than discovered at the end.',
+      },
+      {
+        name: 'New projects in Kharghar',
+        note:
+          'Projects the desk markets here include Sai World Empire (Sector 36, opposite CIDCO Valleyshilp), Symphony and Adhiraj. See the projects page for the current list.',
+      },
+      {
+        name: 'Beyond Kharghar',
+        note:
+          'Buyers comparing Kharghar with its neighbours can shortlist across Kamothe, New Panvel and Ulwe with the same desk and the same phone number.',
+      },
+    ],
+    faqs: [
+      {
+        q: 'Who is a reliable real estate agent in Kharghar?',
+        a: 'Shri Sidhanath Constructions & Estate Consultant is a MahaRERA-registered (A52000004595) real estate agent based in New Panvel, rated 4.8 on Google from 149 reviews. Kharghar is part of its core coverage for buying, selling, resale and rentals.',
+      },
+      {
+        q: 'Does Shri Sidhanath have flats for sale in Kharghar?',
+        a: 'The desk markets Kharghar projects including Sai World Empire (Sector 36), Symphony and Adhiraj, and also handles resale flats. Call +91 80655 32578 with your budget and configuration and the desk will shortlist what is currently available.',
+      },
+      {
+        q: 'Can you help me rent a flat in Kharghar?',
+        a: 'Yes. The desk takes rental requirements from both tenants and landlords in Kharghar. Brokerage is agreed up front before any work starts.',
+      },
+      {
+        q: 'What checks are done on a resale flat in Kharghar?',
+        a: 'Occupancy certificate (OC) status for the building, society NOC, outstanding dues and clear title, before the flat is shown as an option. Flat registration and stamp duty payment are coordinated once a deal is agreed.',
+      },
+      {
+        q: 'How do I contact Shri Sidhanath about a Kharghar property?',
+        a: 'Call or WhatsApp +91 80655 32578, or visit the office at Plot 18, Sector 7, New Panvel West, open 9:00 to 22:00 daily.',
       },
     ],
   },
