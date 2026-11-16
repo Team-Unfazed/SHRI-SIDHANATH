@@ -39,13 +39,18 @@ function homeFallback() {
     )
     .join('');
   const faq = faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('');
+  // Same area-guide links the footer renders (src/sections/Footer.jsx), so
+  // every location page, Kharghar included, is one link from the homepage HTML.
+  const guides = `<p>Area guides: ${locationPages
+    .map((o) => `<a href="${esc(o.path)}">Real estate agent in ${esc(o.navLabel)}</a>`)
+    .join(' &middot; ')}</p>`;
   const proj = projects
     .map((p) => `<li>${esc(p.name)}, ${esc(p.area)}${p.config ? ` (${esc(p.config)})` : ''}</li>`)
     .join('');
 
   return `
         <section><h2>Real estate services in Panvel and Navi Mumbai</h2><ul>${svc}</ul></section>
-        <section><h2>Areas we serve</h2><ul>${loc}</ul></section>
+        <section><h2>Areas we serve</h2><ul>${loc}</ul>${guides}</section>
         <section><h2>Projects we market</h2><ul>${proj}</ul><p><a href="/projects.html">See all projects in Panvel and Navi Mumbai</a></p></section>
         <section><h2>Frequently asked questions</h2>${faq}</section>`;
 }
@@ -110,6 +115,13 @@ function locationFallback(lp) {
     .join('');
   const faq = lp.faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('');
   const intro = lp.intro.map((p) => `<p>${esc(p)}</p>`).join('');
+  // Mirrors the "Also serving" links LocationPage.jsx renders, so a crawler
+  // reading the HTML before React mounts can reach every sibling page directly
+  // instead of only via the homepage.
+  const others = locationPages
+    .filter((o) => o.id !== lp.id)
+    .map((o) => `<a href="${esc(o.path)}">Real estate agent in ${esc(o.navLabel)}</a>`)
+    .join(' &middot; ');
 
   return `
       <main data-fallback>
@@ -123,15 +135,19 @@ function locationFallback(lp) {
         </address>
         <section><h2>Micro-markets in ${esc(lp.navLabel)}</h2><ul>${sub}</ul></section>
         <section><h2>Frequently asked questions</h2>${faq}</section>
+        <nav aria-label="Other areas we serve"><p>Also serving: ${others}</p></nav>
         <p><a href="/">Shri Sidhanath, real estate agent in Panvel</a> &middot;
         <a href="/projects.html">All projects</a></p>
       </main>`;
 }
 
 // RealEstateAgent (scoped to this page's service areas), BreadcrumbList and
-// FAQPage JSON-LD for one location page. The rating, review count, RERA
-// number, phone and address are read from src/data/site.js, never restated by
-// hand, so they cannot drift from the homepage's figures.
+// FAQPage JSON-LD for one location page. The RERA number, phone and address
+// are read from src/data/site.js, never restated by hand, so they cannot drift
+// from the homepage's figures. No aggregateRating: the 4.8 / review count are
+// Google reviews, and Google's review-snippet rules do not allow a business to
+// mark up ratings collected on another site (or self-serving LocalBusiness
+// ratings). The rating stays as visible text on the page.
 function locationSchema(lp) {
   const url = `${ORIGIN}${lp.path}`;
   return [
@@ -153,12 +169,6 @@ function locationSchema(lp) {
       },
       areaServed: lp.serviceAreas.map((name) => ({ '@type': 'Place', name })),
       identifier: { '@type': 'PropertyValue', propertyID: 'MahaRERA', value: site.rera },
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: site.google.rating,
-        reviewCount: site.google.reviews,
-        bestRating: '5',
-      },
       sameAs: [`${ORIGIN}/`],
     }),
     jsonld({

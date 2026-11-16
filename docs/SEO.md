@@ -31,6 +31,16 @@ same way it was fixed on 2026-10-06.
   page, an `ItemList` of projects. Each location page additionally gets its
   own area-scoped `RealEstateAgent`, a `BreadcrumbList` and a `FAQPage`
   (see `scripts/seo-fallback.js`'s `locationSchema`).
+- **Internal links (2026-11-16):** Search Console showed the Panvel and Navi
+  Mumbai pages as "Discovered - currently not indexed" (Google knew the URLs
+  but had never crawled them) while Raigad and Kharghar were indexed. Every
+  location page's crawlable HTML now links to all its sibling location pages
+  ("Also serving", mirroring `LocationPage.jsx`), and the homepage HTML carries
+  an "Area guides" line linking all four (mirroring the footer). The
+  `aggregateRating` JSON-LD was removed from the homepage and location pages:
+  the 4.8 / review count are Google reviews, and Google's review-snippet rules
+  do not allow marking up ratings collected on another site (and do not show
+  self-serving LocalBusiness stars anyway). The rating stays visible as text.
 - **Crawlable fallback:** `scripts/seo-fallback.js` writes services, areas,
   projects and FAQs into the HTML at build time from `src/data`, so crawlers
   that do not run JavaScript read the same content visitors see. Edit the
