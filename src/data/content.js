@@ -312,7 +312,7 @@ export const locationPages = [
     path: '/real-estate-agent-panvel.html',
     navLabel: 'Panvel',
     breadcrumbLabel: 'Panvel',
-    title: 'Real Estate Agent in Panvel | New Panvel, Kharghar, Kamothe, Taloja & Ulwe | Shri Sidhanath',
+    title: 'Real Estate Agent & Property Broker in Panvel | Shri Sidhanath',
     metaDescription:
       "Shri Sidhanath: MahaRERA-registered real estate agent and property consultant based in New Panvel, rated 4.8★ on Google (149 reviews). Flats, land and commercial space in New Panvel, Kharghar, Kamothe, Taloja, Ulwe and Kalamboli. Call +91 80655 32578.",
     kicker: 'Panvel desk',
