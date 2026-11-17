@@ -41,6 +41,17 @@ same way it was fixed on 2026-10-06.
   the 4.8 / review count are Google reviews, and Google's review-snippet rules
   do not allow marking up ratings collected on another site (and do not show
   self-serving LocalBusiness stars anyway). The rating stays visible as text.
+- **Homepage title (2026-11-17):** "Real Estate Agents & Property Brokers in
+  Panvel | Shri Sidhanath", description opening with the phone number. Search
+  Console showed the plural and "contact number" phrasings ("real estate
+  agents panvel", "panvel real estate agents contact number", "broker panvel")
+  earning the homepage's impressions with zero clicks. The Panvel page keeps
+  the singular "Real Estate Agent & Property Broker in Panvel".
+- **IndexNow (2026-11-17):** `public/aed531e9c00e40249eb56514efd4fa2d.txt` is
+  the IndexNow key (created through OpenSEO). It lets us tell Bing, which
+  ChatGPT search reads, that a page changed. Do not delete or rename it; after
+  a deploy, submit changed URLs through OpenSEO's `submit_indexnow_urls`.
+  Google does not use IndexNow.
 - **Crawlable fallback:** `scripts/seo-fallback.js` writes services, areas,
   projects and FAQs into the HTML at build time from `src/data`, so crawlers
   that do not run JavaScript read the same content visitors see. Edit the
