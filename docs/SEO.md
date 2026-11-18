@@ -22,7 +22,7 @@ same way it was fixed on 2026-10-06.
     Kamothe, Kalamboli, Taloja, Ulwe.
   - `real-estate-agent-raigad.html` — Khopoli, Karjat, the Pen–Alibaug
     corridor; land and plotted development.
-  - `real-estate-agent-navi-mumbai.html` — Vashi, Nerul, Kharghar, Belapur.
+  - `real-estate-agent-navi-mumbai.html` — Kharghar, Ulwe and the Panvel node, plus Vashi, Nerul, Belapur.
   Each page's content lives in `src/data/content.js`'s `locationPages` array
   (edit there, not the JSX or the fallback); layout is the shared
   `src/pages/LocationPage.jsx`.
@@ -52,6 +52,16 @@ same way it was fixed on 2026-10-06.
   ChatGPT search reads, that a page changed. Do not delete or rename it; after
   a deploy, submit changed URLs through OpenSEO's `submit_indexnow_urls`.
   Google does not use IndexNow.
+- **Navi Mumbai page + "property dealer" (2026-11-18):** the Navi Mumbai page
+  title was 86 characters (cut off in Google) and led with Vashi, Nerul and
+  Belapur, the nodes covered only on an advisory basis. New title "Real Estate
+  Agent & Property Consultant in Navi Mumbai | Shri Sidhanath"; H1 and
+  description now lead with Kharghar, Kamothe, Ulwe and the Panvel node where
+  coverage is deepest. "Property dealer" (a tracked Panvel / Navi Mumbai search
+  phrase, position ~19 for "property dealers in panvel") was only in an HTML
+  comment; it now appears in the Panvel and Navi Mumbai descriptions and the
+  Panvel intro. Both descriptions put the phone number before Google's snippet
+  cut-off. llms.txt review count synced to 149 (it still said 150).
 - **Crawlable fallback:** `scripts/seo-fallback.js` writes services, areas,
   projects and FAQs into the HTML at build time from `src/data`, so crawlers
   that do not run JavaScript read the same content visitors see. Edit the

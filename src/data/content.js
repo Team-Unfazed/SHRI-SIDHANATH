@@ -314,13 +314,13 @@ export const locationPages = [
     breadcrumbLabel: 'Panvel',
     title: 'Real Estate Agent & Property Broker in Panvel | Shri Sidhanath',
     metaDescription:
-      "Shri Sidhanath: MahaRERA-registered real estate agent and property consultant based in New Panvel, rated 4.8★ on Google (149 reviews). Flats, land and commercial space in New Panvel, Kharghar, Kamothe, Taloja, Ulwe and Kalamboli. Call +91 80655 32578.",
+      "Real estate agent & property dealer in New Panvel — call +91 80655 32578. MahaRERA-registered, 4.8★ on Google (149 reviews). Flats, land and shops in Panvel, Kharghar, Kamothe, Taloja, Ulwe & Kalamboli.",
     kicker: 'Panvel desk',
     h1: 'Real estate agent in Panvel — New Panvel, Kharghar, Kamothe, Taloja, Ulwe & Kalamboli',
     lede:
       'The practice is based in New Panvel and the Panvel node is where its knowledge runs deepest: six micro-markets, one desk, one MahaRERA registration.',
     intro: [
-      "Shri Sidhanath Constructions & Estate Consultant is headquartered on Plot 18, Sector 7, New Panvel West — a MahaRERA-registered (A52000004595) real estate agency and property consultant rated 4.8 on Google from 149 reviews. Panvel is not one market from this desk's side of the table; it is six, and each one gets treated differently.",
+      "Shri Sidhanath Constructions & Estate Consultant is headquartered on Plot 18, Sector 7, New Panvel West — a MahaRERA-registered (A52000004595) real estate agency, property dealer and consultant rated 4.8 on Google from 149 reviews. Panvel is not one market from this desk's side of the table; it is six, and each one gets treated differently.",
       "Buying, selling, resale, renting and property management are handled across all six, alongside CIDCO resale flats, flat registration, stamp duty coordination and OC (occupancy certificate) checks on older buildings before they are recommended to anyone.",
     ],
     heroImage: '/images/locations/new-panvel-office-1200.webp',
@@ -463,11 +463,11 @@ export const locationPages = [
     path: '/real-estate-agent-navi-mumbai.html',
     navLabel: 'Navi Mumbai',
     breadcrumbLabel: 'Navi Mumbai',
-    title: 'Real Estate Agent in Navi Mumbai | Vashi, Nerul, Kharghar & Belapur | Shri Sidhanath',
+    title: 'Real Estate Agent & Property Consultant in Navi Mumbai | Shri Sidhanath',
     metaDescription:
-      "Shri Sidhanath: MahaRERA-registered real estate agent and property consultant covering Navi Mumbai — Vashi, Nerul, Kharghar, Belapur and the Panvel node. Rated 4.8★ on Google (149 reviews). Call +91 80655 32578.",
+      "Real estate agent, property consultant & dealer for Navi Mumbai — call +91 80655 32578. MahaRERA-registered, 4.8★ on Google (149 reviews). Kharghar, Kamothe, Ulwe and the Panvel node, plus Vashi, Nerul & Belapur.",
     kicker: 'Navi Mumbai',
-    h1: 'Real estate agent in Navi Mumbai — Vashi, Nerul, Kharghar & Belapur',
+    h1: 'Real estate agent & property consultant in Navi Mumbai — Kharghar, Ulwe, Vashi, Nerul & Belapur',
     lede:
       'From the Panvel node outward: the same MahaRERA-registered desk extends its advisory to Navi Mumbai\'s established nodes for buyers who want one point of contact across the city.',
     intro: [
