@@ -314,7 +314,7 @@ export const locationPages = [
     breadcrumbLabel: 'Panvel',
     title: 'Real Estate Agent & Property Broker in Panvel | Shri Sidhanath',
     metaDescription:
-      "Real estate agent & property dealer in New Panvel — call +91 80655 32578. MahaRERA-registered, 4.8★ on Google (149 reviews). Flats, land and shops in Panvel, Kharghar, Kamothe, Taloja, Ulwe & Kalamboli.",
+      "Real estate agent & property dealer in New Panvel — call +91 80655 32578. MahaRERA-registered, 4.8★ on Google (149 reviews). Buy, sell or rent flats, land and shops in Panvel, Kharghar, Kamothe, Taloja & Ulwe.",
     kicker: 'Panvel desk',
     h1: 'Real estate agent in Panvel — New Panvel, Kharghar, Kamothe, Taloja, Ulwe & Kalamboli',
     lede:
@@ -380,6 +380,10 @@ export const locationPages = [
       {
         q: 'Is Ulwe a good place to buy near Navi Mumbai International Airport?',
         a: 'Ulwe and neighbouring Dronagiri are the CIDCO nodes closest to Navi Mumbai International Airport (NMIA), which is why they are currently drawing the most new-project enquiries the desk sees. Whether it suits a specific budget and timeline is a conversation, not a blanket yes.',
+      },
+      {
+        q: 'Is there a broker in Panvel for rent — flats, rooms or shops?',
+        a: 'Yes. Shri Sidhanath takes rental requirements from tenants and landlords across New Panvel, Old Panvel, Kharghar, Kamothe, Kalamboli, Taloja and Ulwe — flats, row houses, shops and offices — with the brokerage agreed up front before any work starts. In Maharashtra a residential rental is normally signed as a leave and licence agreement, which has to be registered, and landlords are expected to share tenant details with the local police for verification; plan for both before the move-in date. Call or WhatsApp +91 80655 32578 with your budget, area and move-in date.',
       },
       {
         q: 'Does Shri Sidhanath handle commercial property in Panvel, like shops or godowns?',
