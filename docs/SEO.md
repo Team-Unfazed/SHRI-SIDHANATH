@@ -62,6 +62,15 @@ same way it was fixed on 2026-10-06.
   comment; it now appears in the Panvel and Navi Mumbai descriptions and the
   Panvel intro. Both descriptions put the phone number before Google's snippet
   cut-off. llms.txt review count synced to 149 (it still said 150).
+- **New Panvel West / Khanda Colony (2026-11-20):** Search Console showed the
+  homepage for "property in khanda colony" (pos 5.5), "new panvel real estate
+  agents" (6.6) and "real estate agents in new panvel" (11.7), but no page
+  named Khanda Colony. The homepage New Panvel card now says "New Panvel
+  West"; the Panvel page's New Panvel submarket covers East and West,
+  including Khanda Colony.
+- **Deployment (2026-11-20):** the live site deploys from
+  `Team-Unfazed/SHRI-SIDHANATH` `main` (Vercel repo connection switched by the
+  owner on 2026-11-20). A push to `main` is what triggers a deploy.
 - **Crawlable fallback:** `scripts/seo-fallback.js` writes services, areas,
   projects and FAQs into the HTML at build time from `src/data`, so crawlers
   that do not run JavaScript read the same content visitors see. Edit the
