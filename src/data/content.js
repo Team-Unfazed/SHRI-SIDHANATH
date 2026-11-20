@@ -70,7 +70,7 @@ export const locations = [
     licence: 'first-party',
     name: 'New Panvel',
     role: 'Headquarters',
-    note: 'Our office is on Plot 18, Sector 7. Everything we know about this market, we learned on foot.',
+    note: 'Our office is on Plot 18, Sector 7, New Panvel West. Everything we know about this market, we learned on foot.',
     primary: true,
     pagePath: '/real-estate-agent-panvel.html',
   },
@@ -331,7 +331,7 @@ export const locationPages = [
       {
         name: 'New Panvel',
         note:
-          'Headquarters. Office 1, Siddhivinayak Krupa CHS Ltd, Plot 18, Sector 7, New Panvel West — the desk\'s own neighbourhood, within walking distance of Panvel railway station.',
+          'Headquarters. Office 1, Siddhivinayak Krupa CHS Ltd, Plot 18, Sector 7, New Panvel West — the desk\'s own neighbourhood, within walking distance of Panvel railway station. Flats, shops and rentals on both sides of New Panvel, East and West, including Khanda Colony.',
       },
       {
         name: 'Old Panvel',
