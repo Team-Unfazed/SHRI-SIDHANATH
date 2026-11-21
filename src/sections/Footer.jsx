@@ -14,6 +14,7 @@ const MAIN = [
   { label: 'Agent in Raigad', href: '/real-estate-agent-raigad.html' },
   { label: 'Agent in Navi Mumbai', href: '/real-estate-agent-navi-mumbai.html' },
   { label: 'Agent in Kharghar', href: '/real-estate-agent-kharghar.html' },
+  { label: 'Agent in Kamothe', href: '/real-estate-agent-kamothe.html' },
 ];
 
 const PRACTICE = [

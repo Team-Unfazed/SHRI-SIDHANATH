@@ -593,4 +593,74 @@ export const locationPages = [
       },
     ],
   },
+  {
+    id: 'kamothe',
+    slug: 'real-estate-agent-kamothe.html',
+    path: '/real-estate-agent-kamothe.html',
+    navLabel: 'Kamothe',
+    breadcrumbLabel: 'Kamothe',
+    title: 'Real Estate Agent & Broker in Kamothe | Shri Sidhanath',
+    metaDescription:
+      "Real estate agent & property broker for Kamothe, Navi Mumbai — call +91 80655 32578. MahaRERA-registered, 4.8★ on Google (149 reviews). Resale flats, rentals and shops, from the New Panvel desk next door.",
+    kicker: 'Kamothe',
+    h1: 'Real estate agent in Kamothe — resale flats, rentals and shops',
+    lede:
+      'Kamothe sits between Kharghar and Kalamboli, a short drive from the New Panvel office: resale and rental flats in its numbered sectors, and shops along its main roads.',
+    intro: [
+      "Shri Sidhanath Constructions & Estate Consultant is a MahaRERA-registered (A52000004595) real estate agency, property broker and consultant based in New Panvel, rated 4.8 on Google from 149 reviews. Kamothe is part of its core coverage alongside Kharghar, Kalamboli, Taloja and Ulwe, and most of the Kamothe work is resale and rental: buyers and tenants looking for a flat, owners looking to sell or let one, and shopkeepers looking for frontage.",
+      "Kamothe is a CIDCO-planned node laid out in numbered sectors along the Sion–Panvel Highway, so most enquiries start with a sector and a budget rather than a project name. Before a resale flat is shown as an option the desk checks the paperwork that matters: occupancy certificate (OC) status for the building, the society's NOC and share certificate, outstanding dues and clear title. Flat registration and stamp duty are coordinated once a deal is agreed.",
+    ],
+    heroImage: '/images/locations/new-panvel-office-1200.webp',
+    heroImageSmall: '/images/locations/new-panvel-office-800.webp',
+    heroImageAlt: 'The Shri Sidhanath shopfront in New Panvel at night, MahaRERA seal above the door.',
+    serviceAreas: ['Kamothe', 'Navi Mumbai', 'Kharghar', 'Kalamboli', 'New Panvel', 'Panvel'],
+    submarkets: [
+      {
+        name: 'Resale flats in Kamothe',
+        note:
+          '1, 2 and 3 BHK flats in CIDCO-origin society buildings and newer towers. Each option is checked for OC status, society NOC, dues and title before it is recommended.',
+      },
+      {
+        name: 'Flats and rooms on rent in Kamothe',
+        note:
+          'Rental requirements from tenants and landlords, with the brokerage agreed up front. Commuters usually ask about the Harbour line first: Mansarovar and Khandeshwar are the nearby stations.',
+      },
+      {
+        name: 'Shops and commercial frontage',
+        note:
+          "Shops and small commercial units on Kamothe's main roads and its retail strip, to buy or to rent, alongside the residential work.",
+      },
+      {
+        name: 'Kamothe and its neighbours',
+        note:
+          'Buyers comparing Kamothe with Kharghar, Kalamboli or New Panvel can shortlist across all four with the same desk and the same phone number.',
+      },
+    ],
+    faqs: [
+      {
+        q: 'Who is a reliable real estate agent in Kamothe?',
+        a: 'Shri Sidhanath Constructions & Estate Consultant is a MahaRERA-registered (A52000004595) real estate agent and property broker based in New Panvel, rated 4.8 on Google from 149 reviews. Kamothe is part of its core coverage for buying, selling, resale and rentals. Call or WhatsApp +91 80655 32578.',
+      },
+      {
+        q: 'What is the contact number for a property broker in Kamothe?',
+        a: 'Call or WhatsApp Shri Sidhanath on +91 80655 32578, open 9:00 to 22:00 daily. Share the sector, budget and configuration you want and the desk will shortlist what is currently available in Kamothe.',
+      },
+      {
+        q: 'Can you help me rent a flat or a room in Kamothe?',
+        a: 'Yes. The desk takes rental requirements from tenants and landlords in Kamothe, with the brokerage agreed before any work starts. In Maharashtra a residential rental is normally signed as a leave and licence agreement, which has to be registered, and landlords are expected to share tenant details with the local police for verification; plan for both before the move-in date.',
+      },
+      {
+        q: 'What checks are done on a resale flat in Kamothe?',
+        a: 'Occupancy certificate (OC) status for the building, the society NOC and share certificate, outstanding maintenance and other dues, and clear title, before the flat is shown as an option. Flat registration and stamp duty payment are coordinated once a deal is agreed.',
+      },
+      {
+        q: 'Is Kamothe or Kharghar better for buying a flat?',
+        a: 'It depends on budget and commute. Kamothe and Kharghar are neighbouring nodes, and buyers often compare the two on price, building age and distance to the station. The desk covers both, so a shortlist can include options from each.',
+      },
+      {
+        q: 'Where is the Shri Sidhanath office for Kamothe enquiries?',
+        a: 'Office 1, Siddhivinayak Krupa CHS Ltd, Plot 18, Sector 7, New Panvel West, Navi Mumbai 410206, open 9:00 to 22:00 daily. Site visits in Kamothe are arranged at a time that suits you.',
+      },
+    ],
+  },
 ];

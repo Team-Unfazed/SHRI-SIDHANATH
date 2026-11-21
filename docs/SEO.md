@@ -15,7 +15,7 @@ same way it was fixed on 2026-10-06.
 - **Title and description** (`index.html`) lead with those phrases and back
   "top-rated" with the visible 4.8 Google rating. `projects.html` targets
   "new projects / flats for sale in Panvel, Kharghar, Navi Mumbai".
-- **Location landing pages** (Panvel, Raigad, Navi Mumbai added 2026-10-06; **Kharghar added 2026-11-13** — `real-estate-agent-kharghar.html`, targeting "real estate agent in Kharghar", 590/mo KD 0 in OpenSEO's Sep 2026 India data), one per priority area,
+- **Location landing pages** (Panvel, Raigad, Navi Mumbai added 2026-10-06; **Kharghar added 2026-11-13**; **Kamothe added 2026-11-21** — `real-estate-agent-kharghar.html`, targeting "real estate agent in Kharghar", 590/mo KD 0 in OpenSEO's Sep 2026 India data), one per priority area,
   linked from the homepage Locations cards and the footer (not the primary
   nav — reached by search, AI answers and those internal links):
   - `real-estate-agent-panvel.html` — New Panvel, Old Panvel, Kharghar,
@@ -68,6 +68,14 @@ same way it was fixed on 2026-10-06.
   named Khanda Colony. The homepage New Panvel card now says "New Panvel
   West"; the Panvel page's New Panvel submarket covers East and West,
   including Khanda Colony.
+- **Kamothe page (2026-11-21):** `real-estate-agent-kamothe.html`, targeting
+  "real estate agent in kamothe" (260/mo, KD 0 in OpenSEO's Sep 2026 India
+  data). Search Console (3 months) already showed the homepage for "real estate
+  agents in kamothe" (position 15.6) and "kamothe broker contact number" (33)
+  with no page about Kamothe. Content is resale, rentals and shops (the work
+  the business actually does there; no Kamothe projects are marketed). Same
+  day: Google indexed the Panvel and Navi Mumbai pages (crawled 20 Nov
+  evening, after the deploy), so all six earlier pages are now indexed.
 - **Deployment (2026-11-20):** the live site deploys from
   `Team-Unfazed/SHRI-SIDHANATH` `main` (Vercel repo connection switched by the
   owner on 2026-11-20). A push to `main` is what triggers a deploy.
