@@ -15,7 +15,7 @@ same way it was fixed on 2026-10-06.
 - **Title and description** (`index.html`) lead with those phrases and back
   "top-rated" with the visible 4.8 Google rating. `projects.html` targets
   "new projects / flats for sale in Panvel, Kharghar, Navi Mumbai".
-- **Location landing pages** (Panvel, Raigad, Navi Mumbai added 2026-10-06; **Kharghar added 2026-11-13**; **Kamothe added 2026-11-21** — `real-estate-agent-kharghar.html`, targeting "real estate agent in Kharghar", 590/mo KD 0 in OpenSEO's Sep 2026 India data), one per priority area,
+- **Location landing pages** (Panvel, Raigad, Navi Mumbai added 2026-10-06; **Kharghar added 2026-11-13**; **Kamothe added 2026-11-21**; **Kalamboli added 2026-11-22** — `real-estate-agent-kharghar.html`, targeting "real estate agent in Kharghar", 590/mo KD 0 in OpenSEO's Sep 2026 India data), one per priority area,
   linked from the homepage Locations cards and the footer (not the primary
   nav — reached by search, AI answers and those internal links):
   - `real-estate-agent-panvel.html` — New Panvel, Old Panvel, Kharghar,
@@ -76,6 +76,15 @@ same way it was fixed on 2026-10-06.
   the business actually does there; no Kamothe projects are marketed). Same
   day: Google indexed the Panvel and Navi Mumbai pages (crawled 20 Nov
   evening, after the deploy), so all six earlier pages are now indexed.
+- **Kalamboli page (2026-11-22):** `real-estate-agent-kalamboli.html`.
+  Search Console (3 months) showed the homepage for "kalamboli real estate
+  agents" (8 impressions, position 17.1; 4 impressions at 17.8 in 8-22 Nov)
+  and "real estate agents in kalamboli", with no Kalamboli page. Monthly
+  search volume could NOT be checked (OpenSEO credits exhausted) — the
+  evidence is first-party impressions only. Content is resale, rentals and
+  shops/commercial frontage (what the Panvel page already says the desk does
+  in Kalamboli); no Kalamboli projects are claimed. Built on top of the
+  unmerged Kamothe commit, so merging this branch publishes both.
 - **Deployment (2026-11-20):** the live site deploys from
   `Team-Unfazed/SHRI-SIDHANATH` `main` (Vercel repo connection switched by the
   owner on 2026-11-20). A push to `main` is what triggers a deploy.

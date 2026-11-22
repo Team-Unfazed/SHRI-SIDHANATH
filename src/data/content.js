@@ -663,4 +663,74 @@ export const locationPages = [
       },
     ],
   },
+  {
+    id: 'kalamboli',
+    slug: 'real-estate-agent-kalamboli.html',
+    path: '/real-estate-agent-kalamboli.html',
+    navLabel: 'Kalamboli',
+    breadcrumbLabel: 'Kalamboli',
+    title: 'Real Estate Agent & Broker in Kalamboli | Shri Sidhanath',
+    metaDescription:
+      'Real estate agent & property broker for Kalamboli, Navi Mumbai — call +91 80655 32578. MahaRERA-registered, 4.8★ on Google (149 reviews). Resale flats, rentals and commercial space, from the New Panvel office.',
+    kicker: 'Kalamboli',
+    h1: 'Real estate agent in Kalamboli — resale flats, rentals and commercial space',
+    lede:
+      'Kalamboli sits at the junction where the Sion–Panvel Highway meets the Mumbai–Pune Expressway, next to New Panvel: CIDCO-sector flats to buy or rent, and shops and commercial units along its busy roads.',
+    intro: [
+      "Shri Sidhanath Constructions & Estate Consultant is a MahaRERA-registered (A52000004595) real estate agency, property broker and consultant based in New Panvel, rated 4.8 on Google from 149 reviews. Kalamboli is part of its core coverage alongside Kharghar, Kamothe, Taloja and Ulwe. Most of the Kalamboli work is resale and rental — families and working tenants looking for a flat, owners looking to sell or let one — plus shops and commercial frontage, where the junction's traffic brings footfall.",
+      'Kalamboli is a CIDCO-planned node of numbered sectors, best known for its road links and for the steel market on its edge. It has no Harbour line station of its own, so tenants and buyers who commute by train usually ask first how far a flat is from Khandeshwar or Panvel station; those who drive to Mumbai or Pune ask about the Expressway. Before a resale flat is recommended, the desk checks occupancy certificate (OC) status, the society NOC and share certificate, outstanding dues and clear title, and coordinates flat registration and stamp duty once a deal is agreed.',
+    ],
+    heroImage: '/images/locations/new-panvel-office-1200.webp',
+    heroImageSmall: '/images/locations/new-panvel-office-800.webp',
+    heroImageAlt: 'The Shri Sidhanath shopfront in New Panvel at night, MahaRERA seal above the door.',
+    serviceAreas: ['Kalamboli', 'Navi Mumbai', 'New Panvel', 'Kamothe', 'Taloja', 'Panvel'],
+    submarkets: [
+      {
+        name: 'Resale flats in Kalamboli',
+        note:
+          '1, 2 and 3 BHK flats in CIDCO-origin society buildings and newer towers across its sectors, each checked for OC status, society NOC, dues and title before it is shown.',
+      },
+      {
+        name: 'Flats on rent in Kalamboli',
+        note:
+          'Rental requirements from tenants and landlords, brokerage agreed up front. A common brief: a flat that keeps the Expressway, the JNPT road and Khandeshwar or Panvel station within easy reach.',
+      },
+      {
+        name: 'Shops and commercial units',
+        note:
+          'Shops and commercial frontage on Kalamboli’s main roads, to buy or to rent. Godown enquiries along the highway corridors are taken by the same commercial desk that covers Taloja.',
+      },
+      {
+        name: 'Kalamboli and New Panvel',
+        note:
+          'The office is a short drive away in New Panvel West, so buyers weighing Kalamboli against New Panvel, Kamothe or Taloja can shortlist across all of them with one desk and one phone number.',
+      },
+    ],
+    faqs: [
+      {
+        q: 'Who is a reliable real estate agent in Kalamboli?',
+        a: 'Shri Sidhanath Constructions & Estate Consultant is a MahaRERA-registered (A52000004595) real estate agent and property broker based in New Panvel, next to Kalamboli, rated 4.8 on Google from 149 reviews. It handles buying, selling, resale and rentals in Kalamboli. Call or WhatsApp +91 80655 32578.',
+      },
+      {
+        q: 'What is the contact number for a property broker in Kalamboli?',
+        a: 'Call or WhatsApp Shri Sidhanath on +91 80655 32578, open 9:00 to 22:00 daily. Tell the desk the sector, budget and flat size you want in Kalamboli, and whether you are buying or renting, and it will shortlist what is available.',
+      },
+      {
+        q: 'Can you find me a flat on rent in Kalamboli?',
+        a: 'Yes. The desk takes rental requirements from tenants and landlords in Kalamboli, with the brokerage agreed before any work starts. A residential rental in Maharashtra is normally signed as a registered leave and licence agreement, and landlords are expected to share tenant details with the local police for verification, so allow time for both before moving in.',
+      },
+      {
+        q: 'Do you handle shops or commercial property in Kalamboli?',
+        a: 'Yes. Shops and commercial units on Kalamboli’s main roads, to buy or rent, alongside the residential work. Godown and warehouse requirements near the highway corridors are handled by the same desk that covers Taloja’s godowns and industrial units.',
+      },
+      {
+        q: 'Is Kalamboli or New Panvel better for buying a flat?',
+        a: 'It depends on how you commute. Kalamboli suits buyers who drive, with the Mumbai–Pune Expressway, the Sion–Panvel Highway and the JNPT road at its junction; New Panvel suits buyers who want to walk to Panvel station. The desk covers both, so a shortlist can include options from each.',
+      },
+      {
+        q: 'Where is the Shri Sidhanath office for Kalamboli enquiries?',
+        a: 'Office 1, Siddhivinayak Krupa CHS Ltd, Plot 18, Sector 7, New Panvel West, Navi Mumbai 410206, open 9:00 to 22:00 daily — a short drive from Kalamboli. Site visits in Kalamboli are arranged at a time that suits you.',
+      },
+    ],
+  },
 ];
