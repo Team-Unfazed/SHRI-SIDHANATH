@@ -44,8 +44,8 @@ export default function About() {
           <video
             ref={videoRef}
             className="about__video"
-            autoPlay muted loop playsInline
-            preload="metadata"
+            muted loop playsInline
+            preload="none"
             poster="/videos/about-us-poster.jpg"
             tabIndex={-1}
           >

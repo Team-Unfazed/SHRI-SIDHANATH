@@ -1,4 +1,11 @@
-/** Muted loop playback for full-bleed background videos (hero, about). */
+/**
+ * Muted loop playback for the below-the-fold background videos (about,
+ * shortlist). Nothing is requested until the section is actually on screen
+ * (the About page sits exactly at the fold, so no look-ahead margin): the two
+ * clips are ~13 MB, and starting them at page load put them in the same
+ * network queue as the hero and its headline, the page's largest paint, on
+ * every phone. The hero runs its own playback in Hero.jsx.
+ */
 export function useBackgroundVideo(rootRef, videoRef, introDonePromise) {
   const video = videoRef.current;
   const root = rootRef.current;
@@ -8,7 +15,7 @@ export function useBackgroundVideo(rootRef, videoRef, introDonePromise) {
   video.defaultMuted = true;
   video.volume = 0;
   video.playsInline = true;
-  let visible = true;
+  let visible = false;
 
   const playVideo = () => {
     video.muted = true;
@@ -20,12 +27,11 @@ export function useBackgroundVideo(rootRef, videoRef, introDonePromise) {
     else video.pause();
   };
 
-  playVideo();
-  introDonePromise?.then?.(playVideo);
+  introDonePromise?.then?.(syncPlayback);
 
   const userEvents = ['pointerdown', 'touchstart', 'click', 'keydown', 'scroll'];
   const onFirstUserInteraction = () => {
-    playVideo();
+    syncPlayback();
     userEvents.forEach((evt) => window.removeEventListener(evt, onFirstUserInteraction, { passive: true }));
   };
   userEvents.forEach((evt) => window.addEventListener(evt, onFirstUserInteraction, { passive: true }));
@@ -33,11 +39,11 @@ export function useBackgroundVideo(rootRef, videoRef, introDonePromise) {
   const observer = new IntersectionObserver(([entry]) => {
     visible = entry.isIntersecting;
     syncPlayback();
-  }, { threshold: 0.05 });
+  }, { threshold: 0.01 });
   if (root) observer.observe(root);
 
   document.addEventListener('visibilitychange', syncPlayback);
-  const onEnded = () => { video.currentTime = 0; playVideo(); };
+  const onEnded = () => { video.currentTime = 0; syncPlayback(); };
   video.addEventListener('ended', onEnded);
 
   return () => {

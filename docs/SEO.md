@@ -85,6 +85,21 @@ same way it was fixed on 2026-10-06.
   shops/commercial frontage (what the Panvel page already says the desk does
   in Kalamboli); no Kalamboli projects are claimed. Built on top of the
   unmerged Kamothe commit, so merging this branch publishes both.
+- **Below-the-fold videos load on arrival (2026-11-23):** a mobile Lighthouse
+  run on the production build showed the homepage downloading all three
+  background videos at page load: 20.1 MB in total, 17.7 MB of it video,
+  including the About (5 MB) and Shortlist (5.4 MB) clips a visitor has not
+  scrolled to. `src/lib/backgroundVideo.js` now starts a clip only once its
+  section is on screen (and pauses it when it leaves), and the About video
+  lost `autoPlay` / gained `preload="none"`. Page weight at load: 20.1 MB ->
+  9.5 MB. The Lighthouse performance score did not move (29-30): that is
+  held down by the 3D intro (≈10 s of main-thread work in headless Chrome,
+  which renders WebGL in software, so real phones fare better) and by the
+  hero headline appearing only after the intro (LCP 10.6 s). Those are
+  design decisions for the owner, not changed here. The hero video
+  (`main-bg-video.mp4`, 9.8 MB file, 7 MB fetched) is fingerprint-protected
+  (`docs/hero-video-preservation.json`) and was not touched; a smaller
+  mobile encode would be the next weight saving.
 - **Deployment (2026-11-20):** the live site deploys from
   `Team-Unfazed/SHRI-SIDHANATH` `main` (Vercel repo connection switched by the
   owner on 2026-11-20). A push to `main` is what triggers a deploy.
