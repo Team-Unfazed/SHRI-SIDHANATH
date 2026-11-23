@@ -87,12 +87,12 @@ same way it was fixed on 2026-10-06.
   unmerged Kamothe commit, so merging this branch publishes both.
 - **Below-the-fold videos load on arrival (2026-11-23):** a mobile Lighthouse
   run on the production build showed the homepage downloading all three
-  background videos at page load: 20.1 MB in total, 17.7 MB of it video,
+  background videos at page load: 19.6 MB in total (Lighthouse 20,108 KiB), 17.3 MB of it video,
   including the About (5 MB) and Shortlist (5.4 MB) clips a visitor has not
   scrolled to. `src/lib/backgroundVideo.js` now starts a clip only once its
   section is on screen (and pauses it when it leaves), and the About video
-  lost `autoPlay` / gained `preload="none"`. Page weight at load: 20.1 MB ->
-  9.5 MB. The Lighthouse performance score did not move (29-30): that is
+  lost `autoPlay` / gained `preload="none"`. Page weight at load: 19.6 MB ->
+  9.3 MB (9,547 KiB). The Lighthouse performance score did not move (29-30): that is
   held down by the 3D intro (≈10 s of main-thread work in headless Chrome,
   which renders WebGL in software, so real phones fare better) and by the
   hero headline appearing only after the intro (LCP 10.6 s). Those are
