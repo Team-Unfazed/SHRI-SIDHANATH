@@ -16,7 +16,7 @@ export default defineConfig({
     assetsInlineLimit: 0,
     // Separate entries keep the showcase independent of the existing homepage.
     // The real-estate-agent-*.html entries are the location landing
-    // pages (Panvel, Raigad, Navi Mumbai, Kharghar, Kamothe, Kalamboli —
+    // pages (Panvel, New Panvel, Raigad, Navi Mumbai, Kharghar, Kamothe, Kalamboli —
     // src/data/content.js's `locationPages`), added for local SEO coverage
     // beyond the homepage.
     rollupOptions: {
@@ -25,6 +25,7 @@ export default defineConfig({
         projects: resolve(import.meta.dirname, 'projects.html'),
         showcase: resolve(import.meta.dirname, 'showcase.html'),
         panvel: resolve(import.meta.dirname, 'real-estate-agent-panvel.html'),
+        newPanvel: resolve(import.meta.dirname, 'real-estate-agent-new-panvel.html'),
         raigad: resolve(import.meta.dirname, 'real-estate-agent-raigad.html'),
         naviMumbai: resolve(import.meta.dirname, 'real-estate-agent-navi-mumbai.html'),
         kharghar: resolve(import.meta.dirname, 'real-estate-agent-kharghar.html'),

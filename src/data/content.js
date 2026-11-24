@@ -72,7 +72,7 @@ export const locations = [
     role: 'Headquarters',
     note: 'Our office is on Plot 18, Sector 7, New Panvel West. Everything we know about this market, we learned on foot.',
     primary: true,
-    pagePath: '/real-estate-agent-panvel.html',
+    pagePath: '/real-estate-agent-new-panvel.html',
   },
   {
     id: 'navi-mumbai',
@@ -314,7 +314,7 @@ export const locationPages = [
     breadcrumbLabel: 'Panvel',
     title: 'Real Estate Agent & Property Broker in Panvel | Shri Sidhanath',
     metaDescription:
-      "Real estate agent & property dealer in New Panvel — call +91 80655 32578. MahaRERA-registered, 4.8★ on Google (149 reviews). Buy, sell or rent flats, land and shops in Panvel, Kharghar, Kamothe, Taloja & Ulwe.",
+      "Real estate agent & property dealer in Panvel — call +91 80655 32578. MahaRERA-registered, 4.8★ on Google (149 reviews). Buy, sell or rent flats, land and shops in Panvel, Kharghar, Kamothe, Taloja & Ulwe.",
     kicker: 'Panvel desk',
     h1: 'Real estate agent in Panvel — New Panvel, Kharghar, Kamothe, Taloja, Ulwe & Kalamboli',
     lede:
@@ -392,6 +392,84 @@ export const locationPages = [
       {
         q: 'How do I book a site visit in Panvel?',
         a: 'Call or WhatsApp +91 80655 32578, or visit the office at Plot 18, Sector 7, New Panvel West (open 9:00 to 22:00, daily) and a visit will be arranged at a time that suits you.',
+      },
+    ],
+  },
+  {
+    // Added 2026-11-24. Search Console (21 Aug–21 Nov 2026) showed the
+    // homepage, not a dedicated page, earning New Panvel searches: "real
+    // estate agents in new panvel" (32 impressions, position 10.1), "new
+    // panvel real estate agents" (23, 5.0), "property in khanda colony" (16,
+    // 5.3), "real estate agents in khanda colony" (7, 1.3). Khanda Colony is
+    // the locality the business's own Google Business Profile gives for the
+    // office ("Sector 7 Khanda Colony", docs/GBP-CHECKLIST.md). The projects
+    // named below come from src/data/projects.js and projectRegister.js.
+    id: 'new-panvel',
+    slug: 'real-estate-agent-new-panvel.html',
+    path: '/real-estate-agent-new-panvel.html',
+    navLabel: 'New Panvel',
+    breadcrumbLabel: 'New Panvel',
+    title: 'Real Estate Agent in New Panvel & Khanda Colony | Shri Sidhanath',
+    metaDescription:
+      'Real estate agent & property broker in New Panvel — call +91 80655 32578. Office in Sector 7, Khanda Colony, New Panvel West. MahaRERA-registered, 4.8★ on Google (149 reviews). Flats, rentals, shops.',
+    kicker: 'New Panvel desk',
+    h1: 'Real estate agent in New Panvel — East, West and Khanda Colony',
+    lede:
+      'The office is in New Panvel itself, on Plot 18, Sector 7, New Panvel West, in the Khanda Colony area. This is the market the desk works every day: flats to buy or rent, shops, and new projects inside the node.',
+    intro: [
+      "Shri Sidhanath Constructions & Estate Consultant is a MahaRERA-registered (A52000004595) real estate agency, property broker and consultant rated 4.8 on Google from 149 reviews, and New Panvel is its home ground. The office is within walking distance of Panvel railway station, so buyers and tenants can drop in, talk through a requirement and go straight on to a site visit.",
+      'New Panvel is a CIDCO-planned node of numbered sectors on both sides, East and West. Most enquiries start with a sector, a budget and a flat size. Before a resale flat is shown as an option the desk checks occupancy certificate (OC) status for the building, the society NOC and share certificate, outstanding dues and clear title, and once a deal is agreed it coordinates flat registration and stamp duty payment.',
+    ],
+    heroImage: '/images/locations/new-panvel-office-1200.webp',
+    heroImageSmall: '/images/locations/new-panvel-office-800.webp',
+    heroImageAlt: 'The Shri Sidhanath shopfront in New Panvel at night, MahaRERA seal above the door.',
+    serviceAreas: ['New Panvel', 'Khanda Colony', 'Panvel', 'Kamothe', 'Kalamboli', 'Kharghar'],
+    submarkets: [
+      {
+        name: 'New Panvel West and Khanda Colony',
+        note:
+          "The office's own neighbourhood: Google lists it at Sector 7, Khanda Colony. Resale and rental flats in society buildings, plus shops on the neighbourhood's main roads, shown by a desk that is a short walk away.",
+      },
+      {
+        name: 'New Panvel East',
+        note:
+          'Flats to buy or rent on the East side, handled by the same desk and the same phone number, so a shortlist can mix options from East and West.',
+      },
+      {
+        name: 'New projects in New Panvel',
+        note:
+          'Projects the desk markets inside the node include Delta Prestige (Delta Group, Sector 17, 2 and 3 BHK), Sai Vrindavan (K T Infra, Plot 30+31, Sector 17, New Panvel West, MahaRERA P52000055382) and Park 11 (Homely Land Developers and Builders, 1 and 2 BHK, MahaRERA PR1270002500699). Details are on the projects page.',
+      },
+      {
+        name: 'Rentals near Panvel station',
+        note:
+          'Flats and rooms on rent for tenants who want the station within reach, and for landlords looking for a tenant, with the brokerage agreed up front before any work starts.',
+      },
+    ],
+    faqs: [
+      {
+        q: 'Who is a reliable real estate agent in New Panvel?',
+        a: 'Shri Sidhanath Constructions & Estate Consultant is a MahaRERA-registered (A52000004595) real estate agent and property broker with its office in Sector 7, New Panvel West, rated 4.8 on Google from 149 reviews. It handles buying, selling, resale and rentals across New Panvel East and West. Call or WhatsApp +91 80655 32578.',
+      },
+      {
+        q: 'What is the contact number for a property broker in New Panvel?',
+        a: 'Call or WhatsApp Shri Sidhanath on +91 80655 32578, open 9:00 to 22:00 daily. Tell the desk the sector, budget and flat size you want and whether you are buying or renting, and it will shortlist what is currently available in New Panvel.',
+      },
+      {
+        q: 'Is there a real estate agent in Khanda Colony?',
+        a: 'Yes. The Shri Sidhanath office is in Khanda Colony itself: Office 1, Siddhivinayak Krupa CHS Ltd, Plot 18, Sector 7, New Panvel West, Navi Mumbai 410206. Walk in between 9:00 and 22:00 any day, or call +91 80655 32578 first.',
+      },
+      {
+        q: 'Which new projects can I buy into in New Panvel?',
+        a: 'Projects the desk markets in New Panvel include Delta Prestige (2 and 3 BHK, Sector 17), Sai Vrindavan (Sector 17, New Panvel West, MahaRERA P52000055382, proposed completion December 2029) and Park 11 (1 and 2 BHK, MahaRERA PR1270002500699, proposed completion May 2029). Availability and prices change, so call for what is open today.',
+      },
+      {
+        q: 'Can you help me rent a flat in New Panvel?',
+        a: 'Yes. The desk takes rental requirements from tenants and landlords across New Panvel, with the brokerage agreed before any work starts. In Maharashtra a residential rental is normally signed as a leave and licence agreement, which has to be registered, and landlords are expected to share tenant details with the local police for verification; plan for both before the move-in date.',
+      },
+      {
+        q: 'What checks are done on a resale flat in New Panvel?',
+        a: 'Occupancy certificate (OC) status for the building, the society NOC and share certificate, outstanding maintenance and other dues, and clear title, before the flat is shown as an option. Flat registration and stamp duty payment are coordinated once a deal is agreed.',
       },
     ],
   },

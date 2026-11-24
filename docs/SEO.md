@@ -15,7 +15,7 @@ same way it was fixed on 2026-10-06.
 - **Title and description** (`index.html`) lead with those phrases and back
   "top-rated" with the visible 4.8 Google rating. `projects.html` targets
   "new projects / flats for sale in Panvel, Kharghar, Navi Mumbai".
-- **Location landing pages** (Panvel, Raigad, Navi Mumbai added 2026-10-06; **Kharghar added 2026-11-13**; **Kamothe added 2026-11-21**; **Kalamboli added 2026-11-22** — `real-estate-agent-kharghar.html`, targeting "real estate agent in Kharghar", 590/mo KD 0 in OpenSEO's Sep 2026 India data), one per priority area,
+- **Location landing pages** (Panvel, Raigad, Navi Mumbai added 2026-10-06; **New Panvel added 2026-11-24**; **Kharghar added 2026-11-13**; **Kamothe added 2026-11-21**; **Kalamboli added 2026-11-22** — `real-estate-agent-kharghar.html`, targeting "real estate agent in Kharghar", 590/mo KD 0 in OpenSEO's Sep 2026 India data), one per priority area,
   linked from the homepage Locations cards and the footer (not the primary
   nav — reached by search, AI answers and those internal links):
   - `real-estate-agent-panvel.html` — New Panvel, Old Panvel, Kharghar,
@@ -100,6 +100,19 @@ same way it was fixed on 2026-10-06.
   (`main-bg-video.mp4`, 9.8 MB file, 7 MB fetched) is fingerprint-protected
   (`docs/hero-video-preservation.json`) and was not touched; a smaller
   mobile encode would be the next weight saving.
+- **New Panvel page (2026-11-24):** `real-estate-agent-new-panvel.html`.
+  Search Console (21 Aug–21 Nov) had the homepage, not a dedicated page,
+  answering "real estate agents in new panvel" (32 impressions, position
+  10.1), "new panvel real estate agents" (23, 5.0), "property in khanda
+  colony" (16, 5.3) and "real estate agents in khanda colony" (7, 1.3). The
+  office itself is in New Panvel West; the GBP gives its locality as "Sector 7
+  Khanda Colony". The page covers East, West and Khanda Colony, rentals near
+  the station, and the New Panvel projects already in `src/data` (Delta
+  Prestige, Sai Vrindavan, Park 11). The homepage "New Panvel / Headquarters"
+  card now links here instead of the Panvel page, and the Panvel page's meta
+  description says "in Panvel" rather than "in New Panvel" so the two pages
+  do not compete for the same phrase. Search volume was not checked (OpenSEO
+  had 3 credits); the case rests on Search Console demand.
 - **Deployment (2026-11-20):** the live site deploys from
   `Team-Unfazed/SHRI-SIDHANATH` `main` (Vercel repo connection switched by the
   owner on 2026-11-20). A push to `main` is what triggers a deploy.
