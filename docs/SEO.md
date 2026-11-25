@@ -113,6 +113,19 @@ same way it was fixed on 2026-10-06.
   description says "in Panvel" rather than "in New Panvel" so the two pages
   do not compete for the same phrase. Search volume was not checked (OpenSEO
   had 3 credits); the case rests on Search Console demand.
+- **Panvel page answers "real estate in Panvel" (2026-11-25):** Search
+  Console (22 Aug–22 Nov) showed "real estate panvel" as the single most-seen
+  query (139 impressions) with only the homepage ranking, at position 24.6
+  (page 3), while "panvel real estate" ranked 3.7. The Panvel page listed
+  areas but never said what real estate is on offer. It now has a "New
+  projects across Panvel" micro-market card and two FAQs ("What kind of real
+  estate can I buy or rent in Panvel?", "Which new residential projects are
+  there in Panvel?") naming Godrej City Panvel, Hiranandani Fortune City, L&T
+  Realty Crestoria Estate, Kanakia Valley, Today Global Anandam Phase II,
+  Deep Destiny-2 and Meraki with the MahaRERA numbers, localities and
+  configurations already in `src/data` (no prices restated). The lede now
+  says "Panvel real estate". Title unchanged. Search volume not checked
+  (OpenSEO 3 credits); the case rests on Search Console demand.
 - **Deployment (2026-11-20):** the live site deploys from
   `Team-Unfazed/SHRI-SIDHANATH` `main` (Vercel repo connection switched by the
   owner on 2026-11-20). A push to `main` is what triggers a deploy.

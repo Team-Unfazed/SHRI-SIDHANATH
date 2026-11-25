@@ -318,7 +318,7 @@ export const locationPages = [
     kicker: 'Panvel desk',
     h1: 'Real estate agent in Panvel — New Panvel, Kharghar, Kamothe, Taloja, Ulwe & Kalamboli',
     lede:
-      'The practice is based in New Panvel and the Panvel node is where its knowledge runs deepest: six micro-markets, one desk, one MahaRERA registration.',
+      'The practice is based in New Panvel, and Panvel real estate is where its knowledge runs deepest: resale and rental flats, new projects, shops and land across six micro-markets, from one desk with one MahaRERA registration.',
     intro: [
       "Shri Sidhanath Constructions & Estate Consultant is headquartered on Plot 18, Sector 7, New Panvel West — a MahaRERA-registered (A52000004595) real estate agency, property dealer and consultant rated 4.8 on Google from 149 reviews. Panvel is not one market from this desk's side of the table; it is six, and each one gets treated differently.",
       "Buying, selling, resale, renting and property management are handled across all six, alongside CIDCO resale flats, flat registration, stamp duty coordination and OC (occupancy certificate) checks on older buildings before they are recommended to anyone.",
@@ -363,11 +363,31 @@ export const locationPages = [
         note:
           'The circle and junction area on the Mumbai–Pune highway side of Panvel: resale flats and commercial frontage with heavy footfall.',
       },
+      {
+        // Added 2026-11-25. Search Console (22 Aug–22 Nov 2026): "real estate
+        // panvel" was the most-seen query (139 impressions) but only the
+        // homepage ranked, at position 24.6, and this page never appeared for
+        // it. The page listed areas but not what real estate is actually on
+        // offer. Every project, configuration, locality and MahaRERA number
+        // below is copied from src/data/projects.js, projectRegister.js and
+        // maharera-projects.json; no price is restated (prices change).
+        name: 'New projects across Panvel',
+        note:
+          'New and under-construction projects the desk markets in Panvel include Godrej City Panvel (2 and 3 BHK), Hiranandani Fortune City (2 and 3 BHK, Bhokarpada), L&T Realty Crestoria Estate (Bhokarpada, Old Mumbai–Pune Highway), Kanakia Valley (1 and 2 BHK, Bhokarpada, MahaRERA PR1271012600320), Today Global Anandam Phase II (1 and 2 BHK, Rohinjan, MahaRERA P52000048037), Deep Destiny-2 (1 and 2 BHK, Karanjade, MahaRERA PM1270002502941) and Meraki (1 and 2 BHK, Shedung, MahaRERA P52000054448). Configurations, proposed completion dates and starting prices are on the projects page.',
+      },
     ],
     faqs: [
       {
         q: 'Who is a reliable real estate agent in Panvel?',
         a: 'Shri Sidhanath Constructions & Estate Consultant is a MahaRERA-registered (A52000004595) real estate agent based in New Panvel, rated 4.8 on Google from 149 reviews, covering New Panvel, Old Panvel, Kharghar, Kamothe, Kalamboli, Taloja and Ulwe. Call or WhatsApp +91 80655 32578.',
+      },
+      {
+        q: 'What kind of real estate can I buy or rent in Panvel?',
+        a: 'Panvel real estate runs from CIDCO resale flats in New Panvel and Kharghar to new projects around Bhokarpada and the Old Mumbai–Pune Highway, plus rentals near Panvel station, shops and offices, and godowns and industrial units towards Taloja. Shri Sidhanath handles all of it from its New Panvel office: 1, 2 and 3 BHK flats to buy or rent, resale, new projects, commercial property and land. Call or WhatsApp +91 80655 32578 with your budget and preferred area.',
+      },
+      {
+        q: 'Which new residential projects are there in Panvel?',
+        a: 'New projects the desk markets in Panvel include Godrej City Panvel, Hiranandani Fortune City and L&T Realty Crestoria Estate at Bhokarpada, Kanakia Valley (MahaRERA PR1271012600320), Today Global Anandam Phase II at Rohinjan (P52000048037), Deep Destiny-2 at Karanjade (PM1270002502941) and Meraki at Shedung (P52000054448), mostly 1, 2 and 3 BHK. Check the MahaRERA registration number of any project on the MahaRERA website before booking, and call +91 80655 32578 for what is open today.',
       },
       {
         q: 'Which parts of Panvel does Shri Sidhanath cover?',
