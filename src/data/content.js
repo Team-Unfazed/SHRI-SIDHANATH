@@ -631,15 +631,15 @@ export const locationPages = [
     path: '/real-estate-agent-kharghar.html',
     navLabel: 'Kharghar',
     breadcrumbLabel: 'Kharghar',
-    title: 'Real Estate Agent in Kharghar | Flats for Sale & Rent | Shri Sidhanath',
+    title: 'Real Estate Agent & Property Broker in Kharghar | Shri Sidhanath',
     metaDescription:
-      "Shri Sidhanath: MahaRERA-registered real estate agent for Kharghar — resale and rental flats, new projects such as Sai World Empire, plus registration and stamp duty help. Rated 4.8★ on Google (149 reviews). Call +91 80655 32578.",
+      "Real estate agent & property broker for Kharghar — call +91 80655 32578. MahaRERA-registered, 4.8★ on Google (149 reviews). Resale and rental flats, new projects such as Sai World Empire, registration help.",
     kicker: 'Kharghar',
-    h1: 'Real estate agent in Kharghar — flats to buy, resale and rent',
+    h1: 'Real estate agent & property broker in Kharghar — flats to buy, resale and rent',
     lede:
       "Kharghar sits inside the Panvel node the practice knows best: the same MahaRERA-registered desk that works New Panvel and Kamothe handles Kharghar buying, resale and rental requirements.",
     intro: [
-      "Shri Sidhanath Constructions & Estate Consultant is a MahaRERA-registered (A52000004595) real estate agency and property consultant based in New Panvel. Kharghar is part of its core coverage alongside Kamothe, Kalamboli, Taloja and Ulwe, and the desk takes buying, selling, resale and rental requirements there.",
+      "Shri Sidhanath Constructions & Estate Consultant is a MahaRERA-registered (A52000004595) real estate agency, property broker and consultant based in New Panvel. Kharghar is part of its core coverage alongside Kamothe, Kalamboli, Taloja and Ulwe, and the desk takes buying, selling, resale and rental requirements there.",
       "The practice markets Kharghar projects including Sai World Empire (Sector 36, opposite CIDCO Valleyshilp), Symphony and Adhiraj. For resale and rental flats the desk checks the paperwork that matters before a flat is shown as an option — occupancy certificate (OC) status for older buildings, society NOC, outstanding dues and clear title — and coordinates flat registration and stamp duty once a deal is agreed.",
     ],
     heroImage: '/images/locations/new-panvel-office-1200.webp',
@@ -678,16 +678,16 @@ export const locationPages = [
         a: 'The desk markets Kharghar projects including Sai World Empire (Sector 36), Symphony and Adhiraj, and also handles resale flats. Call +91 80655 32578 with your budget and configuration and the desk will shortlist what is currently available.',
       },
       {
-        q: 'Can you help me rent a flat in Kharghar?',
-        a: 'Yes. The desk takes rental requirements from both tenants and landlords in Kharghar. Brokerage is agreed up front before any work starts.',
+        q: 'Is there a broker in Kharghar who handles rentals?',
+        a: 'Yes. Shri Sidhanath takes rental requirements from both tenants and landlords in Kharghar, with the brokerage agreed up front before any work starts. In Maharashtra a residential rental is normally signed as a leave and licence agreement, which has to be registered, and landlords are expected to share tenant details with the local police for verification; plan for both before the move-in date. Call or WhatsApp +91 80655 32578 with your budget, sector and move-in date.',
       },
       {
         q: 'What checks are done on a resale flat in Kharghar?',
         a: 'Occupancy certificate (OC) status for the building, society NOC, outstanding dues and clear title, before the flat is shown as an option. Flat registration and stamp duty payment are coordinated once a deal is agreed.',
       },
       {
-        q: 'How do I contact Shri Sidhanath about a Kharghar property?',
-        a: 'Call or WhatsApp +91 80655 32578, or visit the office at Plot 18, Sector 7, New Panvel West, open 9:00 to 22:00 daily.',
+        q: 'What is the contact number for a property broker in Kharghar?',
+        a: 'Call or WhatsApp Shri Sidhanath on +91 80655 32578 for buying, selling, resale or rental property in Kharghar. The office is at Plot 18, Sector 7, New Panvel West, open 9:00 to 22:00 daily.',
       },
     ],
   },

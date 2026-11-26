@@ -126,6 +126,22 @@ same way it was fixed on 2026-10-06.
   configurations already in `src/data` (no prices restated). The lede now
   says "Panvel real estate". Title unchanged. Search volume not checked
   (OpenSEO 3 credits); the case rests on Search Console demand.
+- **Kharghar page: "broker" and "contact number" (2026-11-26):** the
+  Kharghar page is live and indexed (crawled 15 Nov) and its appearances rose
+  from 27 (12–18 Nov) to 70 (19–25 Nov), but it sits at position 9.3, the
+  bottom of page one, with 0 clicks. Its top query in Search Console (13–25
+  Nov) is "kharghar broker contact number" (8 impressions, position 9), with
+  "broker in kharghar for rent" (8.5) and "broker in kharghar" (7) alongside
+  the "real estate agent(s) in kharghar" variants (9–10.7). The page never
+  said "broker" and its description put the phone number last, past Google's
+  snippet cut-off. Same treatment the Panvel page got on 16–18 Nov: title
+  "Real Estate Agent & Property Broker in Kharghar | Shri Sidhanath" (was
+  "Real Estate Agent in Kharghar | Flats for Sale & Rent | …"), phone-first
+  description, H1 and intro say "property broker", the rental FAQ now
+  answers "Is there a broker in Kharghar who handles rentals?" (leave and
+  licence registration, tenant police verification, as on the Panvel page),
+  and the contact FAQ is phrased as the search is ("What is the contact
+  number for a property broker in Kharghar?"). No new facts were added.
 - **Deployment (2026-11-20):** the live site deploys from
   `Team-Unfazed/SHRI-SIDHANATH` `main` (Vercel repo connection switched by the
   owner on 2026-11-20). A push to `main` is what triggers a deploy.
