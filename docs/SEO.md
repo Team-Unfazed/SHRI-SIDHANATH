@@ -142,6 +142,17 @@ same way it was fixed on 2026-10-06.
   licence registration, tenant police verification, as on the Panvel page),
   and the contact FAQ is phrased as the search is ("What is the contact
   number for a property broker in Kharghar?"). No new facts were added.
+- **Navi Mumbai page: "broker" and "contact number" (2026-11-27):** the
+  page is indexed (crawled 20 Nov) and earned 58 appearances and 2 clicks on
+  20–26 Nov at position 10.2. Its queries in Search Console (13–26 Nov)
+  include "navi mumbai broker contact number" (5 impressions, position 6.4)
+  and "nerul agent number" (11), but the page never said "broker". The
+  description now reads "Real estate agent, property broker & dealer for
+  Navi Mumbai — call +91 80655 32578 …" (the title keeps "Property
+  Consultant", which carries "property consultant in navi mumbai"), the
+  first intro paragraph names the desk as agent and property broker, and
+  the contact FAQ is phrased as the search is ("What is the contact number
+  for a property broker in Navi Mumbai?"). No new facts were added.
 - **Deployment (2026-11-20):** the live site deploys from
   `Team-Unfazed/SHRI-SIDHANATH` `main` (Vercel repo connection switched by the
   owner on 2026-11-20). A push to `main` is what triggers a deploy.

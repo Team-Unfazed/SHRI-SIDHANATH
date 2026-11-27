@@ -567,13 +567,13 @@ export const locationPages = [
     breadcrumbLabel: 'Navi Mumbai',
     title: 'Real Estate Agent & Property Consultant in Navi Mumbai | Shri Sidhanath',
     metaDescription:
-      "Real estate agent, property consultant & dealer for Navi Mumbai — call +91 80655 32578. MahaRERA-registered, 4.8★ on Google (149 reviews). Kharghar, Kamothe, Ulwe and the Panvel node, plus Vashi, Nerul & Belapur.",
+      "Real estate agent, property broker & dealer for Navi Mumbai — call +91 80655 32578. MahaRERA-registered, 4.8★ on Google (149 reviews). Kharghar, Kamothe, Ulwe and the Panvel node, plus Vashi, Nerul & Belapur.",
     kicker: 'Navi Mumbai',
     h1: 'Real estate agent & property consultant in Navi Mumbai — Kharghar, Ulwe, Vashi, Nerul & Belapur',
     lede:
       'From the Panvel node outward: the same MahaRERA-registered desk extends its advisory to Navi Mumbai\'s established nodes for buyers who want one point of contact across the city.',
     intro: [
-      "Shri Sidhanath's deepest coverage in Navi Mumbai is the Panvel node — Kharghar, Kamothe, Kalamboli, Taloja and Ulwe — run from the practice's own office in New Panvel. The same MahaRERA-registered (A52000004595) desk also takes buying, selling, resale and rental requirements in Navi Mumbai's other established nodes: Vashi, Nerul and Belapur.",
+      "As a real estate agent and property broker, Shri Sidhanath's deepest coverage in Navi Mumbai is the Panvel node — Kharghar, Kamothe, Kalamboli, Taloja and Ulwe — run from the practice's own office in New Panvel. The same MahaRERA-registered (A52000004595) desk also takes buying, selling, resale and rental requirements in Navi Mumbai's other established nodes: Vashi, Nerul and Belapur.",
       "This is advisory coverage in the same vein as the practice's selective mandates in Mumbai, Thane and Pune — real requirements the desk works on, not a claim of an office or an exclusive listing in every node named. For a buyer who wants a shortlist across more than one part of Navi Mumbai without talking to five different agents, it is one desk and one phone number.",
     ],
     heroImage: '/images/locations/navi-mumbai-lunaris-1200.webp',
@@ -620,8 +620,8 @@ export const locationPages = [
         a: 'Yes. The registration (MahaRERA A52000004595) is held by the agency, not by a single locality, so it applies to every transaction the desk handles, in any Navi Mumbai node.',
       },
       {
-        q: 'How do I contact Shri Sidhanath about a Navi Mumbai property?',
-        a: 'Call or WhatsApp +91 80655 32578, email, or visit the office at Plot 18, Sector 7, New Panvel West, open 9:00 to 22:00 daily.',
+        q: 'What is the contact number for a property broker in Navi Mumbai?',
+        a: 'Call or WhatsApp Shri Sidhanath on +91 80655 32578 for buying, selling, resale or rental property in Navi Mumbai: Kharghar, Kamothe, Ulwe and the Panvel node, or Vashi, Nerul and Belapur on request. The office is at Plot 18, Sector 7, New Panvel West, open 9:00 to 22:00 daily.',
       },
     ],
   },
