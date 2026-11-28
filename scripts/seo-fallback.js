@@ -73,7 +73,7 @@ function projectsFallback() {
       (p) =>
         `<li><h2>${esc(p.name)}</h2><p>${esc([p.location || p.area, p.category, p.config].filter(Boolean).join(' · '))}</p>` +
         `${p.priceFrom ? `<p>From ${esc(p.priceFrom)}</p>` : ''}${p.detail ? `<p>${esc(p.detail)}</p>` : ''}` +
-        `${p.reraNumber ? `<p>Promoter: ${esc(p.developer)}. MahaRERA: ${esc(p.reraNumber)}</p><a href="${esc(p.sourceUrl)}">View on MahaRERA</a>` : ''}</li>`
+        `${p.reraNumber ? `<p>Promoter: ${esc(p.developer)}. MahaRERA: ${esc(p.reraNumber)}</p>${p.sourceUrl ? `<a href="${esc(p.sourceUrl)}">View on MahaRERA</a>` : ''}` : ''}</li>`
     )
     .join('');
   return `
@@ -98,7 +98,7 @@ function projectsSchema() {
         '@type': p.source === 'MahaRERA' && !p.projectType ? 'Place' : 'Residence',
         name: p.name,
         ...(p.detail ? { description: p.detail } : {}),
-        ...(p.reraNumber ? { identifier: p.reraNumber, sameAs: p.sourceUrl } : {}),
+        ...(p.reraNumber ? { identifier: p.reraNumber, ...(p.sourceUrl ? { sameAs: p.sourceUrl } : {}) } : {}),
         address: { '@type': 'PostalAddress', addressLocality: p.area, addressRegion: 'Maharashtra', addressCountry: 'IN' },
         ...(p.image ? { image: ORIGIN + p.image } : {}),
       },

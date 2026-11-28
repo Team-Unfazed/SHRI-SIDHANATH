@@ -153,6 +153,19 @@ same way it was fixed on 2026-10-06.
   first intro paragraph names the desk as agent and property broker, and
   the contact FAQ is phrased as the search is ("What is the contact number
   for a property broker in Navi Mumbai?"). No new facts were added.
+- **Broken MahaRERA links + Raigad title (2026-11-28):** a pre-merge audit
+  of every built page found that the projects page's crawlable HTML (written
+  by `scripts/seo-fallback.js`) linked 17 "View on MahaRERA" anchors to
+  `href="undefined"` for projects with a RERA number but no `sourceUrl`;
+  crawlers resolved them to `https://www.shrisidhanath.com/undefined`, a 404
+  (confirmed on the live page via TinyFish fetch). The fallback now prints the
+  link only when `sourceUrl` exists, matching `ProjectRegistration.jsx`, and
+  the ItemList JSON-LD omits `sameAs` the same way. The Raigad title was 86
+  characters (Google cuts at ~60); it is now "Real Estate Agent in Raigad,
+  Khopoli & Karjat | Shri Sidhanath" (62), and its description leads with
+  the phone number like the other area pages. Raigad's Search Console queries
+  are all anonymised (too few searches each), so this is hygiene, not a
+  query-led change.
 - **Deployment (2026-11-20):** the live site deploys from
   `Team-Unfazed/SHRI-SIDHANATH` `main` (Vercel repo connection switched by the
   owner on 2026-11-20). A push to `main` is what triggers a deploy.

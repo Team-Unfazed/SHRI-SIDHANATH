@@ -499,9 +499,9 @@ export const locationPages = [
     path: '/real-estate-agent-raigad.html',
     navLabel: 'Raigad',
     breadcrumbLabel: 'Raigad',
-    title: 'Real Estate Agent in Raigad District | Khopoli, Karjat, Pen & Alibaug | Shri Sidhanath',
+    title: 'Real Estate Agent in Raigad, Khopoli & Karjat | Shri Sidhanath',
     metaDescription:
-      "Shri Sidhanath: MahaRERA-registered real estate agent (A52000004595) for land, plots and property across Raigad district — Khopoli, Karjat, and the wider Pen–Alibaug corridor. Rated 4.8★ on Google. Call +91 80655 32578.",
+      "Real estate agent for Raigad district — call +91 80655 32578. MahaRERA-registered (A52000004595): land, NA plots and property in Khopoli, Karjat and the Pen–Alibaug corridor. Rated 4.8★ on Google.",
     kicker: 'Raigad district',
     h1: 'Real estate agent in Raigad district — Khopoli, Karjat and the Pen–Alibaug corridor',
     lede:
